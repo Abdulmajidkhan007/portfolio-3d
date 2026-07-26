@@ -52,15 +52,37 @@ Spam is filtered by Netlify plus the `bot-field` honeypot.
 
 ## Performance notes
 
-- Every WebGL component sits behind `React.lazy`, so `three` never lands in the initial
-  bundle. It is fetched only when a 3D section approaches the viewport.
-- `LazyCanvas` defers WebGL context creation until the scene is within 300px of the viewport
-  and sets `frameloop="never"` the moment it scrolls away, so off-screen scenes cost nothing.
-- Device pixel ratio is capped at 1.75; particle counts and geometry detail drop on phones.
-- `prefers-reduced-motion` disables Lenis, the custom cursor and all 3D, falling back to
-  static CSS gradients.
+- Every WebGL component sits behind `React.lazy`, and `Deferred3D` decides *when* that import
+  is allowed to fire — near the viewport and on an idle main thread. `vite.config.ts` also
+  strips the `three` chunk from the generated `modulepreload` hints, so ~230 KB of WebGL never
+  competes with the stylesheet for first paint.
+- `LazyCanvas` sets `frameloop="never"` the moment a scene scrolls away, so off-screen scenes
+  cost nothing.
+- `useRenderTier` probes `WEBGL_debug_renderer_info` once. On a CPU rasteriser (SwiftShader,
+  llvmpipe, a VM, a GPU-blocklisted browser) particle budgets drop by an order of magnitude,
+  DPR pins to 1 and the decorative shapes are skipped; with no WebGL at all the static
+  fallbacks render instead.
+- Device pixel ratio is otherwise capped at 1.75; counts and geometry detail also drop on phones.
+- `prefers-reduced-motion` disables Lenis, the custom cursor and all 3D.
+- `index.html` ships a static first-paint shell inside `#root` so the page is not blank until
+  React boots. Keep it visually in sync with `LoadingScreen`.
 - Fonts are self-hosted via `@fontsource` — no external requests, which also keeps the strict
   CSP in `netlify.toml` simple.
+
+### Measured (Lighthouse, production build)
+
+| | Performance | Accessibility | Best practices | SEO |
+| --- | --- | --- | --- | --- |
+| Desktop | **97** | 100 | 100 | 100 |
+| Mobile | **65–71** | 100 | 100 | 100 |
+
+Desktop: FCP 0.7s, LCP 0.8s, TBT 30ms, CLS 0.001.
+
+The mobile preset simulates a 4×-throttled CPU on slow 4G; there LCP sits around 4.3s because
+the hero cannot paint until React, GSAP and Framer Motion have downloaded and executed —
+measured with the intro and the 3D disabled, and the number does not move, so neither is the
+cause. Closing that gap means prerendering the shell at build time (SSG) so the hero paints
+straight from HTML.
 
 ## Project layout
 

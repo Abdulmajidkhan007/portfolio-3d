@@ -29,13 +29,14 @@ export default function Projects() {
             subtitle={t.projects.subtitle}
           />
 
-          <ul role="tablist" aria-label={t.projects.title} className="flex flex-wrap gap-2">
+          {/* Toggle buttons rather than an ARIA tab widget: there are no
+              tabpanels here, the buttons just filter one grid in place. */}
+          <ul aria-label={t.projects.title} className="flex flex-wrap gap-2">
             {projectCategories.map((category) => (
               <li key={category}>
                 <button
                   type="button"
-                  role="tab"
-                  aria-selected={filter === category}
+                  aria-pressed={filter === category}
                   onClick={() => setFilter(category)}
                   className={cn(
                     'relative rounded-full border px-4 py-2 text-sm transition-colors',

@@ -1,10 +1,12 @@
-import { Suspense, lazy, useState } from 'react'
+import { lazy, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { content } from '@/data/content'
 import { cn } from '@/utils/cn'
 import type { SkillGroup } from '@/types'
 import SectionHeading from './SectionHeading'
+import Deferred3D from './three/Deferred3D'
+import { SphereFallback } from './three/fallbacks'
 
 const SkillSphere = lazy(() => import('./three/SkillSphere'))
 
@@ -30,13 +32,13 @@ export default function Skills() {
         <div className="mt-14 grid gap-10 lg:mt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:items-center lg:gap-16">
           <div className="relative">
             <div className="aspect-square w-full max-w-[520px] mx-auto">
-              <Suspense fallback={null}>
+              <Deferred3D fallback={<SphereFallback />}>
                 <SkillSphere
                   skills={content.skills}
                   selected={selected}
                   onSelect={setSelected}
                 />
-              </Suspense>
+              </Deferred3D>
             </div>
 
             <p className="mt-2 text-center font-mono text-[11px] tracking-[0.25em] text-muted uppercase">

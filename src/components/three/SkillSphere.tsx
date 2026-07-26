@@ -205,7 +205,6 @@ export default function SkillSphere({ skills, selected, onSelect }: Props) {
     <LazyCanvas
       camera={{ position: [0, 0, isMobile ? 11 : 9.6], fov: 45 }}
       className="cursor-grab touch-pan-y active:cursor-grabbing"
-      staticFallback={null}
     >
       <Scene skills={skills} selected={selected} onSelect={onSelect} />
     </LazyCanvas>

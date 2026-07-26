@@ -73,7 +73,33 @@
       >Asosiy kontentga o'tish</a
     >
 
-    <div id="root"></div>
+    <!--
+      Static first paint. Without it the page stays blank until React boots,
+      which on a throttled connection is the whole first-contentful-paint
+      budget. React's first commit replaces these children, and the markup is
+      a deliberate visual match for <LoadingScreen> so the handover is
+      invisible. Keep the two in sync if the intro is restyled.
+    -->
+    <div id="root">
+      <div class="fixed inset-0 z-[10000] flex items-center justify-center bg-bg">
+        <div class="grid-backdrop pointer-events-none absolute inset-0 opacity-70"></div>
+        <div class="flex flex-col items-center gap-7">
+          <div class="relative flex h-24 w-24 items-center justify-center">
+            <span
+              class="absolute inset-0 animate-spin rounded-full border border-transparent border-t-neon border-r-cyan [animation-duration:1.4s]"
+            ></span>
+            <span class="absolute inset-3 rounded-full border border-white/10"></span>
+          </div>
+          <div class="text-center">
+            <p class="font-mono text-xs tracking-[0.35em] text-muted uppercase">Booting system</p>
+            <p class="mt-3 font-display text-2xl font-bold sm:text-3xl">
+              <span class="neon-text">{ </span>Abdullohkhan<span class="neon-text"> }</span>
+            </p>
+          </div>
+          <div class="h-px w-64 max-w-[70vw] overflow-hidden bg-white/10"></div>
+        </div>
+      </div>
+    </div>
 
     <!--
       Netlify discovers forms by parsing the deployed HTML at build time, and it

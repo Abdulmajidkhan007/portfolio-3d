@@ -2,6 +2,7 @@ import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useIsMobile } from '@/hooks/useMediaQuery'
+import { useRenderTier } from '@/hooks/useRenderTier'
 import LazyCanvas from './LazyCanvas'
 
 /** Rim light: bright where the surface turns away from the camera. */
@@ -185,20 +186,13 @@ function Head({ pointCount }: { pointCount: number }) {
   )
 }
 
-function StaticAvatar() {
-  return (
-    <div className="flex h-full w-full items-center justify-center">
-      <div className="h-48 w-48 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(0,255,136,0.35),rgba(0,212,255,0.18)_45%,transparent_70%)] ring-1 ring-neon/30" />
-    </div>
-  )
-}
-
 export default function Avatar3D() {
   const isMobile = useIsMobile()
+  const tier = useRenderTier()
 
   return (
-    <LazyCanvas camera={{ position: [0, 0, 5.2], fov: 45 }} staticFallback={<StaticAvatar />}>
-      <Head pointCount={isMobile ? 900 : 2600} />
+    <LazyCanvas camera={{ position: [0, 0, 5.2], fov: 45 }}>
+      <Head pointCount={tier === 'low' ? 700 : isMobile ? 900 : 2600} />
     </LazyCanvas>
   )
 }

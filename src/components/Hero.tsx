@@ -1,21 +1,52 @@
-import { Suspense, lazy, useMemo, useRef } from 'react'
+import { lazy, useEffect, useMemo, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { content } from '@/data/content'
 import { useTypewriter } from '@/hooks/useTypewriter'
+import { useMousePosition } from '@/hooks/useMousePosition'
+import { useHasFinePointer } from '@/hooks/useMediaQuery'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { scrollToSection } from '@/hooks/useLenis'
 import { gsap } from '@/utils/animations'
+import Deferred3D from './three/Deferred3D'
+import { ParticleFallback } from './three/fallbacks'
 
-// The WebGL stack is the single biggest dependency on the site; keeping it
-// behind lazy() is what keeps the initial bundle small.
+// The WebGL stack is the single biggest dependency on the site. lazy() keeps it
+// out of the initial bundle and <Deferred3D> keeps its download off the
+// critical path until the main thread is idle.
 const ParticleField = lazy(() => import('./three/ParticleField'))
 
 export default function Hero() {
   const { t, lang, pick } = useLanguage()
   const rootRef = useRef<HTMLElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
 
   const phrases = useMemo(() => content.hero.typewriter[lang], [lang])
   const typed = useTypewriter(phrases)
+
+  const pointer = useMousePosition()
+  const finePointer = useHasFinePointer()
+  const reducedMotion = useReducedMotion()
+
+  // Parallax the grid backdrop against the particle field. Driven straight
+  // from the pointer ref on an animation frame, so it never triggers a render.
+  useEffect(() => {
+    if (!finePointer || reducedMotion) return
+    let frame = 0
+    const current = { x: 0, y: 0 }
+
+    const tick = () => {
+      const grid = gridRef.current
+      if (grid) {
+        current.x += (pointer.current.nx * 14 - current.x) * 0.05
+        current.y += (-pointer.current.ny * 14 - current.y) * 0.05
+        grid.style.transform = `translate3d(${current.x.toFixed(2)}px, ${current.y.toFixed(2)}px, 0)`
+      }
+      frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [pointer, finePointer, reducedMotion])
 
   useGSAP(
     () => {
@@ -53,13 +84,16 @@ export default function Hero() {
             playsInline
           />
         ) : (
-          <Suspense fallback={null}>
+          <Deferred3D fallback={<ParticleFallback />}>
             <ParticleField />
-          </Suspense>
+          </Deferred3D>
         )}
       </div>
 
-      <div className="grid-backdrop pointer-events-none absolute inset-0 -z-10 opacity-60" />
+      <div
+        ref={gridRef}
+        className="grid-backdrop pointer-events-none absolute -inset-8 -z-10 opacity-60 will-change-transform"
+      />
       {/* Scrim behind the copy so the headline keeps its contrast ratio no
           matter where the particles happen to drift. */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_75%_75%_at_18%_50%,rgba(10,10,10,0.92),rgba(10,10,10,0.35)_55%,transparent_78%)]" />
@@ -90,11 +124,10 @@ export default function Hero() {
             <span className="neon-text block">Sharipov</span>
           </h1>
 
-          <p
-            data-hero-typed
-            className="mt-6 min-h-[2em] font-mono text-lg text-cyan sm:text-2xl"
-            aria-label={pick(content.profile.role)}
-          >
+          {/* Assistive tech reads the settled role once; the animated text is
+              hidden from it so it is not re-announced on every keystroke. */}
+          <p data-hero-typed className="mt-6 min-h-[2em] font-mono text-lg text-cyan sm:text-2xl">
+            <span className="sr-only">{pick(content.profile.role)}</span>
             <span aria-hidden>
               {typed}
               <span className="ml-0.5 inline-block w-[2px] animate-blink bg-cyan align-middle text-transparent">

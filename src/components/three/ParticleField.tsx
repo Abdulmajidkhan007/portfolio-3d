@@ -2,6 +2,7 @@ import { useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useIsMobile } from '@/hooks/useMediaQuery'
+import { useRenderTier } from '@/hooks/useRenderTier'
 import LazyCanvas from './LazyCanvas'
 
 /**
@@ -143,20 +144,15 @@ function Particles({ count }: { count: number }) {
   )
 }
 
-/** Static CSS stand-in used when the visitor prefers reduced motion. */
-function StaticField() {
-  return (
-    <div className="h-full w-full bg-[radial-gradient(ellipse_60%_50%_at_50%_45%,rgba(0,255,136,0.12),transparent_70%),radial-gradient(ellipse_50%_40%_at_70%_60%,rgba(0,212,255,0.1),transparent_70%)]" />
-  )
-}
-
 export default function ParticleField() {
   const isMobile = useIsMobile()
-  // Phones get a quarter of the particles: same look, a fraction of the fill rate.
-  const count = isMobile ? 1500 : 6000
+  const tier = useRenderTier()
+  // Phones get a quarter of the particles and CPU rasterisers far less again:
+  // same look, a fraction of the fill rate.
+  const count = tier === 'low' ? 600 : isMobile ? 1500 : 6000
 
   return (
-    <LazyCanvas camera={{ position: [0, 0, 14], fov: 62 }} staticFallback={<StaticField />}>
+    <LazyCanvas camera={{ position: [0, 0, 14], fov: 62 }}>
       <Particles count={count} />
     </LazyCanvas>
   )

@@ -18,6 +18,12 @@ export default defineConfig({
     // it is never part of the initial download, and it is fetched only once a
     // 3D section is close to the viewport.
     chunkSizeWarningLimit: 900,
+    modulePreload: {
+      // Vite preloads every chunk it can reach from the entry, which would pull
+      // ~230 KB of WebGL into the critical path and undo <Deferred3D>. Everything
+      // else still gets its preload hint.
+      resolveDependencies: (_url, deps) => deps.filter((dep) => !dep.includes('three-')),
+    },
     rollupOptions: {
       output: {
         // Keep the WebGL stack out of the initial bundle. Every three/ component

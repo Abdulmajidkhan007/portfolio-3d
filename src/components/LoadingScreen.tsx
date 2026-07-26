@@ -5,10 +5,24 @@ import { gsap } from '@/utils/animations'
 
 const SESSION_KEY = 'portfolio-intro-seen'
 
-/** True when the intro has already played in this browser tab. */
+interface NetworkInformation {
+  effectiveType?: string
+  saveData?: boolean
+}
+
+/**
+ * True when the intro should be skipped: it has already played in this tab, or
+ * the visitor is on a connection where an extra second of branding is the last
+ * thing they need. The intro holds back the largest text on the page, so on a
+ * slow link it is pure added latency.
+ */
 export function introAlreadySeen() {
   if (typeof window === 'undefined') return false
-  return window.sessionStorage.getItem(SESSION_KEY) === '1'
+  if (window.sessionStorage.getItem(SESSION_KEY) === '1') return true
+
+  const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection
+  if (connection?.saveData) return true
+  return connection?.effectiveType === '2g' || connection?.effectiveType === 'slow-2g'
 }
 
 interface Props {
@@ -32,8 +46,10 @@ export default function LoadingScreen({ onDone }: Props) {
     let settled = false
     let finishStart = 0
     const started = performance.now()
-    const MIN_MS = 1100
-    const MAX_MS = 3500
+    // Kept short on purpose: the intro sits in front of the hero headline, so
+    // every extra millisecond here is a millisecond of Largest Contentful Paint.
+    const MIN_MS = 700
+    const MAX_MS = 2500
     const FINISH_MS = 260
 
     Promise.race([

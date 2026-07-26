@@ -1,9 +1,11 @@
-import { Suspense, lazy, useRef } from 'react'
+import { lazy, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { content } from '@/data/content'
 import { countUp, fadeUp, gsap, revealTrigger, staggerUp } from '@/utils/animations'
 import SectionHeading from './SectionHeading'
+import Deferred3D from './three/Deferred3D'
+import { AvatarFallback } from './three/fallbacks'
 
 const Avatar3D = lazy(() => import('./three/Avatar3D'))
 const FloatingShapes = lazy(() => import('./three/FloatingShapes'))
@@ -49,9 +51,9 @@ export default function About() {
   return (
     <section id="about" ref={rootRef} className="relative overflow-hidden py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-70">
-        <Suspense fallback={null}>
+        <Deferred3D>
           <FloatingShapes />
-        </Suspense>
+        </Deferred3D>
       </div>
 
       <div className="section-shell">
@@ -71,9 +73,9 @@ export default function About() {
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <Suspense fallback={null}>
+                <Deferred3D fallback={<AvatarFallback />}>
                   <Avatar3D />
-                </Suspense>
+                </Deferred3D>
               )}
               <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-neon/20 ring-inset" />
             </div>
