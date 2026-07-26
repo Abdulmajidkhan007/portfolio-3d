@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>Abdullohkhan Sharipov | Frontend Developer &amp; 3D Enthusiast</title>
+    <meta
+      name="description"
+      content="Zamonaviy veb-ilovalar va 3D tajribalar yaratuvchi frontend dasturchi. React, TypeScript, Three.js va WebGL."
+    />
+    <meta
+      name="keywords"
+      content="frontend developer, react, typescript, three.js, webgl, web developer, portfolio, 3d web, gsap"
+    />
+    <meta name="author" content="Abdullohkhan Sharipov" />
+    <link rel="canonical" href="https://abdullohkhan-portfolio.netlify.app/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Abdullohkhan Sharipov" />
+    <meta property="og:url" content="https://abdullohkhan-portfolio.netlify.app/" />
+    <meta property="og:title" content="Abdullohkhan Sharipov | Frontend Developer &amp; 3D Enthusiast" />
+    <meta
+      property="og:description"
+      content="Zamonaviy veb-ilovalar va 3D tajribalar yaratuvchi frontend dasturchi. React, TypeScript, Three.js va WebGL."
+    />
+    <meta property="og:image" content="https://abdullohkhan-portfolio.netlify.app/images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="uz_UZ" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Abdullohkhan Sharipov | Frontend Developer &amp; 3D Enthusiast" />
+    <meta
+      name="twitter:description"
+      content="Zamonaviy veb-ilovalar va 3D tajribalar yaratuvchi frontend dasturchi. React, TypeScript, Three.js va WebGL."
+    />
+    <meta name="twitter:image" content="https://abdullohkhan-portfolio.netlify.app/images/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Abdullohkhan Sharipov",
+        "url": "https://abdullohkhan-portfolio.netlify.app/",
+        "image": "https://abdullohkhan-portfolio.netlify.app/images/og-image.png",
+        "jobTitle": "Frontend Developer",
+        "description": "Frontend developer building modern web applications and 3D experiences.",
+        "address": { "@type": "PostalAddress", "addressLocality": "Tashkent", "addressCountry": "UZ" },
+        "knowsAbout": ["React", "TypeScript", "Three.js", "WebGL", "GSAP", "Web Performance"],
+        "sameAs": ["https://github.com/abdulmajidkhan007"]
+      }
+    </script>
+  </head>
+  <body>
+    <a
+      href="#main"
+      style="
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        z-index: 10001;
+        padding: 12px 20px;
+        background: #00ff88;
+        color: #0a0a0a;
+      "
+      onfocus="this.style.left='12px';this.style.top='12px'"
+      onblur="this.style.left='-9999px'"
+      >Asosiy kontentga o'tish</a
+    >
+
+    <div id="root"></div>
+
+    <!--
+      Netlify discovers forms by parsing the deployed HTML at build time, and it
+      never sees markup that React renders at runtime. This hidden twin of the
+      contact form is what registers the form; the React form then POSTs to "/"
+      with a matching `form-name`. Keep the field names in sync with
+      src/components/Contact.tsx.
+    -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

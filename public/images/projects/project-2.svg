@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="orbit-analytics — dashboard">
+  
+    <defs>
+      <linearGradient id="g-p2" x1="0" y1="0" x2="1" y2="1" gradientTransform="rotate(145 0.5 0.5)">
+        <stop offset="0%" stop-color="#00d4ff"/>
+        <stop offset="100%" stop-color="#00ff88"/>
+      </linearGradient>
+      <radialGradient id="glow-p2" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.42"/>
+        <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="blur-p2" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="34"/>
+      </filter>
+      <pattern id="grid-p2" width="48" height="48" patternUnits="userSpaceOnUse">
+        <path d="M48 0H0v48" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+      </pattern>
+    </defs>
+  <rect width="1200" height="750" fill="#0a0a0a"/>
+  <rect width="1200" height="750" fill="url(#grid-p2)"/>
+  <ellipse cx="900" cy="225" rx="330" ry="250" fill="url(#glow-p2)" filter="url(#blur-p2)"/>
+  
+    <rect x="56" y="56" width="1088" height="638" rx="18" fill="#111318" stroke="#1e232d"/>
+    <path d="M56 96h1088" stroke="#1e232d" stroke-width="1"/>
+    <circle cx="86" cy="76" r="5" fill="#ff5f57"/>
+    <circle cx="104" cy="76" r="5" fill="#febc2e"/>
+    <circle cx="122" cy="76" r="5" fill="#28c840"/>
+    <text x="600" y="81" text-anchor="middle" font-family="ui-monospace, monospace"
+          font-size="13" fill="#8b93a7">orbit-analytics — dashboard</text>
+  
+    
+      <rect x="96" y="132" width="230" height="96" rx="12" fill="#0d0f14" stroke="#1e232d"/>
+      <rect x="120" y="0" width="0" height="0"/>
+      <rect x="120" y="158" width="70" height="10" rx="5" fill="#ffffff" fill-opacity="0.14"/>
+      <rect x="120" y="184" width="104" height="20" rx="6" fill="#00d4ff" fill-opacity="0.8"/>
+      <rect x="350" y="132" width="230" height="96" rx="12" fill="#0d0f14" stroke="#1e232d"/>
+      <rect x="120" y="0" width="0" height="0"/>
+      <rect x="374" y="158" width="84" height="10" rx="5" fill="#ffffff" fill-opacity="0.14"/>
+      <rect x="374" y="184" width="94" height="20" rx="6" fill="#00ff88" fill-opacity="0.8"/>
+      <rect x="604" y="132" width="230" height="96" rx="12" fill="#0d0f14" stroke="#1e232d"/>
+      <rect x="120" y="0" width="0" height="0"/>
+      <rect x="628" y="158" width="98" height="10" rx="5" fill="#ffffff" fill-opacity="0.14"/>
+      <rect x="628" y="184" width="84" height="20" rx="6" fill="#00d4ff" fill-opacity="0.8"/>
+      <rect x="858" y="132" width="230" height="96" rx="12" fill="#0d0f14" stroke="#1e232d"/>
+      <rect x="120" y="0" width="0" height="0"/>
+      <rect x="882" y="158" width="112" height="10" rx="5" fill="#ffffff" fill-opacity="0.14"/>
+      <rect x="882" y="184" width="74" height="20" rx="6" fill="#00ff88" fill-opacity="0.8"/>
+    <rect x="96" y="260" width="1008" height="404" rx="14" fill="#0d0f14" stroke="#1e232d"/>
+    
+    <path d="M140 474.26 L175.38 434.84 L210.77 402.98 L246.15 422.02 L281.54 403.36 L316.92 415.75 L352.31 446.98 L387.69 464.81 L423.08 470.92 L458.46 435.85 L493.85 439.48 L529.23 413.21 L564.62 397.72 L600 364.63 L635.38 370.52 L670.77 357.95 L706.15 325 L741.54 325 L776.92 325 L812.31 357.21 L847.69 327.73 L883.08 325 L918.46 325 L953.85 343.92 L989.23 325 L1024.62 330.06 L1060 325 L1060 610 L140 610 Z" fill="url(#g-p2)" fill-opacity="0.16"/>
+    <path d="M140 474.26 L175.38 434.84 L210.77 402.98 L246.15 422.02 L281.54 403.36 L316.92 415.75 L352.31 446.98 L387.69 464.81 L423.08 470.92 L458.46 435.85 L493.85 439.48 L529.23 413.21 L564.62 397.72 L600 364.63 L635.38 370.52 L670.77 357.95 L706.15 325 L741.54 325 L776.92 325 L812.31 357.21 L847.69 327.73 L883.08 325 L918.46 325 L953.85 343.92 L989.23 325 L1024.62 330.06 L1060 325" fill="none" stroke="#00d4ff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="140" cy="474.26" r="3.5" fill="#00d4ff"/><circle cx="352.31" cy="446.98" r="3.5" fill="#00d4ff"/><circle cx="564.62" cy="397.72" r="3.5" fill="#00d4ff"/><circle cx="776.92" cy="325" r="3.5" fill="#00d4ff"/><circle cx="989.23" cy="325" r="3.5" fill="#00d4ff"/>
+    <rect x="140" y="628" width="920" height="1" fill="#1e232d"/>
+</svg>

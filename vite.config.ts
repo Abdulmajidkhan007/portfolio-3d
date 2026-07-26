@@ -1,0 +1,44 @@
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+  build: {
+    target: 'es2022',
+    cssCodeSplit: true,
+    // The `three` chunk is deliberately large: it is the whole WebGL runtime,
+    // it is never part of the initial download, and it is fetched only once a
+    // 3D section is close to the viewport.
+    chunkSizeWarningLimit: 900,
+    rollupOptions: {
+      output: {
+        // Keep the WebGL stack out of the initial bundle. Every three/ component
+        // is behind React.lazy, so these chunks only load once a 3D section is
+        // actually near the viewport.
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          if (id.includes('/three/') || id.includes('three-stdlib') || id.includes('@react-three')) {
+            return 'three'
+          }
+          if (id.includes('/gsap/')) return 'gsap'
+          if (
+            id.includes('framer-motion') ||
+            id.includes('motion-dom') ||
+            id.includes('motion-utils')
+          ) {
+            return 'motion'
+          }
+          return 'vendor'
+        },
+      },
+    },
+  },
+})
