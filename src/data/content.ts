@@ -7,6 +7,11 @@ import type { SiteContent } from '@/types'
  * Swapping in generated/real imagery:
  *   drop files into public/images/... and point `image`, `avatarImage` or
  *   `hero.videoSrc` at them. `null` keeps the procedural 3D version.
+ *
+ * `imageHd` / `avatarImageHd` are the Higgsfield-generated versions, fetched
+ * during the build by scripts/fetch-assets.mjs rather than committed. They are
+ * preferred when they load; `image` (a committed SVG) and the 3D avatar are
+ * the fallbacks. Set `avatarImageHd: null` to keep the 3D avatar always.
  */
 export const content: SiteContent = {
   profile: {
@@ -19,6 +24,7 @@ export const content: SiteContent = {
     email: 'santexnika.atoyo@gmail.com',
     resume: '/resume.pdf',
     avatarImage: null,
+    avatarImageHd: '/images/avatar.webp',
   },
 
   hero: {
@@ -72,6 +78,7 @@ export const content: SiteContent = {
       category: 'web',
       tags: ['React', 'Three.js', 'Stripe', 'Edge'],
       image: '/images/projects/project-1.svg',
+      imageHd: '/images/projects/project-1.webp',
       repo: 'https://github.com/abdulmajidkhan007',
       year: 2025,
       featured: true,
@@ -86,6 +93,7 @@ export const content: SiteContent = {
       category: 'web',
       tags: ['TypeScript', 'D3', 'WebSocket', 'Vite'],
       image: '/images/projects/project-2.svg',
+      imageHd: '/images/projects/project-2.webp',
       repo: 'https://github.com/abdulmajidkhan007',
       year: 2025,
     },
@@ -99,6 +107,7 @@ export const content: SiteContent = {
       category: '3d',
       tags: ['Three.js', 'WebGL', 'Zustand', 'GLTF'],
       image: '/images/projects/project-3.svg',
+      imageHd: '/images/projects/project-3.webp',
       repo: 'https://github.com/abdulmajidkhan007',
       year: 2024,
       featured: true,
@@ -113,6 +122,7 @@ export const content: SiteContent = {
       category: '3d',
       tags: ['GLSL', 'React', 'CodeMirror'],
       image: '/images/projects/project-4.svg',
+      imageHd: '/images/projects/project-4.webp',
       year: 2024,
     },
     {
@@ -125,6 +135,7 @@ export const content: SiteContent = {
       category: 'mobile',
       tags: ['React Native', 'Expo', 'SQLite'],
       image: '/images/projects/project-5.svg',
+      imageHd: '/images/projects/project-5.webp',
       repo: 'https://github.com/abdulmajidkhan007',
       year: 2023,
     },
@@ -138,6 +149,7 @@ export const content: SiteContent = {
       category: 'tool',
       tags: ['Node.js', 'TypeScript', 'Rollup'],
       image: '/images/projects/project-6.svg',
+      imageHd: '/images/projects/project-6.webp',
       repo: 'https://github.com/abdulmajidkhan007',
       year: 2023,
     },

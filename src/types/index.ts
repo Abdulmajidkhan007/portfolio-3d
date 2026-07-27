@@ -11,8 +11,13 @@ export interface Project {
   description: Localized
   category: ProjectCategory
   tags: string[]
-  /** Path under /public. Swap for a generated image any time. */
+  /** Path under /public. Always committed, so it is the guaranteed baseline. */
   image: string
+  /**
+   * Richer artwork fetched at build time by scripts/fetch-assets.mjs. Preferred
+   * when present; the card falls back to `image` if the file never arrived.
+   */
+  imageHd?: string
   live?: string
   repo?: string
   year: number
@@ -58,6 +63,11 @@ export interface SiteContent {
     resume: string
     /** null -> render the 3D avatar. Set a path to render an image instead. */
     avatarImage: string | null
+    /**
+     * Build-time portrait (see scripts/fetch-assets.mjs). Used when
+     * `avatarImage` is null; if the fetch failed, the 3D avatar renders.
+     */
+    avatarImageHd?: string
   }
   hero: {
     /** null -> render the particle field. Set a path to render a video instead. */

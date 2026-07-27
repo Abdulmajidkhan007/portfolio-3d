@@ -1,0 +1,44 @@
+{
+  "$comment": [
+    "Imagery generated with Higgsfield and fetched at build time by",
+    "scripts/fetch-assets.mjs. Keeping the binaries out of git keeps clones",
+    "small; Netlify's build box has open egress and writes them into public/",
+    "before Vite runs, so they ship on Netlify's CDN like any static asset.",
+    "",
+    "To replace an image: change its url here (or drop the file straight into",
+    "public/ — an existing file is never overwritten)."
+  ],
+  "maxWidth": 1400,
+  "quality": 82,
+  "assets": [
+    {
+      "target": "images/projects/project-1.webp",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Glu3BrLsqQKMf1c22bZnp6ytwF/hf_20260727_054253_f594cf6d-3b20-4fad-893b-a43ec99e009d.png"
+    },
+    {
+      "target": "images/projects/project-2.webp",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Glu3BrLsqQKMf1c22bZnp6ytwF/hf_20260727_054255_67e79d0b-4bb6-4300-be73-d316b5ba8fb9.png"
+    },
+    {
+      "target": "images/projects/project-3.webp",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Glu3BrLsqQKMf1c22bZnp6ytwF/hf_20260727_054300_fde95946-9034-427d-96ff-4dc9c13f3421.png"
+    },
+    {
+      "target": "images/projects/project-4.webp",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Glu3BrLsqQKMf1c22bZnp6ytwF/hf_20260727_054303_02459825-272c-424e-bf06-0fdc8faa79a2.png"
+    },
+    {
+      "target": "images/projects/project-5.webp",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Glu3BrLsqQKMf1c22bZnp6ytwF/hf_20260727_054306_f0caf15b-ae6b-4fa4-b056-eb4b530b7b95.png"
+    },
+    {
+      "target": "images/projects/project-6.webp",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Glu3BrLsqQKMf1c22bZnp6ytwF/hf_20260727_054308_d0e9ff34-3ea1-40c5-8187-fe54c2613778.png"
+    },
+    {
+      "target": "images/avatar.webp",
+      "maxWidth": 900,
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Glu3BrLsqQKMf1c22bZnp6ytwF/hf_20260727_054536_05239e35-f833-4e71-a5d6-a8318e9b1bbe.png"
+    }
+  ]
+}

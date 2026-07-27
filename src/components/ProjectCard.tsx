@@ -16,6 +16,9 @@ export default function ProjectCard({ project, index }: { project: Project; inde
   const reducedMotion = useReducedMotion()
   const cardRef = useRef<HTMLDivElement>(null)
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
+  // Prefer the generated artwork, but drop to the committed SVG if the
+  // build-time fetch never produced it. See scripts/fetch-assets.mjs.
+  const [imageSrc, setImageSrc] = useState(project.imageHd ?? project.image)
 
   const tiltEnabled = finePointer && !reducedMotion
 
@@ -51,12 +54,13 @@ export default function ProjectCard({ project, index }: { project: Project; inde
       >
         <div className="relative aspect-16/10 overflow-hidden bg-bg-soft">
           <img
-            src={project.image}
+            src={imageSrc}
             alt={project.title}
             width={1200}
             height={750}
             loading="lazy"
             decoding="async"
+            onError={() => setImageSrc(project.image)}
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/35 to-transparent" />

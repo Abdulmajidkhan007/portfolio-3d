@@ -1,4 +1,4 @@
-import { lazy, useRef } from 'react'
+import { lazy, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { content } from '@/data/content'
@@ -16,6 +16,11 @@ const BAR_SKILLS = ['React', 'TypeScript', 'Three.js', 'GSAP', 'CSS / Tailwind',
 export default function About() {
   const { t, lang } = useLanguage()
   const rootRef = useRef<HTMLElement>(null)
+  // The generated portrait is fetched at build time, so it can legitimately be
+  // absent. Clearing it on error hands the slot back to the 3D avatar.
+  const [portrait, setPortrait] = useState(
+    content.profile.avatarImage ?? content.profile.avatarImageHd ?? null,
+  )
 
   useGSAP(
     () => {
@@ -62,14 +67,15 @@ export default function About() {
         <div className="mt-14 grid items-start gap-12 lg:mt-20 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-16">
           <div data-about-visual className="relative mx-auto w-full max-w-sm lg:max-w-none">
             <div className="glass relative aspect-square overflow-hidden rounded-3xl">
-              {content.profile.avatarImage ? (
+              {portrait ? (
                 <img
-                  src={content.profile.avatarImage}
+                  src={portrait}
                   alt={content.profile.name}
                   width={640}
                   height={640}
                   loading="lazy"
                   decoding="async"
+                  onError={() => setPortrait(null)}
                   className="h-full w-full object-cover"
                 />
               ) : (

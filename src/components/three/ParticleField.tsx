@@ -1,9 +1,10 @@
 import { useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useIsMobile } from '@/hooks/useMediaQuery'
+import { useHasFinePointer, useIsMobile } from '@/hooks/useMediaQuery'
 import { useRenderTier } from '@/hooks/useRenderTier'
 import LazyCanvas from './LazyCanvas'
+import { ShapesScene } from './FloatingShapes'
 
 /**
  * All motion lives in the vertex shader: drift, mouse repulsion and depth
@@ -41,12 +42,13 @@ const vertexShader = /* glsl */ `
     gl_Position = projectionMatrix * mvPosition;
 
     // Perspective-correct sizing, plus a nudge for repelled particles.
-    gl_PointSize = aScale * uPixelRatio * (95.0 / max(0.1, -mvPosition.z)) * (1.0 + force * 0.8);
+    gl_PointSize = aScale * uPixelRatio * (135.0 / max(0.1, -mvPosition.z)) * (1.0 + force * 0.8);
 
     vSeed = aSeed;
-    // Deliberately dim: this is a backdrop behind body copy, not the subject.
-    // Distance fade plus a low base keeps the headline readable.
-    vFade = smoothstep(40.0, 4.0, -mvPosition.z) * (0.16 + force * 0.5);
+    // Bright enough to read as a field of light, with the near particles
+    // carrying most of it. The hero keeps its contrast with a scrim behind the
+    // copy rather than by dimming the whole scene.
+    vFade = smoothstep(46.0, 2.0, -mvPosition.z) * (0.55 + force * 0.45);
   }
 `
 
@@ -68,7 +70,7 @@ const fragmentShader = /* glsl */ `
   }
 `
 
-function Particles({ count }: { count: number }) {
+function Particles({ count, autoOrbit }: { count: number; autoOrbit: boolean }) {
   const materialRef = useRef<THREE.ShaderMaterial>(null)
   const groupRef = useRef<THREE.Group>(null)
   const viewport = useThree((state) => state.viewport)
@@ -112,13 +114,24 @@ function Particles({ count }: { count: number }) {
     const material = materialRef.current
     if (!material) return
 
-    material.uniforms.uTime.value = state.clock.elapsedTime
+    const time = state.clock.elapsedTime
+    material.uniforms.uTime.value = time
 
-    // Pointer is normalised (-1..1); convert to the world units of the z=0 plane.
-    pointerTarget.current.set(
-      (state.pointer.x * viewport.width) / 2,
-      (state.pointer.y * viewport.height) / 2,
-    )
+    if (autoOrbit) {
+      // Touch devices never emit a pointer, so the repulsion wake would never
+      // fire and the field would read as a flat starfield. Sweep the attractor
+      // on a slow lissajous instead so the parting is always visible.
+      pointerTarget.current.set(
+        Math.sin(time * 0.24) * viewport.width * 0.3,
+        Math.cos(time * 0.17) * viewport.height * 0.26,
+      )
+    } else {
+      // Pointer is normalised (-1..1); convert to the world units of the z=0 plane.
+      pointerTarget.current.set(
+        (state.pointer.x * viewport.width) / 2,
+        (state.pointer.y * viewport.height) / 2,
+      )
+    }
     material.uniforms.uMouse.value.lerp(pointerTarget.current, Math.min(1, delta * 4))
 
     if (groupRef.current) {
@@ -146,14 +159,19 @@ function Particles({ count }: { count: number }) {
 
 export default function ParticleField() {
   const isMobile = useIsMobile()
+  const finePointer = useHasFinePointer()
   const tier = useRenderTier()
-  // Phones get a quarter of the particles and CPU rasterisers far less again:
-  // same look, a fraction of the fill rate.
-  const count = tier === 'low' ? 600 : isMobile ? 1500 : 6000
+  // Phones get a reduced field and CPU rasterisers far less again: same look,
+  // a fraction of the fill rate.
+  const count = tier === 'low' ? 900 : isMobile ? 2600 : 6000
 
   return (
     <LazyCanvas camera={{ position: [0, 0, 14], fov: 62 }}>
-      <Particles count={count} />
+      <Particles count={count} autoOrbit={!finePointer} />
+      {/* Shares this canvas rather than stacking its own. The camera here sits
+          at z=14/fov 62 against the shapes' authored z=6/fov 50, so they need
+          scaling up to land at the same apparent size. */}
+      <ShapesScene spread={2.6} layout="hero" />
     </LazyCanvas>
   )
 }

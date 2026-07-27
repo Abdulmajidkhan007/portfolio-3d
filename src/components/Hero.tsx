@@ -95,8 +95,9 @@ export default function Hero() {
         className="grid-backdrop pointer-events-none absolute -inset-8 -z-10 opacity-60 will-change-transform"
       />
       {/* Scrim behind the copy so the headline keeps its contrast ratio no
-          matter where the particles happen to drift. */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_75%_75%_at_18%_50%,rgba(10,10,10,0.92),rgba(10,10,10,0.35)_55%,transparent_78%)]" />
+          matter where the particles happen to drift. Kept tight around the
+          text column so the field stays visible either side of it. */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_58%_68%_at_20%_50%,rgba(10,10,10,0.9),rgba(10,10,10,0.3)_58%,transparent_76%)]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-bg to-transparent" />
 
       <div className="section-shell">

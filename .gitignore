@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Imagery pulled in by scripts/fetch-assets.mjs at build time. Committing your
+# own file at one of these paths is supported — the script never overwrites an
+# existing file — but you have to force it past this rule: git add -f <path>
+/public/images/projects/*.webp
+/public/images/avatar.webp
