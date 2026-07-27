@@ -15,7 +15,7 @@ export const content: SiteContent = {
       uz: 'Frontend Developer & 3D Enthusiast',
       en: 'Frontend Developer & 3D Enthusiast',
     },
-    location: { uz: 'Toshkent, Ozbekiston', en: 'Tashkent, Uzbekistan' },
+    location: { uz: 'Toshkent, Oʻzbekiston', en: 'Tashkent, Uzbekistan' },
     email: 'santexnika.atoyo@gmail.com',
     resume: '/resume.pdf',
     avatarImage: null,
@@ -28,7 +28,7 @@ export const content: SiteContent = {
       uz: [
         'Frontend Developer',
         '3D veb tajribalar quraman',
-        'React va Three.js oshigi',
+        'React va Three.js oshigʻi',
         'Interfeyslarni jonlantiraman',
       ],
       en: [
@@ -44,7 +44,7 @@ export const content: SiteContent = {
     bio: {
       uz: [
         'Men brauzerda ishlaydigan tez, silliq va esda qoladigan interfeyslar quraman. Asosiy qurollarim — React, TypeScript va WebGL.',
-        'Songgi yillarda 3D grafika va scroll asosidagi animatsiyalarga chuqur kirdim: Three.js shaderlari, GSAP ScrollTrigger va performance optimizatsiyasi kundalik ishim.',
+        'Soʻnggi yillarda 3D grafika va scroll asosidagi animatsiyalarga chuqur kirdim: Three.js shaderlari, GSAP ScrollTrigger va performance optimizatsiyasi kundalik ishim.',
         'Dizaynerlar bilan tildan tez topishaman va Figma maketni pikselgacha aniq, lekin jonli koda aylantiraman.',
       ],
       en: [
@@ -57,7 +57,7 @@ export const content: SiteContent = {
       { value: '5+', label: { uz: 'yillik tajriba', en: 'years of experience' } },
       { value: '40+', label: { uz: 'yakunlangan loyiha', en: 'projects shipped' } },
       { value: '18', label: { uz: 'mamnun mijoz', en: 'happy clients' } },
-      { value: '96', label: { uz: 'ortacha Lighthouse', en: 'avg. Lighthouse' } },
+      { value: '96', label: { uz: 'oʻrtacha Lighthouse', en: 'avg. Lighthouse' } },
     ],
   },
 
@@ -66,13 +66,12 @@ export const content: SiteContent = {
       id: 'nebula-commerce',
       title: 'Nebula Commerce',
       description: {
-        uz: '3D mahsulot konfiguratori bilan headless e-commerce platformasi. Real vaqtda material almashtirish va AR korish.',
+        uz: '3D mahsulot konfiguratori bilan headless e-commerce platformasi. Real vaqtda material almashtirish va AR koʻrish.',
         en: 'Headless e-commerce platform with a 3D product configurator, real-time material swapping and AR preview.',
       },
       category: 'web',
       tags: ['React', 'Three.js', 'Stripe', 'Edge'],
       image: '/images/projects/project-1.svg',
-      live: 'https://example.com/nebula',
       repo: 'https://github.com/abdulmajidkhan007',
       year: 2025,
       featured: true,
@@ -87,7 +86,6 @@ export const content: SiteContent = {
       category: 'web',
       tags: ['TypeScript', 'D3', 'WebSocket', 'Vite'],
       image: '/images/projects/project-2.svg',
-      live: 'https://example.com/orbit',
       repo: 'https://github.com/abdulmajidkhan007',
       year: 2025,
     },
@@ -109,13 +107,12 @@ export const content: SiteContent = {
       id: 'shader-lab',
       title: 'Shader Lab',
       description: {
-        uz: 'GLSL orgatuvchi playground: jonli kod muharriri, 30+ misol va shader kompilyatsiya xatolarini korsatish.',
+        uz: 'GLSL oʻrgatuvchi playground: jonli kod muharriri, 30+ misol va shader kompilyatsiya xatolarini koʻrsatish.',
         en: 'A GLSL teaching playground with a live editor, 30+ examples and inline shader compile diagnostics.',
       },
       category: '3d',
       tags: ['GLSL', 'React', 'CodeMirror'],
       image: '/images/projects/project-4.svg',
-      live: 'https://example.com/shaderlab',
       year: 2024,
     },
     {
@@ -208,10 +205,12 @@ export const content: SiteContent = {
     },
   ],
 
+  // `href: null` renders the handle as plain text instead of a dead link — fill in
+  // the real profile URL and it turns into a link with no component change.
   socials: [
     { label: 'GitHub', href: 'https://github.com/abdulmajidkhan007', handle: '@abdulmajidkhan007' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/', handle: '/in/abdullohkhan' },
-    { label: 'Telegram', href: 'https://t.me/', handle: '@abdullohkhan' },
+    { label: 'LinkedIn', href: null, handle: '/in/abdullohkhan' },
+    { label: 'Telegram', href: null, handle: '@abdullohkhan' },
     { label: 'Email', href: 'mailto:santexnika.atoyo@gmail.com', handle: 'santexnika.atoyo@gmail.com' },
   ],
 }

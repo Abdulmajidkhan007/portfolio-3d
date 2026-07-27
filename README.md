@@ -12,6 +12,8 @@ npm install
 npm run dev          # http://localhost:5173
 npm run build        # typecheck + production build into dist/
 npm run preview      # serve the production build locally
+npm test             # content, i18n and Netlify-form checks
+npm run lint         # oxlint
 ```
 
 ## Making it yours
@@ -32,6 +34,11 @@ into `public/` and point `content.ts` at it — no component changes:
 | `hero.videoSrc` | `null` → Three.js particle field | play a background video instead |
 | `profile.avatarImage` | `null` → 3D point-cloud avatar | show an image instead |
 | `projects[].image` | generated SVG under `public/images/projects/` | use your own screenshot |
+| `socials[].href` | `null` → the handle renders as plain text, not a link | link to the real profile |
+
+`projects[].live` and `projects[].repo` work the same way: leave a key out and the card simply
+does not render that link. Shipping a link to `example.com` or to a bare `linkedin.com/in/` is
+worse than shipping none, so `npm test` rejects both.
 
 `npm run assets` regenerates the project artwork and the OG source SVG deterministically.
 `public/images/og-image.png` and `public/resume.pdf` are committed binaries — the PNG is a
@@ -45,10 +52,29 @@ The form is handled by **Netlify Forms** — no backend, no database, no SMTP cr
 Netlify detects forms by parsing the deployed HTML at build time and never sees markup that
 React renders at runtime, so `index.html` carries a hidden static twin of the form. The React
 form in `src/components/Contact.tsx` then POSTs URL-encoded data to `/` with a matching
-`form-name`. **If you add or rename a field, change it in both places.**
+`form-name`. **If you add or rename a field, change it in both places** — `npm test` fails if
+the two forms drift, because nothing else catches it before production.
 
 Submissions appear under *Forms* in the Netlify dashboard; turn on email notifications there.
 Spam is filtered by Netlify plus the `bot-field` honeypot.
+
+## Tests
+
+`npm test` runs Vitest in a Node environment. There are no component-render tests; the suites
+guard the invariants that are easy to break and impossible to notice locally:
+
+- **`content.test.ts`** — every asset path in `content.ts` resolves to a committed file under
+  `public/`, project ids are unique, categories match the filter, skill levels stay in the
+  0–100 range the progress bars assume, and no outbound URL is a placeholder (`example.com`, or
+  a bare `linkedin.com/in/`). Localized `{ uz, en }` pairs must both be non-empty, and the
+  array-valued ones (`bio`, `typewriter`) must have matching lengths.
+- **`i18n.test.ts`** — `en.ts` defines exactly the keys `uz.ts` does and neither side is empty.
+  It also enforces Uzbek orthography: `oʻ`/`gʻ` must use U+02BB (ʻ), not a straight quote and
+  not a bare vowel.
+- **`netlify-form.test.ts`** — the hidden static form in `index.html` still exists, is still
+  marked `data-netlify`, and declares the same fields as the React form.
+
+CI (`.github/workflows/ci.yml`) runs lint, tests and the build on every push and pull request.
 
 ## Performance notes
 
@@ -94,6 +120,7 @@ src/hooks/         media queries, pointer, scroll progress, Lenis, typewriter
 src/i18n/          uz/en dictionaries + language context
 src/data/          content.ts — the single source of truth for site content
 src/utils/         GSAP animation presets, class-name helper
+src/__tests__/     content, i18n and Netlify-form invariant checks
 ```
 
 One deliberate naming note: the project cards use CSS 3D transforms rather than a WebGL

@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
+// vitest/config re-exports Vite's defineConfig with the `test` block typed.
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
@@ -46,5 +47,11 @@ export default defineConfig({
         },
       },
     },
+  },
+  test: {
+    // Node environment is enough: these suites assert on data, dictionaries and
+    // source text, not on rendered components.
+    environment: 'node',
+    include: ['src/**/*.test.ts'],
   },
 })

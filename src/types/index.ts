@@ -42,7 +42,8 @@ export interface ExperienceItem {
 
 export interface SocialLink {
   label: string
-  href: string
+  /** null -> render `handle` as plain text rather than a link that goes nowhere. */
+  href: string | null
   handle: string
 }
 

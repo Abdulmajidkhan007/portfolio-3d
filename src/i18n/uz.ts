@@ -9,7 +9,7 @@ export const uz = {
     home: 'Bosh sahifa',
     about: 'Men haqimda',
     projects: 'Loyihalar',
-    skills: 'Konikmalar',
+    skills: 'Koʻnikmalar',
     experience: 'Tajriba',
     contact: 'Bogʻlanish',
     menu: 'Menyu',

@@ -256,21 +256,32 @@ export default function Contact() {
               {t.contact.directTitle}
             </h3>
             <ul className="mt-5 space-y-4">
-              {content.socials.map((social) => (
-                <li key={social.label}>
-                  <a
-                    href={social.href}
-                    target={social.href.startsWith('http') ? '_blank' : undefined}
-                    rel="noreferrer noopener"
-                    className="group flex items-center justify-between gap-3"
-                  >
+              {content.socials.map((social) => {
+                const row = (
+                  <>
                     <span className="text-sm text-muted">{social.label}</span>
                     <span className="truncate font-mono text-xs text-ink transition-colors group-hover:text-neon">
                       {social.handle}
                     </span>
-                  </a>
-                </li>
-              ))}
+                  </>
+                )
+                return (
+                  <li key={social.label}>
+                    {social.href ? (
+                      <a
+                        href={social.href}
+                        target={social.href.startsWith('http') ? '_blank' : undefined}
+                        rel="noreferrer noopener"
+                        className="group flex items-center justify-between gap-3"
+                      >
+                        {row}
+                      </a>
+                    ) : (
+                      <div className="flex items-center justify-between gap-3">{row}</div>
+                    )}
+                  </li>
+                )
+              })}
             </ul>
           </aside>
         </div>

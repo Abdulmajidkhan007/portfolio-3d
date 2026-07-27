@@ -18,17 +18,21 @@ export default function Footer() {
         </div>
 
         <nav aria-label="Social links" className="flex flex-wrap gap-x-6 gap-y-2">
-          {content.socials.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target={social.href.startsWith('http') ? '_blank' : undefined}
-              rel="noreferrer noopener"
-              className="text-sm text-muted transition-colors hover:text-neon"
-            >
-              {social.label}
-            </a>
-          ))}
+          {/* The footer is a pure link row, so entries without a URL are left out
+              rather than rendered as unclickable labels. */}
+          {content.socials
+            .filter((social): social is typeof social & { href: string } => social.href !== null)
+            .map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target={social.href.startsWith('http') ? '_blank' : undefined}
+                rel="noreferrer noopener"
+                className="text-sm text-muted transition-colors hover:text-neon"
+              >
+                {social.label}
+              </a>
+            ))}
         </nav>
 
         <button
