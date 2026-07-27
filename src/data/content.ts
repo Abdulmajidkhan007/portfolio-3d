@@ -75,8 +75,8 @@ export const content: SiteContent = {
       id: 'atoyo',
       title: 'ATOYO Santexnika',
       description: {
-        uz: '10 000+ mahsulotli e-commerce platformasi. Cursor-based pagination, typo-tolerant qidiruv, Telegram bot orqali buyurtma boshqaruvi va rolga asoslangan admin panel.',
-        en: 'E-commerce platform with 10,000+ products: cursor-based pagination, typo-tolerant search, order management over a Telegram bot and a role-based admin panel.',
+        uz: '10 000+ mahsulotli e-commerce platformasi — bitta repoda Next.js sayti va React Native ilovasi. Typo-tolerant qidiruv, Telegram bot orqali buyurtma boshqaruvi, rolga asoslangan admin panel va CI’da yigʻiladigan release APK.',
+        en: 'E-commerce platform with 10,000+ products — a Next.js site and a React Native app in one repo. Typo-tolerant search, order management over a Telegram bot, a role-based admin panel and a release APK built in CI.',
       },
       category: 'web',
       platform: { uz: 'Ilova + Veb', en: 'App + Web' },
