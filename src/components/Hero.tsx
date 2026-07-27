@@ -21,6 +21,13 @@ export default function Hero() {
   const rootRef = useRef<HTMLElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
 
+  const [firstNames, surname] = useMemo(() => {
+    const parts = content.profile.name.trim().split(/\s+/)
+    return parts.length > 1
+      ? [parts.slice(0, -1).join(' '), parts[parts.length - 1]]
+      : [parts[0], '']
+  }, [])
+
   const phrases = useMemo(() => content.hero.typewriter[lang], [lang])
   const typed = useTypewriter(phrases)
 
@@ -95,9 +102,8 @@ export default function Hero() {
         className="grid-backdrop pointer-events-none absolute -inset-8 -z-10 opacity-60 will-change-transform"
       />
       {/* Scrim behind the copy so the headline keeps its contrast ratio no
-          matter where the particles happen to drift. Kept tight around the
-          text column so the field stays visible either side of it. */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_58%_68%_at_20%_50%,rgba(10,10,10,0.9),rgba(10,10,10,0.3)_58%,transparent_76%)]" />
+          matter where the particles happen to drift. */}
+      <div className="hero-scrim pointer-events-none absolute inset-0 -z-10" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-bg to-transparent" />
 
       <div className="section-shell">
@@ -121,8 +127,10 @@ export default function Hero() {
             data-hero-name
             className="mt-2 font-display text-5xl leading-[0.95] font-bold tracking-tight text-balance sm:text-7xl lg:text-8xl"
           >
-            <span className="block text-ink">Abdullohkhan</span>
-            <span className="neon-text block">Sharipov</span>
+            {/* Split on the last space so the surname always lands on its own
+                line in the accent colour, whatever the name in content.ts is. */}
+            <span className="block text-ink">{firstNames}</span>
+            <span className="neon-text block">{surname}</span>
           </h1>
 
           {/* Assistive tech reads the settled role once; the animated text is
@@ -154,7 +162,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => scrollToSection('contact')}
-              className="rounded-full border border-white/15 px-7 py-3.5 font-medium text-ink transition-colors hover:border-cyan/50 hover:text-cyan"
+              className="rounded-full border border-line px-7 py-3.5 font-medium text-ink transition-colors hover:border-cyan/50 hover:text-cyan"
             >
               {t.hero.ctaSecondary}
             </button>

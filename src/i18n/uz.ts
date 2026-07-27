@@ -15,6 +15,7 @@ export const uz = {
     menu: 'Menyu',
     close: 'Yopish',
     switchLanguage: 'Tilni almashtirish',
+    switchTheme: 'Mavzuni almashtirish',
   },
 
   loading: {
@@ -64,6 +65,10 @@ export const uz = {
       core: 'Asosiy',
       threed: '3D va animatsiya',
       tooling: 'Asboblar',
+    },
+    tabs: {
+      skills: 'Koʻnikmalar',
+      tools: 'Asboblar',
     },
   },
 

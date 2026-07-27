@@ -1,10 +1,12 @@
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useHasFinePointer, useIsMobile } from '@/hooks/useMediaQuery'
 import { useRenderTier } from '@/hooks/useRenderTier'
 import LazyCanvas from './LazyCanvas'
 import { ShapesScene } from './FloatingShapes'
+import { useScenePalette } from '@/theme/ThemeContext'
+import type { ScenePalette } from '@/theme/ThemeContext'
 
 /**
  * All motion lives in the vertex shader: drift, mouse repulsion and depth
@@ -53,8 +55,9 @@ const vertexShader = /* glsl */ `
 `
 
 const fragmentShader = /* glsl */ `
-  uniform vec3 uColorA;
-  uniform vec3 uColorB;
+  uniform vec3  uColorA;
+  uniform vec3  uColorB;
+  uniform float uOpacity;
 
   varying float vSeed;
   varying float vFade;
@@ -66,11 +69,19 @@ const fragmentShader = /* glsl */ `
     if (alpha < 0.01) discard;
 
     vec3 color = mix(uColorA, uColorB, vSeed);
-    gl_FragColor = vec4(color, alpha * vFade);
+    gl_FragColor = vec4(color, clamp(alpha * vFade * uOpacity, 0.0, 1.0));
   }
 `
 
-function Particles({ count, autoOrbit }: { count: number; autoOrbit: boolean }) {
+function Particles({
+  count,
+  autoOrbit,
+  palette,
+}: {
+  count: number
+  autoOrbit: boolean
+  palette: ScenePalette
+}) {
   const materialRef = useRef<THREE.ShaderMaterial>(null)
   const groupRef = useRef<THREE.Group>(null)
   const viewport = useThree((state) => state.viewport)
@@ -104,11 +115,20 @@ function Particles({ count, autoOrbit }: { count: number; autoOrbit: boolean }) 
       uMouse: { value: new THREE.Vector2(999, 999) },
       uPixelRatio: { value: Math.min(window.devicePixelRatio, 1.75) },
       uRadius: { value: 3.4 },
-      uColorA: { value: new THREE.Color('#00ff88') },
-      uColorB: { value: new THREE.Color('#00d4ff') },
+      uColorA: { value: new THREE.Color(palette.neon) },
+      uColorB: { value: new THREE.Color(palette.cyan) },
+      uOpacity: { value: palette.opacityScale },
     }),
+    // Colours are pushed in the effect below rather than rebuilt here: a new
+    // uniforms object would force the material to recompile every toggle.
     [],
   )
+
+  useEffect(() => {
+    uniforms.uColorA.value.set(palette.neon)
+    uniforms.uColorB.value.set(palette.cyan)
+    uniforms.uOpacity.value = palette.opacityScale
+  }, [uniforms, palette])
 
   useFrame((state, delta) => {
     const material = materialRef.current
@@ -150,7 +170,7 @@ function Particles({ count, autoOrbit }: { count: number; autoOrbit: boolean }) 
           fragmentShader={fragmentShader}
           transparent
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
+          blending={palette.additive ? THREE.AdditiveBlending : THREE.NormalBlending}
         />
       </points>
     </group>
@@ -161,17 +181,18 @@ export default function ParticleField() {
   const isMobile = useIsMobile()
   const finePointer = useHasFinePointer()
   const tier = useRenderTier()
+  const palette = useScenePalette()
   // Phones get a reduced field and CPU rasterisers far less again: same look,
   // a fraction of the fill rate.
   const count = tier === 'low' ? 900 : isMobile ? 2600 : 6000
 
   return (
     <LazyCanvas camera={{ position: [0, 0, 14], fov: 62 }}>
-      <Particles count={count} autoOrbit={!finePointer} />
+      <Particles count={count} autoOrbit={!finePointer} palette={palette} />
       {/* Shares this canvas rather than stacking its own. The camera here sits
           at z=14/fov 62 against the shapes' authored z=6/fov 50, so they need
           scaling up to land at the same apparent size. */}
-      <ShapesScene spread={2.6} layout="hero" />
+      <ShapesScene spread={2.6} layout="hero" palette={palette} />
     </LazyCanvas>
   )
 }

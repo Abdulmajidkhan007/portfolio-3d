@@ -17,6 +17,7 @@ export const en: Dictionary = {
     menu: 'Menu',
     close: 'Close',
     switchLanguage: 'Switch language',
+    switchTheme: 'Switch theme',
   },
 
   loading: {
@@ -66,6 +67,10 @@ export const en: Dictionary = {
       core: 'Core',
       threed: '3D & motion',
       tooling: 'Tooling',
+    },
+    tabs: {
+      skills: 'Skills',
+      tools: 'Tools',
     },
   },
 

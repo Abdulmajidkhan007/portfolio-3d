@@ -5,27 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#0a0a0a" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content="dark light" />
 
-    <title>Abdullohkhan Sharipov | Frontend Developer &amp; 3D Enthusiast</title>
+    <!--
+      Resolve the theme before the first paint. React sets the same attribute in
+      <ThemeProvider>, but that only runs after hydration — without this the
+      page would paint dark and then flip to light. Keep the logic identical to
+      resolveInitialTheme() in src/theme/ThemeContext.tsx.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('portfolio-theme')
+          var theme =
+            stored === 'dark' || stored === 'light'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark'
+          document.documentElement.dataset.theme = theme
+          document.documentElement.style.colorScheme = theme
+        } catch (e) {
+          document.documentElement.dataset.theme = 'dark'
+        }
+      })()
+    </script>
+
+    <title>Abdulmajid Sharipov | Frontend Developer</title>
     <meta
       name="description"
-      content="Zamonaviy veb-ilovalar va 3D tajribalar yaratuvchi frontend dasturchi. React, TypeScript, Three.js va WebGL."
+      content="React va TypeScript asosida veb va mobil ilovalar yaratuvchi frontend dasturchi. Next.js, React Native, Firebase, Three.js."
     />
     <meta
       name="keywords"
-      content="frontend developer, react, typescript, three.js, webgl, web developer, portfolio, 3d web, gsap"
+      content="frontend developer, react, react native, typescript, next.js, firebase, three.js, portfolio, Abdulmajid Sharipov"
     />
-    <meta name="author" content="Abdullohkhan Sharipov" />
+    <meta name="author" content="Abdulmajid Sharipov" />
     <link rel="canonical" href="https://abdullohkhan-portfolio.netlify.app/" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Abdullohkhan Sharipov" />
+    <meta property="og:site_name" content="Abdulmajid Sharipov" />
     <meta property="og:url" content="https://abdullohkhan-portfolio.netlify.app/" />
-    <meta property="og:title" content="Abdullohkhan Sharipov | Frontend Developer &amp; 3D Enthusiast" />
+    <meta property="og:title" content="Abdulmajid Sharipov | Frontend Developer" />
     <meta
       property="og:description"
-      content="Zamonaviy veb-ilovalar va 3D tajribalar yaratuvchi frontend dasturchi. React, TypeScript, Three.js va WebGL."
+      content="React va TypeScript asosida veb va mobil ilovalar yaratuvchi frontend dasturchi. Next.js, React Native, Firebase, Three.js."
     />
     <meta property="og:image" content="https://abdullohkhan-portfolio.netlify.app/images/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -34,10 +58,10 @@
     <meta property="og:locale:alternate" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Abdullohkhan Sharipov | Frontend Developer &amp; 3D Enthusiast" />
+    <meta name="twitter:title" content="Abdulmajid Sharipov | Frontend Developer" />
     <meta
       name="twitter:description"
-      content="Zamonaviy veb-ilovalar va 3D tajribalar yaratuvchi frontend dasturchi. React, TypeScript, Three.js va WebGL."
+      content="React va TypeScript asosida veb va mobil ilovalar yaratuvchi frontend dasturchi. Next.js, React Native, Firebase, Three.js."
     />
     <meta name="twitter:image" content="https://abdullohkhan-portfolio.netlify.app/images/og-image.png" />
 
@@ -45,14 +69,17 @@
       {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Abdullohkhan Sharipov",
+        "name": "Abdulmajid Sharipov",
         "url": "https://abdullohkhan-portfolio.netlify.app/",
         "image": "https://abdullohkhan-portfolio.netlify.app/images/og-image.png",
         "jobTitle": "Frontend Developer",
-        "description": "Frontend developer building modern web applications and 3D experiences.",
-        "address": { "@type": "PostalAddress", "addressLocality": "Tashkent", "addressCountry": "UZ" },
-        "knowsAbout": ["React", "TypeScript", "Three.js", "WebGL", "GSAP", "Web Performance"],
-        "sameAs": ["https://github.com/abdulmajidkhan007"]
+        "description": "Frontend developer building web and mobile applications with React, TypeScript and Firebase.",
+        "address": { "@type": "PostalAddress", "addressLocality": "Qoqon", "addressCountry": "UZ" },
+        "knowsAbout": ["React", "React Native", "TypeScript", "Next.js", "Firebase", "Three.js", "GSAP"],
+        "sameAs": [
+          "https://github.com/Abdulmajidkhan007",
+          "https://linkedin.com/in/abdulmajid-sharipov-profile"
+        ]
       }
     </script>
   </head>
@@ -88,15 +115,15 @@
             <span
               class="absolute inset-0 animate-spin rounded-full border border-transparent border-t-neon border-r-cyan [animation-duration:1.4s]"
             ></span>
-            <span class="absolute inset-3 rounded-full border border-white/10"></span>
+            <span class="absolute inset-3 rounded-full border border-line"></span>
           </div>
           <div class="text-center">
             <p class="font-mono text-xs tracking-[0.35em] text-muted uppercase">Booting system</p>
             <p class="mt-3 font-display text-2xl font-bold sm:text-3xl">
-              <span class="neon-text">{ </span>Abdullohkhan<span class="neon-text"> }</span>
+              <span class="neon-text">{ </span>Abdulmajid<span class="neon-text"> }</span>
             </p>
           </div>
-          <div class="h-px w-64 max-w-[70vw] overflow-hidden bg-white/10"></div>
+          <div class="h-px w-64 max-w-[70vw] overflow-hidden bg-line"></div>
         </div>
       </div>
     </div>

@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Abdulmajid Sharipov — Frontend Developer</title>
+    <style>
+      /*
+       * Print-first stylesheet: greyscale only, no background fills, no web
+       * fonts. Recruiters print these and ATS parsers strip colour anyway, so
+       * hierarchy is carried by weight, size and rules instead.
+       */
+      @page {
+        size: A4;
+        margin: 13mm 14mm;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 9.6pt;
+        line-height: 1.42;
+        color: #000;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 21pt;
+        font-weight: 700;
+        letter-spacing: -0.4pt;
+        text-transform: uppercase;
+      }
+
+      .role {
+        margin: 2pt 0 0;
+        font-size: 11pt;
+        font-weight: 400;
+        letter-spacing: 0.6pt;
+        color: #333;
+      }
+
+      .contact {
+        margin: 6pt 0 0;
+        font-size: 8.6pt;
+        color: #222;
+      }
+
+      .contact span::after {
+        content: ' · ';
+        color: #888;
+      }
+      .contact span:last-child::after {
+        content: '';
+      }
+
+      header {
+        border-bottom: 1.4pt solid #000;
+        padding-bottom: 8pt;
+      }
+
+      h2 {
+        margin: 13pt 0 6pt;
+        font-size: 9pt;
+        font-weight: 700;
+        letter-spacing: 1.3pt;
+        text-transform: uppercase;
+        border-bottom: 0.5pt solid #999;
+        padding-bottom: 2.5pt;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 12pt;
+      }
+
+      li {
+        margin-bottom: 2pt;
+      }
+
+      p {
+        margin: 0 0 3pt;
+      }
+
+      /* Role / company on the left, dates on the right, on one baseline. */
+      .entry-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10pt;
+      }
+
+      .entry-title {
+        font-weight: 700;
+        font-size: 10pt;
+      }
+
+      .entry-meta {
+        font-size: 8.4pt;
+        color: #444;
+        white-space: nowrap;
+      }
+
+      .entry {
+        margin-bottom: 8pt;
+      }
+
+      .entry:last-child {
+        margin-bottom: 0;
+      }
+
+      .focus {
+        font-size: 8.8pt;
+        color: #222;
+        line-height: 1.6;
+      }
+
+      /* Project stack line — monospace so versions stay scannable. */
+      .stack {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 8pt;
+        color: #333;
+        margin: 1pt 0 2.5pt;
+      }
+
+      .links {
+        font-size: 8pt;
+        color: #444;
+      }
+
+      /* "Ilova + Veb" marker: outlined, not filled, so it survives greyscale. */
+      .badge {
+        display: inline-block;
+        border: 0.7pt solid #000;
+        border-radius: 2pt;
+        padding: 0.5pt 3.5pt;
+        font-size: 7.2pt;
+        font-weight: 700;
+        letter-spacing: 0.5pt;
+        text-transform: uppercase;
+        vertical-align: 1pt;
+        margin-left: 4pt;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: 82pt 1fr;
+        gap: 2.5pt 8pt;
+        font-size: 9pt;
+      }
+
+      .skills-grid dt {
+        font-weight: 700;
+      }
+
+      .skills-grid dd {
+        margin: 0;
+      }
+
+      /* Keep an entry from splitting across the page break. */
+      .entry,
+      header {
+        break-inside: avoid;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Abdulmajid Sharipov</h1>
+      <p class="role">Frontend Developer</p>
+      <p class="contact">
+        <span>+998 90 854 56 03</span>
+        <span>abdulmajidsharipovlc@gmail.com</span>
+        <span>Qoʻqon, Oʻzbekiston</span>
+      </p>
+      <p class="contact">
+        <span>github.com/Abdulmajidkhan007</span>
+        <span>linkedin.com/in/abdulmajid-sharipov-profile</span>
+        <span>abdullohkhan-portfolio.netlify.app</span>
+      </p>
+    </header>
+
+    <h2>Profil</h2>
+    <ul>
+      <li>
+        React va TypeScript asosida toza, qayta ishlatiluvchi va miqyoslanuvchi veb-ilovalar
+        yaratishga ixtisoslashgan frontend dasturchi.
+      </li>
+      <li>
+        Komponentlar arxitekturasi, holatni boshqarish (Redux Toolkit, Zustand, TanStack Query)
+        hamda REST va Firebase API'lar bilan integratsiyada amaliy tajriba.
+      </li>
+      <li>
+        TailwindCSS, MUI va Bootstrap yordamida piksel darajasida aniq, responsiv interfeyslar;
+        Framer Motion va GSAP bilan silliq animatsiya va interaksiyalar.
+      </li>
+      <li>
+        Monorepo arxitekturasida amaliy tajriba: veb va mobil ilova bitta kod bazasi va umumiy
+        design-token tizimidan chiqadi (Turborepo, pnpm/npm workspaces).
+      </li>
+      <li>
+        Real vaqt rejimidagi ilovalar, autentifikatsiya tizimlari va admin panellarni noldan
+        toʻliq ishlab chiqish boʻyicha tajriba.
+      </li>
+    </ul>
+
+    <h2>Asosiy yoʻnalishlar</h2>
+    <p class="focus">
+      Komponent arxitekturasi · Holatni boshqarish · Monorepo (Turborepo) · Responsiv dizayn ·
+      Performans optimizatsiyasi · UI / UX implementatsiyasi · Animatsiya va interaksiya · REST &
+      Firebase integratsiyasi · Avtomatik deploy (CI/CD)
+    </p>
+
+    <h2>Tajriba</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Frontend Developer — Freelance</span>
+        <span class="entry-meta">Sentyabr 2025 — hozirgacha · Qoʻqon</span>
+      </div>
+      <ul>
+        <li>
+          Mijoz talablariga mos pixel-perfect interfeyslarni HTML, CSS, JavaScript va React
+          yordamida ishlab chiqdim.
+        </li>
+        <li>
+          Firebase (Auth, Firestore, Storage) integratsiyasi orqali real vaqt rejimida ishlovchi
+          funksiyalarni joriy etdim.
+        </li>
+        <li>
+          Framer Motion yordamida foydalanuvchi tajribasini yaxshilovchi animatsiya va
+          oʻtishlarni qoʻshdim.
+        </li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Mustaqil loyihalar — GitHub</span>
+        <span class="entry-meta">2025 — hozirgacha</span>
+      </div>
+      <ul>
+        <li>
+          26 ta ochiq repozitoriy: veb-ilovalar, React Native mobil ilovalar va Telegram botlar.
+        </li>
+        <li>
+          Monorepo arxitekturasini amalda oʻzlashtirdim — Zod bilan yagona domen modeli, TanStack
+          Query bilan server holati, Turborepo bilan build orkestratsiyasi.
+        </li>
+      </ul>
+    </div>
+
+    <h2>Loyihalar</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">ATOYO Santexnika — E-commerce platformasi</span>
+        <span class="entry-meta">Veb</span>
+      </div>
+      <p class="stack">Next.js 16 · Firebase · Redux Toolkit · Telegram Bot API · Netlify</p>
+      <p class="links">atoyo-uz.netlify.app · github.com/Abdulmajidkhan007/atoyo-e-commerce</p>
+      <ul>
+        <li>
+          10 000+ mahsulotli katalog: cursor-based pagination, infinite scroll, kompozit
+          indeksli filtrlar va typo-tolerant qidiruv (Firestore prefiks + Fuse.js).
+        </li>
+        <li>
+          Telegram bot integratsiyasi — har bir buyurtma guruhning tegishli forum topicʼiga
+          boradi, inline tugmalar webhook orqali Firestore statusini yangilaydi.
+        </li>
+        <li>
+          Rolga asoslangan admin panel va ikki qatlamli himoya (proxy + layout darajasida
+          mustaqil qayta tekshiruv).
+        </li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"
+          >KidsWear — Bolalar kiyimi platformasi<span class="badge">Ilova + Veb</span></span
+        >
+        <span class="entry-meta">Monorepo</span>
+      </div>
+      <p class="stack">
+        React Native (bare CLI) · React + Vite · Firebase · Turborepo · Redux Toolkit · i18next
+      </p>
+      <p class="links">github.com/Abdulmajidkhan007/rn-r-e-commerce</p>
+      <ul>
+        <li>
+          Veb va mobil ilova bitta monorepodan chiqadi: UI har platforma uchun alohida, lekin
+          yagona design-token tizimi bilan boshqariladi.
+        </li>
+        <li>
+          Cloud Functions bilan tranzaksion zaxira kamaytirish, FCM push bildirishnomalari
+          (ikkala platformada) va biometrik AppLock.
+        </li>
+        <li>Uch tilli interfeys (uz/en/ru), Google Sign-In va rolga asoslangan admin panel.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"
+          >Vroom — Taksi va kuryer super-app<span class="badge">Ilova + Veb</span></span
+        >
+        <span class="entry-meta">Monorepo</span>
+      </div>
+      <p class="stack">Expo · React + Vite · Turborepo · Zod · TanStack Query · Zustand</p>
+      <p class="links">github.com/Abdulmajidkhan007/go-uz</p>
+      <ul>
+        <li>
+          9 ta umumiy paketdan iborat arxitektura: domen modeli, Zod validatsiya, mock API,
+          design tokenlar va platformadan mustaqil UI hooklari.
+        </li>
+        <li>
+          Discriminated-union holat mashinalari (TripStatus, DeliveryStatus, PaymentState) va
+          optimistik yangilanishli React Query hooklari.
+        </li>
+        <li>TypeScript strict rejimi: noUncheckedIndexedAccess, exactOptionalPropertyTypes.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Organick — Organik oziq-ovqat platformasi</span>
+        <span class="entry-meta">Veb</span>
+      </div>
+      <p class="stack">React 19 · TypeScript · Redux Toolkit · Tailwind v4 · Firebase · i18next</p>
+      <p class="links">github.com/Abdulmajidkhan007/Organick_org</p>
+      <ul>
+        <li>
+          Toʻliq onlayn-doʻkon: kategoriya boʻyicha filtrlash, qidiruv va saralash, reyting
+          tizimi, localStorageʼda saqlanuvchi savatcha (slide-in sidebar + alohida sahifa).
+        </li>
+        <li>
+          Firebase autentifikatsiyasining uch usuli — Google Sign-In, Email/parol va telefon
+          orqali SMS OTP; himoyalangan admin dashboard (mahsulot va blog uchun CRUD).
+        </li>
+        <li>i18next bilan 3 tilli interfeys, dark/light rejim va mobil-birinchi responsiv dizayn.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Lumina — Ijtimoiy tarmoq ilovasi</span>
+        <span class="entry-meta">Mobil ilova</span>
+      </div>
+      <p class="stack">
+        React Native 0.79 (bare CLI, New Architecture) · React Navigation v7 · TanStack Query ·
+        Zustand · Reanimated
+      </p>
+      <p class="links">github.com/Abdulmajidkhan007/lumina</p>
+      <ul>
+        <li>
+          Toʻliq tiplangan navigatsiya (native-stack + bottom-tabs) va strict TypeScript rejimi.
+        </li>
+        <li>
+          Server holati AsyncStorageʼda offline saqlanadi; formalar React Hook Form + Zod bilan
+          validatsiyadan oʻtadi.
+        </li>
+        <li>Autentifikatsiya tokenlari react-native-keychain orqali xavfsiz saqlanadi.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">3D Portfolio — Shaxsiy portfolio sayti</span>
+        <span class="entry-meta">Veb / 3D</span>
+      </div>
+      <p class="stack">React 19 · Three.js / React Three Fiber · GSAP · Tailwind v4 · Netlify</p>
+      <p class="links">abdullohkhan-portfolio.netlify.app</p>
+      <ul>
+        <li>
+          Oʻzim yozgan GLSL shaderlardagi zarrachalar maydoni: butun maydon bitta draw callʼda,
+          harakat va sichqonchaga reaksiya vertex shaderda hisoblanadi.
+        </li>
+        <li>
+          WebGL bundle kritik yoʻldan chiqarilgan (lazy + requestIdleCallback), shuning uchun
+          boshlangʻich JS ~17 kB gzip.
+        </li>
+        <li>Ikki tilli interfeys (uz/en), dark/light rejim va Netlify Forms orqali aloqa formasi.</li>
+      </ul>
+    </div>
+
+    <h2>Texnik koʻnikmalar</h2>
+    <dl class="skills-grid">
+      <dt>Tillar</dt>
+      <dd>TypeScript, JavaScript (ES6+), HTML5, CSS3</dd>
+
+      <dt>Frameworklar</dt>
+      <dd>React, React Native, Next.js, Expo, Vite</dd>
+
+      <dt>Holat</dt>
+      <dd>Redux Toolkit, Zustand, TanStack Query, React Hook Form + Zod</dd>
+
+      <dt>Uslublash</dt>
+      <dd>TailwindCSS, MUI, Bootstrap, NativeWind, React Native Paper</dd>
+
+      <dt>Animatsiya</dt>
+      <dd>Framer Motion, GSAP, Reanimated, Three.js / React Three Fiber</dd>
+
+      <dt>Vositalar</dt>
+      <dd>Firebase, Supabase, Turborepo, Git, GitHub, Netlify, Figma</dd>
+    </dl>
+
+    <h2>Taʼlim</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Pro Teach — Frontend dasturlash</span>
+        <span class="entry-meta">Sentyabr 2024 — Avgust 2025</span>
+      </div>
+      <p>
+        Oʻquv markazda avval kompyuter savodxonligini, soʻngra frontend dasturlash yoʻnalishini
+        oʻrgandim.
+      </p>
+    </div>
+  </body>
+</html>

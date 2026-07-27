@@ -13,7 +13,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
       role="group"
       aria-label={t.nav.switchLanguage}
       className={cn(
-        'relative flex items-center rounded-full border border-white/10 bg-white/5 p-0.5',
+        'relative flex items-center rounded-full border border-line bg-bg-soft p-0.5',
         className,
       )}
     >

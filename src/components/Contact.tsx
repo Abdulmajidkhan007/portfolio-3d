@@ -70,10 +70,10 @@ export default function Contact() {
 
   const inputClass = (invalid: boolean) =>
     cn(
-      'w-full rounded-xl border bg-white/4 px-4 py-3 text-sm text-ink outline-none transition-all placeholder:text-muted/60',
+      'w-full rounded-xl border bg-bg-soft px-4 py-3 text-sm text-ink outline-none transition-all placeholder:text-muted/60',
       invalid
         ? 'border-red-500/60 focus:border-red-500'
-        : 'border-white/10 focus:border-neon/60 focus:shadow-neon',
+        : 'border-line focus:border-neon/60 focus:shadow-neon',
     )
 
   return (
@@ -134,7 +134,7 @@ export default function Contact() {
                   <button
                     type="button"
                     onClick={() => setStatus('idle')}
-                    className="mt-8 rounded-full border border-white/15 px-5 py-2.5 text-sm transition-colors hover:border-neon/45 hover:text-neon"
+                    className="mt-8 rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-neon/45 hover:text-neon"
                   >
                     {t.contact.sendAnother}
                   </button>

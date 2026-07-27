@@ -46,7 +46,7 @@ export default function Experience() {
 
         <div data-timeline-list className="relative mt-14 lg:mt-20">
           {/* Spine: left-aligned on small screens, centred from lg up. */}
-          <div className="absolute top-0 bottom-0 left-[15px] w-px bg-white/10 lg:left-1/2 lg:-translate-x-1/2">
+          <div className="absolute top-0 bottom-0 left-[15px] w-px bg-line lg:left-1/2 lg:-translate-x-1/2">
             <div
               data-timeline-fill
               className="h-full w-full origin-top bg-gradient-to-b from-neon to-cyan"

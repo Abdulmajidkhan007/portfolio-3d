@@ -5,6 +5,7 @@ import { useActiveSection } from '@/hooks/useScrollProgress'
 import { scrollToSection, setScrollLocked } from '@/hooks/useLenis'
 import { cn } from '@/utils/cn'
 import LanguageToggle from './LanguageToggle'
+import ThemeToggle from './ThemeToggle'
 
 export const SECTION_IDS = [
   'home',
@@ -44,6 +45,11 @@ export default function Navbar() {
   }, [menuOpen])
 
   const go = (id: string) => {
+    // Unlock before scrolling rather than leaving it to the menuOpen effect.
+    // That effect only runs after this handler returns, so Lenis would still be
+    // stopped when scrollToSection fires and would swallow the scroll outright —
+    // the menu closed and nothing moved.
+    setScrollLocked(false)
     setMenuOpen(false)
     scrollToSection(id)
   }
@@ -55,7 +61,7 @@ export default function Navbar() {
       <header
         className={cn(
           'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-          scrolled ? 'glass-strong border-b border-white/10 py-3' : 'border-b border-transparent py-5',
+          scrolled ? 'glass-strong border-b border-line py-3' : 'border-b border-transparent py-5',
         )}
       >
         <nav className="section-shell flex items-center justify-between gap-4">
@@ -93,8 +99,9 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <LanguageToggle />
+            <ThemeToggle />
             <button
               type="button"
               onClick={() => go('contact')}
@@ -108,7 +115,7 @@ export default function Navbar() {
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label={menuOpen ? t.nav.close : t.nav.menu}
-              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/10 lg:hidden"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-line lg:hidden"
             >
               <span className="sr-only">{menuOpen ? t.nav.close : t.nav.menu}</span>
               <span

@@ -42,7 +42,7 @@ export default function Projects() {
                     'relative rounded-full border px-4 py-2 text-sm transition-colors',
                     filter === category
                       ? 'border-neon/50 text-neon'
-                      : 'border-white/10 text-muted hover:border-white/25 hover:text-ink',
+                      : 'border-line text-muted hover:border-neon/35 hover:text-ink',
                   )}
                 >
                   {filter === category && (

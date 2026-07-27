@@ -120,7 +120,7 @@ export default function LoadingScreen({ onDone }: Props) {
       <div data-loader-content className="section-shell flex flex-col items-center gap-7">
         <div className="relative flex h-24 w-24 items-center justify-center">
           <span className="absolute inset-0 animate-spin rounded-full border border-transparent border-t-neon border-r-cyan [animation-duration:1.4s]" />
-          <span className="absolute inset-3 rounded-full border border-white/10" />
+          <span className="absolute inset-3 rounded-full border border-line" />
           <span className="font-mono text-sm text-neon">{shown}%</span>
         </div>
 
@@ -135,7 +135,7 @@ export default function LoadingScreen({ onDone }: Props) {
           </p>
         </div>
 
-        <div className="h-px w-64 max-w-[70vw] overflow-hidden bg-white/10">
+        <div className="h-px w-64 max-w-[70vw] overflow-hidden bg-line">
           <div
             className="h-full bg-gradient-to-r from-neon to-cyan transition-[width] duration-150 ease-out"
             style={{ width: `${shown}%` }}

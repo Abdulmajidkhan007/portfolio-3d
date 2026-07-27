@@ -73,6 +73,12 @@ export default function ProjectCard({ project, index }: { project: Project; inde
           <span className="absolute top-3 right-3 font-mono text-[11px] text-muted">
             {project.year}
           </span>
+
+          {project.platform && (
+            <span className="absolute bottom-3 left-3 rounded-full border border-cyan/40 bg-bg/80 px-2.5 py-1 font-mono text-[10px] tracking-wide text-cyan uppercase">
+              {pick(project.platform)}
+            </span>
+          )}
         </div>
 
         <div className="relative p-5 [transform:translateZ(28px)]">

@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { content } from '@/data/content'
 import { countUp, fadeUp, gsap, revealTrigger, staggerUp } from '@/utils/animations'
+import { cn } from '@/utils/cn'
 import SectionHeading from './SectionHeading'
 import Deferred3D from './three/Deferred3D'
 import { AvatarFallback } from './three/fallbacks'
@@ -11,7 +12,7 @@ const Avatar3D = lazy(() => import('./three/Avatar3D'))
 const FloatingShapes = lazy(() => import('./three/FloatingShapes'))
 
 /** Skills shown as bars here; the full set lives in the Skills section. */
-const BAR_SKILLS = ['React', 'TypeScript', 'Three.js', 'GSAP', 'CSS / Tailwind', 'Next.js']
+const BAR_SKILLS = ['React', 'TypeScript', 'React Native', 'Next.js', 'TailwindCSS', 'Firebase']
 
 export default function About() {
   const { t, lang } = useLanguage()
@@ -66,7 +67,14 @@ export default function About() {
 
         <div className="mt-14 grid items-start gap-12 lg:mt-20 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-16">
           <div data-about-visual className="relative mx-auto w-full max-w-sm lg:max-w-none">
-            <div className="glass relative aspect-square overflow-hidden rounded-3xl">
+            <div
+              className={cn(
+                'glass relative aspect-square overflow-hidden rounded-3xl',
+                // Same reasoning as the skill sphere: the neon avatar needs a
+                // dark backdrop, but a photo brings its own.
+                !portrait && 'bg-[#0a0c11]',
+              )}
+            >
               {portrait ? (
                 <img
                   src={portrait}
@@ -153,7 +161,7 @@ export default function About() {
                       aria-valuemin={0}
                       aria-valuemax={100}
                       aria-label={skill.name}
-                      className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/8"
+                      className="mt-2 h-1.5 overflow-hidden rounded-full bg-line"
                     >
                       <div
                         data-bar-fill
@@ -168,7 +176,7 @@ export default function About() {
               <a
                 href={content.profile.resume}
                 download
-                className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm transition-colors hover:border-neon/45 hover:text-neon"
+                className="mt-8 inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm transition-colors hover:border-neon/45 hover:text-neon"
               >
                 {t.about.resume}
                 <span aria-hidden>↓</span>
