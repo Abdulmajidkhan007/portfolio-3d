@@ -51,6 +51,7 @@ export const uz = {
       tool: 'Asboblar',
     },
     live: 'Jonli koʻrish',
+    app: 'Ilovani yuklab olish',
     code: 'Kod',
     featured: 'Tanlangan',
     empty: 'Bu kategoriyada loyiha yoʻq.',

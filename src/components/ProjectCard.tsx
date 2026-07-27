@@ -107,6 +107,17 @@ export default function ProjectCard({ project, index }: { project: Project; inde
                 <span aria-hidden>↗</span>
               </a>
             )}
+            {project.app && (
+              <a
+                href={project.app}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-1.5 text-sm text-cyan transition-opacity hover:opacity-80"
+              >
+                {t.projects.app}
+                <span aria-hidden>↓</span>
+              </a>
+            )}
             {project.repo && (
               <a
                 href={project.repo}

@@ -135,6 +135,19 @@
         color: #444;
       }
 
+      /*
+       * Every URL on the page is a real anchor so the PDF is clickable. They
+       * keep the surrounding colour and take a hairline underline instead —
+       * blue link text would break the greyscale rule.
+       */
+      a {
+        color: inherit;
+        text-decoration: underline;
+        text-decoration-color: #aaa;
+        text-underline-offset: 1.5pt;
+        text-decoration-thickness: 0.4pt;
+      }
+
       /* "Ilova + Veb" marker: outlined, not filled, so it survives greyscale. */
       .badge {
         display: inline-block;
@@ -176,14 +189,14 @@
       <h1>Abdulmajid Sharipov</h1>
       <p class="role">Frontend Developer</p>
       <p class="contact">
-        <span>+998 90 854 56 03</span>
-        <span>abdulmajidsharipovlc@gmail.com</span>
+        <span><a href="tel:+998908545603">+998 90 854 56 03</a></span>
+        <span><a href="mailto:abdulmajidsharipovlc@gmail.com">abdulmajidsharipovlc@gmail.com</a></span>
         <span>Qoʻqon, Oʻzbekiston</span>
       </p>
       <p class="contact">
-        <span>github.com/Abdulmajidkhan007</span>
-        <span>linkedin.com/in/abdulmajid-sharipov-profile</span>
-        <span>abdullohkhan-portfolio.netlify.app</span>
+        <span><a href="https://github.com/Abdulmajidkhan007">github.com/Abdulmajidkhan007</a></span>
+        <span><a href="https://linkedin.com/in/abdulmajid-sharipov-profile">linkedin.com/in/abdulmajid-sharipov-profile</a></span>
+        <span><a href="https://abdullohkhan-portfolio.netlify.app">abdullohkhan-portfolio.netlify.app</a></span>
       </p>
     </header>
 
@@ -251,8 +264,8 @@
           26 ta ochiq repozitoriy: veb-ilovalar, React Native mobil ilovalar va Telegram botlar.
         </li>
         <li>
-          Monorepo arxitekturasini amalda oʻzlashtirdim — Zod bilan yagona domen modeli, TanStack
-          Query bilan server holati, Turborepo bilan build orkestratsiyasi.
+          Monorepo arxitekturasini amalda oʻzlashtirdim — veb va mobil ilova bitta kod bazasi,
+          TanStack Query bilan server holati, Turborepo bilan build orkestratsiyasi.
         </li>
       </ul>
     </div>
@@ -261,11 +274,18 @@
 
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">ATOYO Santexnika — E-commerce platformasi</span>
-        <span class="entry-meta">Veb</span>
+        <span class="entry-title"
+          >ATOYO Santexnika — E-commerce platformasi<span class="badge">Ilova + Veb</span></span
+        >
+        <span class="entry-meta">Monorepo</span>
       </div>
-      <p class="stack">Next.js 16 · Firebase · Redux Toolkit · Telegram Bot API · Netlify</p>
-      <p class="links">atoyo-uz.netlify.app · github.com/Abdulmajidkhan007/atoyo-e-commerce</p>
+      <p class="stack">Next.js 16 · React Native · Firebase · Redux Toolkit · Telegram Bot API</p>
+      <p class="links">
+        <a href="https://atoyo-uz.netlify.app">atoyo-uz.netlify.app</a> ·
+        <a href="https://github.com/Abdulmajidkhan007/atoyo-e-commerce"
+          >github.com/Abdulmajidkhan007/atoyo-e-commerce</a
+        >
+      </p>
       <ul>
         <li>
           10 000+ mahsulotli katalog: cursor-based pagination, infinite scroll, kompozit
@@ -292,7 +312,11 @@
       <p class="stack">
         React Native (bare CLI) · React + Vite · Firebase · Turborepo · Redux Toolkit · i18next
       </p>
-      <p class="links">github.com/Abdulmajidkhan007/rn-r-e-commerce</p>
+      <p class="links">
+        <a href="https://github.com/Abdulmajidkhan007/rn-r-e-commerce"
+          >github.com/Abdulmajidkhan007/rn-r-e-commerce</a
+        >
+      </p>
       <ul>
         <li>
           Veb va mobil ilova bitta monorepodan chiqadi: UI har platforma uchun alohida, lekin
@@ -308,33 +332,15 @@
 
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title"
-          >Vroom — Taksi va kuryer super-app<span class="badge">Ilova + Veb</span></span
-        >
-        <span class="entry-meta">Monorepo</span>
-      </div>
-      <p class="stack">Expo · React + Vite · Turborepo · Zod · TanStack Query · Zustand</p>
-      <p class="links">github.com/Abdulmajidkhan007/go-uz</p>
-      <ul>
-        <li>
-          9 ta umumiy paketdan iborat arxitektura: domen modeli, Zod validatsiya, mock API,
-          design tokenlar va platformadan mustaqil UI hooklari.
-        </li>
-        <li>
-          Discriminated-union holat mashinalari (TripStatus, DeliveryStatus, PaymentState) va
-          optimistik yangilanishli React Query hooklari.
-        </li>
-        <li>TypeScript strict rejimi: noUncheckedIndexedAccess, exactOptionalPropertyTypes.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-head">
         <span class="entry-title">Organick — Organik oziq-ovqat platformasi</span>
         <span class="entry-meta">Veb</span>
       </div>
       <p class="stack">React 19 · TypeScript · Redux Toolkit · Tailwind v4 · Firebase · i18next</p>
-      <p class="links">github.com/Abdulmajidkhan007/Organick_org</p>
+      <p class="links">
+        <a href="https://github.com/Abdulmajidkhan007/Organick_org"
+          >github.com/Abdulmajidkhan007/Organick_org</a
+        >
+      </p>
       <ul>
         <li>
           Toʻliq onlayn-doʻkon: kategoriya boʻyicha filtrlash, qidiruv va saralash, reyting
@@ -350,14 +356,20 @@
 
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">Lumina — Ijtimoiy tarmoq ilovasi</span>
-        <span class="entry-meta">Mobil ilova</span>
+        <span class="entry-title"
+          >Lumina — Ijtimoiy tarmoq ilovasi<span class="badge">Ilova + Veb</span></span
+        >
+        <span class="entry-meta">Monorepo</span>
       </div>
       <p class="stack">
         React Native 0.79 (bare CLI, New Architecture) · React Navigation v7 · TanStack Query ·
         Zustand · Reanimated
       </p>
-      <p class="links">github.com/Abdulmajidkhan007/lumina</p>
+      <p class="links">
+        <a href="https://github.com/Abdulmajidkhan007/lumina"
+          >github.com/Abdulmajidkhan007/lumina</a
+        >
+      </p>
       <ul>
         <li>
           Toʻliq tiplangan navigatsiya (native-stack + bottom-tabs) va strict TypeScript rejimi.
@@ -376,7 +388,9 @@
         <span class="entry-meta">Veb / 3D</span>
       </div>
       <p class="stack">React 19 · Three.js / React Three Fiber · GSAP · Tailwind v4 · Netlify</p>
-      <p class="links">abdullohkhan-portfolio.netlify.app</p>
+      <p class="links">
+        <a href="https://abdullohkhan-portfolio.netlify.app">abdullohkhan-portfolio.netlify.app</a>
+      </p>
       <ul>
         <li>
           Oʻzim yozgan GLSL shaderlardagi zarrachalar maydoni: butun maydon bitta draw callʼda,

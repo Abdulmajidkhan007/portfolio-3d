@@ -18,7 +18,10 @@ export interface Project {
    * when present; the card falls back to `image` if the file never arrived.
    */
   imageHd?: string
+  /** Where the web build runs. */
   live?: string
+  /** Where the mobile build can be installed from — store page or APK. */
+  app?: string
   repo?: string
   year: number
   featured?: boolean

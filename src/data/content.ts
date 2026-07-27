@@ -60,8 +60,8 @@ export const content: SiteContent = {
         'I have shipped realtime applications, authentication systems and admin panels end to end. Performance and code quality get particular attention.',
       ],
     },
-    // Derived from the public GitHub account: 26 repositories of my own, of
-    // which Vroom is the one whose apps are still in progress.
+    // Derived from the public GitHub account: 26 repositories of my own, one of
+    // which is still in progress.
     stats: [
       { value: '2', label: { uz: 'yillik tajriba', en: 'years of experience' } },
       { value: '25', label: { uz: 'tugallangan loyiha', en: 'projects completed' } },
@@ -79,10 +79,12 @@ export const content: SiteContent = {
         en: 'E-commerce platform with 10,000+ products: cursor-based pagination, typo-tolerant search, order management over a Telegram bot and a role-based admin panel.',
       },
       category: 'web',
-      tags: ['Next.js 16', 'Firebase', 'Redux Toolkit', 'Telegram API'],
+      platform: { uz: 'Ilova + Veb', en: 'App + Web' },
+      tags: ['Next.js 16', 'React Native', 'Firebase', 'Telegram API'],
       image: '/images/projects/project-1.svg',
       imageHd: '/images/projects/project-1.webp',
       live: 'https://atoyo-uz.netlify.app',
+      // `app` goes here once the build has a store page or a release to link to.
       repo: 'https://github.com/Abdulmajidkhan007/atoyo-e-commerce',
       year: 2026,
       featured: true,
@@ -104,21 +106,6 @@ export const content: SiteContent = {
       featured: true,
     },
     {
-      id: 'vroom',
-      title: 'Vroom',
-      description: {
-        uz: 'Taksi chaqirish va kuryer yetkazib berish super-app. 9 ta umumiy paketli monorepo: domen modeli, Zod validatsiya, mock API va React Query hooklari.',
-        en: 'Ride-hailing and courier delivery super-app. A monorepo of 9 shared packages: domain model, Zod validation, mock API and React Query hooks.',
-      },
-      category: 'mobile',
-      platform: { uz: 'Ilova + Veb', en: 'App + Web' },
-      tags: ['Expo', 'Vite', 'Turborepo', 'TanStack Query'],
-      image: '/images/projects/project-2.svg',
-      imageHd: '/images/projects/project-2.webp',
-      repo: 'https://github.com/Abdulmajidkhan007/go-uz',
-      year: 2026,
-    },
-    {
       id: 'lumina',
       title: 'Lumina',
       description: {
@@ -126,7 +113,8 @@ export const content: SiteContent = {
         en: 'A social media app on bare React Native CLI: New Architecture, fully typed navigation, offline-persisted server state and Reanimated motion.',
       },
       category: 'mobile',
-      tags: ['React Native', 'TanStack Query', 'Zustand', 'Reanimated'],
+      platform: { uz: 'Ilova + Veb', en: 'App + Web' },
+      tags: ['React Native', 'React', 'TanStack Query', 'Zustand'],
       image: '/images/projects/project-3.svg',
       imageHd: '/images/projects/project-3.webp',
       repo: 'https://github.com/Abdulmajidkhan007/lumina',
@@ -215,8 +203,8 @@ export const content: SiteContent = {
       company: 'GitHub',
       period: { uz: '2025 — hozir', en: '2025 — present' },
       description: {
-        uz: 'Monorepo arxitekturasini amalda oʻrgandim: KidsWear va Vroom loyihalarida veb va mobil ilova bitta kod bazasidan chiqadi. Zod bilan yagona domen modeli, TanStack Query bilan server holati, Turborepo bilan build orkestratsiyasi.',
-        en: 'Learned monorepo architecture in practice: on KidsWear and Vroom the web and mobile apps ship from one codebase. A single Zod-defined domain model, server state via TanStack Query, build orchestration with Turborepo.',
+        uz: 'Monorepo arxitekturasini amalda oʻrgandim: KidsWear va ATOYO loyihalarida veb va mobil ilova bitta kod bazasidan chiqadi. Zod bilan yagona domen modeli, TanStack Query bilan server holati, Turborepo bilan build orkestratsiyasi.',
+        en: 'Learned monorepo architecture in practice: on KidsWear and ATOYO the web and mobile apps ship from one codebase. A single Zod-defined domain model, server state via TanStack Query, build orchestration with Turborepo.',
       },
       stack: ['React Native', 'Expo', 'Turborepo', 'TanStack Query'],
     },
