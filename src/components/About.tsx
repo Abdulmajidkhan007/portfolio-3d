@@ -2,17 +2,15 @@ import { lazy, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { content } from '@/data/content'
-import { countUp, fadeUp, gsap, revealTrigger, staggerUp } from '@/utils/animations'
+import { countUp, fadeUp, staggerUp } from '@/utils/animations'
 import { cn } from '@/utils/cn'
 import SectionHeading from './SectionHeading'
+import SkillIconGrid from './SkillIconGrid'
 import Deferred3D from './three/Deferred3D'
 import { AvatarFallback } from './three/fallbacks'
 
 const Avatar3D = lazy(() => import('./three/Avatar3D'))
 const FloatingShapes = lazy(() => import('./three/FloatingShapes'))
-
-/** Skills shown as bars here; the full set lives in the Skills section. */
-const BAR_SKILLS = ['React', 'TypeScript', 'React Native', 'Next.js', 'TailwindCSS', 'Firebase']
 
 export default function About() {
   const { t, lang } = useLanguage()
@@ -34,25 +32,9 @@ export default function About() {
 
       root.querySelectorAll<HTMLElement>('[data-stat-value]').forEach((node) => countUp(node, root))
 
-      // Bars fill from zero to their real width when the section arrives.
-      root.querySelectorAll<HTMLElement>('[data-bar-fill]').forEach((bar, index) => {
-        gsap.fromTo(
-          bar,
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            duration: 1.1,
-            delay: index * 0.08,
-            ease: 'power2.out',
-            scrollTrigger: revealTrigger(root),
-          },
-        )
-      })
     },
     { scope: rootRef },
   )
-
-  const bars = content.skills.filter((skill) => BAR_SKILLS.includes(skill.name))
 
   return (
     <section id="about" ref={rootRef} className="relative overflow-hidden py-24 lg:py-32">
@@ -92,6 +74,17 @@ export default function About() {
                 </Deferred3D>
               )}
               <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-neon/20 ring-inset" />
+
+              {/* The portrait is generated, not a photograph. The badge says so
+                  and keeps the frame from reading as a picture of a real person. */}
+              {portrait && (
+                <span className="glass-strong pointer-events-none absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full px-3 py-1.5">
+                  <span aria-hidden className="text-sm">👨‍💻</span>
+                  <span className="font-mono text-[10px] tracking-wide text-muted uppercase">
+                    {t.about.avatarBadge}
+                  </span>
+                </span>
+              )}
             </div>
 
             <div className="glass mt-4 flex items-center justify-between rounded-2xl px-5 py-4">
@@ -144,34 +137,7 @@ export default function About() {
             </dl>
 
             <div className="mt-12">
-              <h3 className="font-mono text-xs tracking-[0.25em] text-muted uppercase">
-                {t.about.skillsTitle}
-              </h3>
-
-              <ul className="mt-6 space-y-5">
-                {bars.map((skill) => (
-                  <li key={skill.name}>
-                    <div className="flex items-baseline justify-between gap-4">
-                      <span className="text-sm text-ink">{skill.name}</span>
-                      <span className="font-mono text-xs text-muted">{skill.level}%</span>
-                    </div>
-                    <div
-                      role="meter"
-                      aria-valuenow={skill.level}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label={skill.name}
-                      className="mt-2 h-1.5 overflow-hidden rounded-full bg-line"
-                    >
-                      <div
-                        data-bar-fill
-                        style={{ width: `${skill.level}%` }}
-                        className="h-full origin-left rounded-full bg-gradient-to-r from-neon to-cyan"
-                      />
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <SkillIconGrid />
 
               <a
                 href={content.profile.resume}

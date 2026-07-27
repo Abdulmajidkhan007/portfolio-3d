@@ -36,6 +36,8 @@ export const uz = {
     eyebrow: '01 / Men haqimda',
     title: 'Kod va vizual tajriba oraligʻida',
     skillsTitle: 'Asosiy koʻnikmalar',
+    skillsHint: 'Ikonka ustiga bosing yoki suring',
+    avatarBadge: 'AI avatar',
     resume: 'Rezyumeni yuklab olish',
   },
 

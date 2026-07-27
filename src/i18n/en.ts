@@ -38,6 +38,8 @@ export const en: Dictionary = {
     eyebrow: '01 / About',
     title: 'Between code and visual experience',
     skillsTitle: 'Core skills',
+    skillsHint: 'Tap or hover an icon',
+    avatarBadge: 'AI avatar',
     resume: 'Download resume',
   },
 

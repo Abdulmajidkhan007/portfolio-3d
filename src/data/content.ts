@@ -117,6 +117,7 @@ export const content: SiteContent = {
       tags: ['React Native', 'React', 'TanStack Query', 'Zustand'],
       image: '/images/projects/project-3.svg',
       imageHd: '/images/projects/project-3.webp',
+      live: 'https://lumina-007app.web.app',
       repo: 'https://github.com/Abdulmajidkhan007/lumina',
       year: 2026,
       featured: true,
