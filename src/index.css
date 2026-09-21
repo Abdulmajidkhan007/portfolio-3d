@@ -212,6 +212,27 @@ html[data-theme='light'] {
   }
 }
 
+
+/*
+  Klaviatura bilan yuruvchilar uchun "kontentga o'tish" havolasi. Ekrandan
+  tashqarida turadi va faqat fokus olganda ko'rinadi — buni CSS bajaradi,
+  chunki CSP inline onfocus/onblur ni bloklaydi.
+*/
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  z-index: 10001;
+  padding: 12px 20px;
+  background: #00ff88;
+  color: #0a0a0a;
+}
+
+.skip-link:focus {
+  top: 12px;
+  left: 12px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

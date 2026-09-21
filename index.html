@@ -84,21 +84,12 @@
     </script>
   </head>
   <body>
-    <a
-      href="#main"
-      style="
-        position: absolute;
-        left: -9999px;
-        top: 0;
-        z-index: 10001;
-        padding: 12px 20px;
-        background: #00ff88;
-        color: #0a0a0a;
-      "
-      onfocus="this.style.left='12px';this.style.top='12px'"
-      onblur="this.style.left='-9999px'"
-      >Asosiy kontentga oʻtish</a
-    >
+    <!--
+      Uslub va fokus mantig'i .skip-link klassida (src/index.css). Inline
+      style/onfocus/onblur ishlatilmaydi: netlify.toml dagi CSP script-src'da
+      'unsafe-inline' yo'q, shuning uchun brauzer inline handlerlarni bloklaydi.
+    -->
+    <a href="#main" class="skip-link">Asosiy kontentga oʻtish</a>
 
     <!--
       Static first paint. Without it the page stays blank until React boots,

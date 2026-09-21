@@ -12,6 +12,10 @@
   to = "/index.html"
   status = 200
 
+# script-src dagi sha256 — index.html ichidagi tema skripti uchun. U birinchi
+# bo'yoqdan oldin ishlashi kerak, shuning uchun tashqi faylga chiqarilmadi;
+# 'unsafe-inline' esa butun himoyani bekor qilardi. Skript o'zgarsa hash ham
+# o'zgaradi — buni src/__tests__/csp.test.ts ushlab qoladi.
 [[headers]]
   for = "/*"
   [headers.values]
@@ -19,7 +23,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-IS43vciT4TabXPIK8tx0n10pWdNcCZoRYeXqDvIVMso='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
 
 # Vite emits content-hashed filenames, so these can be cached forever.
 [[headers]]
