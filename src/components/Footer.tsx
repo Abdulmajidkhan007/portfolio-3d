@@ -52,7 +52,7 @@ export default function Footer() {
           <p>
             © {year} {content.profile.name}. {t.footer.rights}
           </p>
-          <p className="font-mono">React · Three.js · GSAP · Netlify</p>
+          <p className="font-mono">React · Three.js · GSAP · Firebase</p>
         </div>
       </div>
     </footer>

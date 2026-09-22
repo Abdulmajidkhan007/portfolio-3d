@@ -10,7 +10,6 @@ import {
   siHtml5,
   siJavascript,
   siMui,
-  siNetlify,
   siNextdotjs,
   siNodedotjs,
   siReact,
@@ -71,6 +70,6 @@ export const SKILL_ICONS: Record<string, SkillIcon> = {
   Turborepo: siTurborepo,
   'TanStack Query': siReactquery,
   Zod: siZod,
-  Netlify: siNetlify,
+  'Cloud Functions': siFirebase,
   Figma: siFigma,
 }

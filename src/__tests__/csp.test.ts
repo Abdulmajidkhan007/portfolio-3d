@@ -1,5 +1,5 @@
 /**
- * netlify.toml dagi CSP bilan index.html ichidagi kod mos turishini qo'riqlaydi.
+ * firebase.json dagi CSP bilan index.html ichidagi kod mos turishini qo'riqlaydi.
  *
  * script-src da 'unsafe-inline' yo'q, shuning uchun inline skript faqat sha256
  * hash orqali ishlaydi. Skript bir harfga o'zgarsa hash eskiradi va brauzer uni
@@ -16,18 +16,26 @@ const read = (relative: string) =>
   readFileSync(fileURLToPath(new URL(`../../${relative}`, import.meta.url)), 'utf8')
 
 const indexHtml = read('index.html')
-const netlifyToml = read('netlify.toml')
+const firebaseJson = JSON.parse(read('firebase.json')) as {
+  hosting: { headers: { source: string; headers: { key: string; value: string }[] }[] }
+}
 
-// Avval CSP sarlavhasining o'zini ajratamiz — netlify.toml dagi izohlarda ham
-// "script-src" so'zi uchraydi va to'g'ridan-to'g'ri qidiruv o'shanga tushadi.
-const csp = /Content-Security-Policy = "([^"]+)"/.exec(netlifyToml)?.[1] ?? ''
+const csp =
+  firebaseJson.hosting.headers
+    .find((entry) => entry.source === '**')
+    ?.headers.find((header) => header.key === 'Content-Security-Policy')?.value ?? ''
+
 const scriptSrc = /script-src ([^;]+)/.exec(csp)?.[1] ?? ''
 
 /** CSP hash skript tegi ichidagi matnning AYNAN o'zidan hisoblanadi. */
 const sha256 = (body: string) => `sha256-${createHash('sha256').update(body).digest('base64')}`
 
 describe('Content-Security-Policy', () => {
-  it('script-src da unsafe-inline yo\'q', () => {
+  it('firebase.json da CSP sarlavhasi bor', () => {
+    expect(csp).not.toBe('')
+  })
+
+  it("script-src da unsafe-inline yo'q", () => {
     expect(scriptSrc).not.toContain("'unsafe-inline'")
   })
 
@@ -43,7 +51,7 @@ describe('Content-Security-Policy', () => {
     }
   })
 
-  it('index.html da inline hodisa atributlari yo\'q', () => {
+  it("index.html da inline hodisa atributlari yo'q", () => {
     // onfocus="..." kabi atributlar CSP tomonidan bloklanadi — ular CSS ga
     // yoki komponentga ko'chirilishi kerak.
     const handlers = indexHtml.match(/\son[a-z]+\s*=\s*"/g) ?? []

@@ -3,7 +3,8 @@
 Cyber-minimalist 3D portfolio site — React 19 + Vite + TypeScript, React Three Fiber for the
 WebGL scenes, GSAP ScrollTrigger for scroll motion, Framer Motion for component transitions,
 Tailwind CSS v4 for styling, Lenis for smooth scrolling. Bilingual (Uzbek / English), dark
-theme only, deployed on Netlify.
+theme only. Deployed on **Firebase Hosting**, with a **Cloud Functions** backend for the
+contact form.
 
 ## Quick start
 
@@ -12,7 +13,7 @@ npm install
 npm run dev          # http://localhost:5173
 npm run build        # typecheck + production build into dist/
 npm run preview      # serve the production build locally
-npm test             # content, i18n and Netlify-form checks
+npm test             # content, i18n, CSP and contact-form checks
 npm run lint         # oxlint
 ```
 
@@ -45,18 +46,31 @@ worse than shipping none, so `npm test` rejects both.
 1200×630 render of `og-image.svg` (social platforms do not accept SVG previews), and the PDF
 is a placeholder résumé built from the same content.
 
-## Contact form
+## Contact form (backend)
 
-The form is handled by **Netlify Forms** — no backend, no database, no SMTP credentials.
+The form posts JSON to `/api/contact`. `firebase.json` rewrites that path to the **`contact`
+Cloud Function** (`functions/src/index.ts`), so the browser only ever talks to one origin —
+no CORS, and `connect-src 'self'` in the CSP stays untouched.
 
-Netlify detects forms by parsing the deployed HTML at build time and never sees markup that
-React renders at runtime, so `index.html` carries a hidden static twin of the form. The React
-form in `src/components/Contact.tsx` then POSTs URL-encoded data to `/` with a matching
-`form-name`. **If you add or rename a field, change it in both places** — `npm test` fails if
-the two forms drift, because nothing else catches it before production.
+What the function does, in order:
 
-Submissions appear under *Forms* in the Netlify dashboard; turn on email notifications there.
-Spam is filtered by Netlify plus the `bot-field` honeypot.
+1. **Validates** the payload (`functions/src/validate.ts`) — required fields, email shape,
+   length bounds, control characters stripped. The client validates too, but only for comfort:
+   an HTTP request does not need a browser.
+2. **Honeypot** — a `botField` input hidden from people. If it is filled the function returns
+   `200 OK` without storing anything, so the bot believes it succeeded and does not retry.
+3. **Rate limit** — 3 submissions per IP per minute, counted in a Firestore transaction.
+4. **Stores** the message in the `messages` collection.
+5. **Notifies** Telegram, if `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` secrets are set.
+   A failed notification is logged but does not fail the request — the message is already saved.
+
+`firestore.rules` denies every client read and write. Only the function, which runs with the
+Admin SDK, can touch the data.
+
+**If you add or rename a field, change it in both places** — `contact-contract.test.ts` fails
+if the React form and the validator drift apart.
+
+Full deployment steps: [`docs/FIREBASE.md`](docs/FIREBASE.md).
 
 ## Tests
 
@@ -71,8 +85,14 @@ guard the invariants that are easy to break and impossible to notice locally:
 - **`i18n.test.ts`** — `en.ts` defines exactly the keys `uz.ts` does and neither side is empty.
   It also enforces Uzbek orthography: `oʻ`/`gʻ` must use U+02BB (ʻ), not a straight quote and
   not a bare vowel.
-- **`netlify-form.test.ts`** — the hidden static form in `index.html` still exists, is still
-  marked `data-netlify`, and declares the same fields as the React form.
+- **`contact-contract.test.ts`** — the React form still posts to `/api/contact`, `firebase.json`
+  still rewrites that path to the `contact` function *before* the SPA catch-all, and the form
+  fields still match the keys the validator reads.
+- **`contact-validate.test.ts`** — the backend validator itself: honeypot, email shapes, length
+  bounds, control-character stripping. Imported straight from `functions/src/` so there is no
+  second test toolchain to keep in sync.
+- **`csp.test.ts`** — every inline script in `index.html` has a matching sha256 hash in the CSP
+  inside `firebase.json`, and no inline event attributes crept back in.
 
 CI (`.github/workflows/ci.yml`) runs lint, tests and the build on every push and pull request.
 
@@ -93,7 +113,7 @@ CI (`.github/workflows/ci.yml`) runs lint, tests and the build on every push and
 - `index.html` ships a static first-paint shell inside `#root` so the page is not blank until
   React boots. Keep it visually in sync with `LoadingScreen`.
 - Fonts are self-hosted via `@fontsource` — no external requests, which also keeps the strict
-  CSP in `netlify.toml` simple.
+  CSP in `firebase.json` simple.
 
 ### Measured (Lighthouse, production build)
 
@@ -120,7 +140,8 @@ src/hooks/         media queries, pointer, scroll progress, Lenis, typewriter
 src/i18n/          uz/en dictionaries + language context
 src/data/          content.ts — the single source of truth for site content
 src/utils/         GSAP animation presets, class-name helper
-src/__tests__/     content, i18n and Netlify-form invariant checks
+src/__tests__/     content, i18n, CSP and contact-form invariant checks
+functions/         Cloud Functions backend (contact endpoint)
 ```
 
 One deliberate naming note: the project cards use CSS 3D transforms rather than a WebGL
@@ -129,5 +150,13 @@ contexts; `perspective` + `rotateX/rotateY` gets the same effect on the composit
 
 ## Deployment
 
-Netlify builds with `npm run build` and publishes `dist/`. Redirects, cache headers and the
-CSP live in [`netlify.toml`](netlify.toml).
+```bash
+npm run build                     # dist/
+firebase deploy                   # hosting + functions + firestore rules
+```
+
+`firebase.json` holds the SPA rewrite, the `/api/contact` → function rewrite, cache headers
+and the CSP. `.firebaserc` names the project — set it before the first deploy.
+
+Step-by-step (project creation, secrets, emulator, custom domain):
+[`docs/FIREBASE.md`](docs/FIREBASE.md).

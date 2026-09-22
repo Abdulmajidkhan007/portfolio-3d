@@ -5,8 +5,8 @@ import { content } from '@/data/content'
 import { cn } from '@/utils/cn'
 import SectionHeading from './SectionHeading'
 
-/** Must match the hidden static form in index.html that Netlify detects. */
-const FORM_NAME = 'contact'
+/** Firebase Hosting rewrite bilan Cloud Function'ga boradi (firebase.json). */
+const ENDPOINT = '/api/contact'
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
@@ -45,17 +45,22 @@ export default function Contact() {
 
     setStatus('sending')
     const form = event.currentTarget
-    const data = new FormData(form)
-    // Netlify keys the submission off this field, not off the request path.
-    data.set('form-name', FORM_NAME)
+    const botField = (form.elements.namedItem('botField') as HTMLInputElement | null)?.value ?? ''
 
     try {
-      const response = await fetch('/', {
+      const response = await fetch(ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...fields, botField }),
       })
-      if (!response.ok) throw new Error(`Netlify responded ${response.status}`)
+      // Server o'z tekshiruvini qiladi — maydon xatosini foydalanuvchiga qaytaramiz.
+      if (response.status === 400) {
+        const body = (await response.json()) as { error?: string; field?: keyof Fields }
+        if (body.field) setErrors({ [body.field]: body.error } as Partial<Fields>)
+        setStatus('idle')
+        return
+      }
+      if (!response.ok) throw new Error(`Server ${response.status}`)
       setFields(EMPTY)
       setStatus('success')
     } catch {
@@ -142,10 +147,7 @@ export default function Contact() {
               ) : (
                 <motion.form
                   key="form"
-                  name={FORM_NAME}
                   method="POST"
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
                   onSubmit={handleSubmit}
                   noValidate
                   initial={{ opacity: 0 }}
@@ -153,11 +155,10 @@ export default function Contact() {
                   exit={{ opacity: 0 }}
                   className="space-y-5"
                 >
-                  <input type="hidden" name="form-name" value={FORM_NAME} />
-                  {/* Honeypot: hidden from people, irresistible to bots. */}
+                  {/* Honeypot: odam ko'rmaydi, bot to'ldiradi. Serverda tekshiriladi. */}
                   <p className="hidden">
                     <label>
-                      Do not fill this out: <input name="bot-field" tabIndex={-1} />
+                      Do not fill this out: <input name="botField" tabIndex={-1} autoComplete="off" />
                     </label>
                   </p>
 

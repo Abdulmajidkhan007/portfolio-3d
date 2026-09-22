@@ -41,17 +41,17 @@
       content="frontend developer, react, react native, typescript, next.js, firebase, three.js, portfolio, Abdulmajid Sharipov"
     />
     <meta name="author" content="Abdulmajid Sharipov" />
-    <link rel="canonical" href="https://abdullohkhan-portfolio.netlify.app/" />
+    <link rel="canonical" href="https://abdullohkhan-portfolio.web.app/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Abdulmajid Sharipov" />
-    <meta property="og:url" content="https://abdullohkhan-portfolio.netlify.app/" />
+    <meta property="og:url" content="https://abdullohkhan-portfolio.web.app/" />
     <meta property="og:title" content="Abdulmajid Sharipov | Frontend Developer" />
     <meta
       property="og:description"
       content="React va TypeScript asosida veb va mobil ilovalar yaratuvchi frontend dasturchi. Next.js, React Native, Firebase, Three.js."
     />
-    <meta property="og:image" content="https://abdullohkhan-portfolio.netlify.app/images/og-image.png" />
+    <meta property="og:image" content="https://abdullohkhan-portfolio.web.app/images/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="uz_UZ" />
@@ -63,15 +63,15 @@
       name="twitter:description"
       content="React va TypeScript asosida veb va mobil ilovalar yaratuvchi frontend dasturchi. Next.js, React Native, Firebase, Three.js."
     />
-    <meta name="twitter:image" content="https://abdullohkhan-portfolio.netlify.app/images/og-image.png" />
+    <meta name="twitter:image" content="https://abdullohkhan-portfolio.web.app/images/og-image.png" />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Abdulmajid Sharipov",
-        "url": "https://abdullohkhan-portfolio.netlify.app/",
-        "image": "https://abdullohkhan-portfolio.netlify.app/images/og-image.png",
+        "url": "https://abdullohkhan-portfolio.web.app/",
+        "image": "https://abdullohkhan-portfolio.web.app/images/og-image.png",
         "jobTitle": "Frontend Developer",
         "description": "Frontend developer building web and mobile applications with React, TypeScript and Firebase.",
         "address": { "@type": "PostalAddress", "addressLocality": "Qoqon", "addressCountry": "UZ" },
@@ -86,7 +86,7 @@
   <body>
     <!--
       Uslub va fokus mantig'i .skip-link klassida (src/index.css). Inline
-      style/onfocus/onblur ishlatilmaydi: netlify.toml dagi CSP script-src'da
+      style/onfocus/onblur ishlatilmaydi: firebase.json dagi CSP script-src'da
       'unsafe-inline' yo'q, shuning uchun brauzer inline handlerlarni bloklaydi.
     -->
     <a href="#main" class="skip-link">Asosiy kontentga oʻtish</a>
@@ -119,20 +119,6 @@
       </div>
     </div>
 
-    <!--
-      Netlify discovers forms by parsing the deployed HTML at build time, and it
-      never sees markup that React renders at runtime. This hidden twin of the
-      contact form is what registers the form; the React form then POSTs to "/"
-      with a matching `form-name`. Keep the field names in sync with
-      src/components/Contact.tsx.
-    -->
-    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-      <input type="hidden" name="form-name" value="contact" />
-      <input type="text" name="bot-field" />
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <textarea name="message"></textarea>
-    </form>
 
     <script type="module" src="/src/main.tsx"></script>
   </body>
