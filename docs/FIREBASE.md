@@ -3,7 +3,7 @@
 > Netlify'dan Firebase'ga ko'chirish. Sayt endi **statik emas** — aloqa
 > formasi haqiqiy backend orqali ishlaydi.
 
-**Oxirgi yangilanish:** 2026-09-22
+**Oxirgi yangilanish:** 2026-10-03
 
 ---
 
@@ -24,7 +24,7 @@ Natijada loyiha statik saytdan **full-stack** loyihaga aylandi.
 |---|---|---|
 | Hosting | **Firebase Hosting** | `dist/` statik fayllari, CDN, SSL, SPA rewrite |
 | Backend | **Cloud Functions (2-avlod)** | `POST /api/contact` endpointi |
-| Runtime | **Node.js 20** + TypeScript 5.9 | funksiya kodi |
+| Runtime | **Node.js 22** + TypeScript 5.9 | funksiya kodi |
 | Baza | **Cloud Firestore** | kelgan xabarlar (`messages`), rate limit hisobi (`rate_limits`) |
 | Admin kirish | **firebase-admin SDK** | funksiya ichidan Firestore'ga yozish |
 | Maxfiy qiymatlar | **Firebase Secrets** (`defineSecret`) | Telegram tokeni — kodda ham, `.env` da ham emas |
@@ -40,7 +40,7 @@ firebase.json          hosting, rewrite'lar, sarlavhalar, CSP, emulyator portlar
 .firebaserc            loyiha ID si
 firestore.rules        barcha mijoz kirishini taqiqlaydi
 functions/
-  package.json         Node 20, firebase-admin, firebase-functions
+  package.json         Node 22, firebase-admin, firebase-functions
   tsconfig.json        module: node16 (subpath importlar uchun shart)
   src/validate.ts      toza tekshiruv mantig'i — Firebase'ga bog'liq emas
   src/index.ts         contact funksiyasi: validatsiya → limit → Firestore → Telegram
@@ -235,7 +235,7 @@ Ikkita test tizimi — ikki marta yangilanadigan va ikki marta buziladigan narsa
 ## Tekshirilgan / tekshirilmagan
 
 **Tekshirildi:**
-- `npm test` — 427/427 o'tdi
+- `npm test` — 431/431 o'tdi
 - `npm run build` — muvaffaqiyatli
 - `npm run lint` — 0 xato
 - `functions/` TypeScript kompilyatsiyasi haqiqiy `firebase-admin` va
@@ -244,6 +244,15 @@ Ikkita test tizimi — ikki marta yangilanadigan va ikki marta buziladigan narsa
 **Tekshirilmadi:**
 - Haqiqiy deploy va jonli endpoint. Buning uchun Firebase loyihasi, Blaze
   rejasi va `firebase login` kerak — ular sizning hisobingizda.
-- Emulyatorda to'liq oqim (`functions/node_modules` bu muhitda o'rnatilmadi).
+- Emulyatorda to'liq oqim (Firebase CLI va Java kerak).
+
+**2026-10-03 da qo'shildi:**
+- Runtime `nodejs20` → `nodejs22`: Node 20 ning hayot muddati 2026-aprelda
+  tugagan, Cloud Functions uni bosqichma-bosqich bekor qilmoqda.
+- `functions/package-lock.json` commit qilindi va CI endi `functions/` ni
+  alohida typecheck qiladi — ildizdagi build uni kompilyatsiya qilmaydi,
+  shuning uchun undagi xato faqat deploy paytida chiqardi.
+- `robots.txt`, `sitemap.xml` va rezyume hali ham o'chgan `netlify.app`
+  manziliga yuborardi — `web.app` ga o'tkazildi, test qo'shildi.
 
 Birinchi deploy'dan keyin yuqoridagi `curl` bilan endpointni sinab ko'ring.

@@ -67,3 +67,25 @@ describe('aloqa formasi shartnomasi', () => {
     expect(contactSource.toLowerCase()).not.toContain('netlify')
   })
 })
+
+/**
+ * Hosting ko'chganda canonical yangilangan, lekin robots.txt, sitemap.xml va
+ * rezyume eski netlify.app manzilida qolib ketgan edi — qidiruv tizimi va HR
+ * o'lik saytga yuborilardi. Endi hammasi bitta manbaga — canonical'ga bog'langan.
+ */
+describe('sayt manzili hamma joyda bir xil', () => {
+  const canonical = indexHtml.match(/<link rel="canonical" href="([^"]+)"/)?.[1]
+  const origin = canonical ? new URL(canonical).origin : ''
+
+  it('index.html da canonical bor', () => {
+    expect(origin).toMatch(/^https:\/\//)
+  })
+
+  for (const file of ['public/robots.txt', 'public/sitemap.xml', 'scripts/resume/resume.html']) {
+    it(`${file} canonical manzilini ishlatadi`, () => {
+      const source = read(file)
+      expect(source).toContain(origin)
+      expect(source).not.toContain('netlify.app')
+    })
+  }
+})
