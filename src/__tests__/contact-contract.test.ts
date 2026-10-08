@@ -66,10 +66,26 @@ describe('aloqa formasi shartnomasi', () => {
     expect(indexHtml).not.toContain('netlify.app')
     expect(contactSource.toLowerCase()).not.toContain('netlify')
   })
+})
 
-  it("sitemap va robots Netlify manzilini ko'rsatmaydi", () => {
-    // Firebase'ga ko'chishda shu ikki fayl unutilgan edi (2026-10-08).
-    expect(read('public/sitemap.xml')).not.toContain('netlify.app')
-    expect(read('public/robots.txt')).not.toContain('netlify.app')
+/**
+ * Hosting ko'chganda canonical yangilangan, lekin robots.txt, sitemap.xml va
+ * rezyume eski netlify.app manzilida qolib ketgan edi — qidiruv tizimi va HR
+ * o'lik saytga yuborilardi. Endi hammasi bitta manbaga — canonical'ga bog'langan.
+ */
+describe('sayt manzili hamma joyda bir xil', () => {
+  const canonical = indexHtml.match(/<link rel="canonical" href="([^"]+)"/)?.[1]
+  const origin = canonical ? new URL(canonical).origin : ''
+
+  it('index.html da canonical bor', () => {
+    expect(origin).toMatch(/^https:\/\//)
   })
+
+  for (const file of ['public/robots.txt', 'public/sitemap.xml', 'scripts/resume/resume.html']) {
+    it(`${file} canonical manzilini ishlatadi`, () => {
+      const source = read(file)
+      expect(source).toContain(origin)
+      expect(source).not.toContain('netlify.app')
+    })
+  }
 })

@@ -2,8 +2,8 @@
   "$comment": [
     "Imagery generated with Higgsfield and fetched at build time by",
     "scripts/fetch-assets.mjs. Keeping the binaries out of git keeps clones",
-    "small; Netlify's build box has open egress and writes them into public/",
-    "before Vite runs, so they ship on Netlify's CDN like any static asset.",
+    "small; `npm run build` writes them into public/ before Vite runs, so",
+    "`firebase deploy` ships them on the Hosting CDN like any static asset.",
     "",
     "To replace an image: change its url here (or drop the file straight into",
     "public/ — an existing file is never overwritten)."

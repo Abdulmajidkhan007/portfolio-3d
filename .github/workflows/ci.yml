@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            functions/package-lock.json
 
       - run: npm ci
 
@@ -32,3 +35,11 @@ jobs:
       # and catches anything that only breaks in a production bundle.
       - name: Build
         run: npm run build
+
+      # The Cloud Function has its own package.json; the root build never
+      # compiles it, so a type error there would only surface on deploy.
+      - name: Typecheck functions
+        working-directory: functions
+        run: |
+          npm ci
+          npx tsc --noEmit -p .
