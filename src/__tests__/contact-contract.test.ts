@@ -66,4 +66,10 @@ describe('aloqa formasi shartnomasi', () => {
     expect(indexHtml).not.toContain('netlify.app')
     expect(contactSource.toLowerCase()).not.toContain('netlify')
   })
+
+  it("sitemap va robots Netlify manzilini ko'rsatmaydi", () => {
+    // Firebase'ga ko'chishda shu ikki fayl unutilgan edi (2026-10-08).
+    expect(read('public/sitemap.xml')).not.toContain('netlify.app')
+    expect(read('public/robots.txt')).not.toContain('netlify.app')
+  })
 })

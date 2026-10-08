@@ -84,7 +84,7 @@ export const content: SiteContent = {
       // The APK link lands here once the CI publishes a Release (see the repo).
       image: '/images/projects/project-1.svg',
       imageHd: '/images/projects/project-1.webp',
-      live: 'https://atoyo-uz.web.app',
+      live: 'https://atoyo.uz',
       // `app` goes here once the build has a store page or a release to link to.
       repo: 'https://github.com/Abdulmajidkhan007/atoyo-e-commerce',
       year: 2026,
