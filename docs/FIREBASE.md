@@ -155,6 +155,60 @@ firebase deploy --only firestore:rules
 
 ---
 
+## Telefondan deploy (GitHub Actions) — terminal kerak emas
+
+Kompyuter bo'lmasa ham bo'ladi: kod `main` ga push qilinganda
+`.github/workflows/deploy.yml` saytni va funksiyani o'zi joylaydi. Siz faqat
+bir marta brauzerda sozlaysiz (hammasi telefondan qilinadi).
+
+### 1. Firebase loyiha
+[console.firebase.google.com](https://console.firebase.google.com) → **Add project**.
+Nomi: `abdullohkhan-portfolio`. Pastdagi **Project ID** ham aynan shunday
+bo'lsin — saytdagi manzillar (`canonical`, sitemap, rezyume) shu nomga
+bog'langan. Band bo'lsa — boshqa ID oling va Claude'ga ayting, manzillar
+yangilanadi. Google Analytics — o'chiq.
+
+### 2. Blaze rejasi
+⚙️ → **Usage and billing** → **Details & settings** → **Modify plan** → **Blaze**
+→ mavjud billing hisobini tanlang (Atoyo'dagi). Bepul kvota bu sayt uchun
+yetarli. Xavfsizlik uchun
+[console.cloud.google.com/billing](https://console.cloud.google.com/billing) →
+**Budgets & alerts** → 1 $ lik ogohlantirish qo'ying.
+
+### 3. Firestore
+**Build → Firestore Database → Create database → Production mode** →
+location `eur3` (yoki `europe-west1`).
+
+### 4. Service account kaliti
+⚙️ **Project settings → Service accounts → Generate new private key** →
+JSON fayl telefoningizga yuklanadi.
+
+Unga deploy huquqi bering:
+`console.cloud.google.com/iam-admin/iam?project=<PROJECT_ID>` → ro'yxatdan
+`firebase-adminsdk-...` qatorini toping → ✏️ → **Add another role** →
+**Owner** → **Save**.
+
+> ⚠️ Bu kalit loyihani to'liq boshqaradi. Faqat GitHub secret'ga qo'ying,
+> hech kimga yubormang; 5-qadamdan keyin telefondagi JSON faylni o'chiring.
+
+### 5. GitHub sozlamalari
+`github.com/Abdulmajidkhan007/portfolio-3d` → **Settings → Secrets and
+variables → Actions**:
+
+| Tab | Nomi | Qiymati |
+|---|---|---|
+| Variables | `FIREBASE_PROJECT_ID` | `abdullohkhan-portfolio` (yoki sizdagi ID) |
+| Secrets | `FIREBASE_SERVICE_ACCOUNT` | JSON faylning **to'liq matni** (faylni matn ko'ruvchida oching → hammasini belgilang → nusxalang) |
+| Secrets | `TELEGRAM_BOT_TOKEN` | ixtiyoriy — forma xabarlari keladigan bot tokeni |
+| Secrets | `TELEGRAM_CHAT_ID` | ixtiyoriy — o'zingizning Telegram ID'ingiz (@IDFINDER007BOT) |
+
+### 6. Ishga tushirish
+**Actions → Deploy (Firebase) → Run workflow**. 5–8 daqiqa. Yashil bo'lsa —
+sayt `https://<PROJECT_ID>.web.app` da. Keyin har `main` ga push o'zi deploy
+qiladi. Qizil bo'lsa — loglarning oxirgi 20 qatorini Claude'ga yuboring.
+
+---
+
 ## Lokal sinov (emulyator)
 
 Deploy qilmasdan to'liq oqimni tekshirish:

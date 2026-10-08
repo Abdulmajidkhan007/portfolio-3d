@@ -1,0 +1,86 @@
+# Firebase'ga avtomatik deploy (Hosting + Functions + Firestore rules).
+#
+# Nega CI orqali: egasi telefonda ishlaydi, `firebase deploy` ni lokal
+# ishga tushira olmaydi. Bir martalik sozlash — docs/FIREBASE.md,
+# "Telefondan deploy (GitHub Actions)" bo'limi.
+#
+# Kerak:
+#   Variables: FIREBASE_PROJECT_ID          (Settings → Secrets and variables → Actions → Variables)
+#   Secrets:   FIREBASE_SERVICE_ACCOUNT     (service account JSON'ining to'liq matni)
+#              TELEGRAM_BOT_TOKEN           (ixtiyoriy — forma xabarlari Telegram'ga)
+#              TELEGRAM_CHAT_ID             (ixtiyoriy)
+#
+# FIREBASE_PROJECT_ID berilmaguncha job o'tkazib yuboriladi — sozlashdan oldingi
+# push'lar qizil bo'lmaydi.
+name: Deploy (Firebase)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-firebase
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ vars.FIREBASE_PROJECT_ID != '' }}
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            functions/package-lock.json
+
+      - run: npm ci
+      - run: npm ci --prefix functions
+
+      # Deploy'dan oldin xuddi CI dagi tekshiruv: buzilgan kod jonli saytga chiqmasin.
+      - name: Test
+        run: npm test
+      - name: Build
+        run: npm run build
+
+      - name: Service account kaliti
+        env:
+          SA_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$SA_JSON" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT secret berilmagan (docs/FIREBASE.md)."
+            exit 1
+          fi
+          printf '%s' "$SA_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      # Telegram sirlari faqat GitHub'da berilgan bo'lsa yoziladi. Berilmasa funksiya
+      # baribir ishlaydi — xabar faqat Firestore'ga tushadi.
+      - name: Telegram sirlari (ixtiyoriy)
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -n "$TG_TOKEN" ] && [ -n "$TG_CHAT" ]; then
+            printf '%s' "$TG_TOKEN" | npx --yes firebase-tools@latest functions:secrets:set TELEGRAM_BOT_TOKEN --project "$PROJECT_ID" --data-file=- --force --non-interactive
+            printf '%s' "$TG_CHAT"  | npx --yes firebase-tools@latest functions:secrets:set TELEGRAM_CHAT_ID  --project "$PROJECT_ID" --data-file=- --force --non-interactive
+          else
+            echo "Telegram sirlari berilmagan — o'tkazib yuborildi."
+          fi
+
+      # Birinchi Functions deploy'ida Google API'lar endigina yoqiladi va ruxsatlar
+      # tarqalishiga bir-ikki daqiqa ketadi — shuning uchun bitta qayta urinish.
+      - name: Deploy
+        run: |
+          deploy() { npx --yes firebase-tools@latest deploy --project "$PROJECT_ID" --non-interactive --force; }
+          deploy || { echo "Birinchi urinish yiqildi — 90 soniyadan keyin qayta urinaman."; sleep 90; deploy; }
+
+      - name: Kalitni o'chirish
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"
