@@ -118,6 +118,7 @@ export const content: SiteContent = {
       tags: ['React 19', 'Redux Toolkit', 'Firebase', 'i18next'],
       image: '/images/projects/project-4.svg',
       imageHd: '/images/projects/project-4.webp',
+      live: 'https://organick-e1c5a.web.app',
       repo: 'https://github.com/Abdulmajidkhan007/Organick_org',
       year: 2026,
     },
@@ -156,7 +157,6 @@ export const content: SiteContent = {
 
     // Everything I reach for around the code — the "Tools" pill.
     { name: 'Firebase', level: 90, group: 'tooling', tab: 'tools', short: 'FB', color: '#ffca28' },
-    { name: 'Supabase', level: 76, group: 'tooling', tab: 'tools', short: 'SB', color: '#3ecf8e' },
     { name: 'Git', level: 88, group: 'tooling', tab: 'tools', short: 'Git', color: '#f05033' },
     { name: 'GitHub', level: 90, group: 'tooling', tab: 'tools', short: 'GH', color: '#e8ecf4' },
     { name: 'Vite', level: 91, group: 'tooling', tab: 'tools', short: 'Vt', color: '#bd34fe' },
