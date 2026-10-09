@@ -7,6 +7,8 @@ import SectionHeading from './SectionHeading'
 
 /** Firebase Hosting rewrite bilan Cloud Function'ga boradi (firebase.json). */
 const ENDPOINT = '/api/contact'
+// Server yiqilsa yoki hali deploy qilinmagan bo'lsa (Spark rejimi) — xabar yo'qolmasin.
+const TELEGRAM_URL = 'https://t.me/Abdulloh_77700'
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
@@ -61,6 +63,10 @@ export default function Contact() {
         return
       }
       if (!response.ok) throw new Error(`Server ${response.status}`)
+      // Funksiya yo'q bo'lsa (Spark) Hosting index.html ni 200 bilan qaytarishi mumkin —
+      // faqat funksiyaning o'z javobi { ok: true } muvaffaqiyat hisoblanadi.
+      const result = (await response.json().catch(() => null)) as { ok?: boolean } | null
+      if (result?.ok !== true) throw new Error('Kutilmagan javob')
       setFields(EMPTY)
       setStatus('success')
     } catch {
@@ -233,7 +239,10 @@ export default function Contact() {
 
                   {status === 'error' && (
                     <p role="alert" className="text-sm text-red-400">
-                      {t.contact.errorGeneric}
+                      {t.contact.errorGeneric} {t.contact.errorFallback}{' '}
+                      <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="underline">
+                        @Abdulloh_77700
+                      </a>
                     </p>
                   )}
 

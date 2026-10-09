@@ -207,6 +207,16 @@ variables → Actions**:
 sayt `https://<PROJECT_ID>.web.app` da. Keyin har `main` ga push o'zi deploy
 qiladi. Qizil bo'lsa — loglarning oxirgi 20 qatorini Claude'ga yuboring.
 
+### Blaze hali yo'q bo'lsa — faqat sayt (Spark)
+Billing hisobi yangi loyihani qabul qilmasa ("maximum linked project quota")
+yoki Blaze'ga hali o'tilmagan bo'lsa: **Variables** ga `FIREBASE_PLAN` =
+`spark` qo'shing. Workflow faqat Hosting'ni joylaydi — Functions, Firestore
+va Telegram sirlari o'tkazib yuboriladi (ular Blaze talab qiladi; bo'lmasa
+`secretmanager.googleapis.com ... Billing must be enabled` xatosi chiqadi).
+Saytdagi forma bu rejimda xabar yubora olmaydi va xato o'rniga Telegram
+havolasini (@Abdulloh_77700) ko'rsatadi. Blaze yoqilgach `FIREBASE_PLAN` ni
+o'chiring va workflow'ni qayta ishga tushiring — forma ham jonlanadi.
+
 ---
 
 ## Lokal sinov (emulyator)

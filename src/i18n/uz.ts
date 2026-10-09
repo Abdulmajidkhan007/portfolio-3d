@@ -96,7 +96,8 @@ export const uz = {
     successTitle: 'Xabar yuborildi',
     successBody: 'Rahmat! Tez orada javob beraman.',
     sendAnother: 'Yana yuborish',
-    errorGeneric: 'Xabar yuborilmadi. Iltimos, qayta urinib koʻring.',
+    errorGeneric: 'Xabar yuborilmadi. Iltimos, qayta urinib koʻring',
+    errorFallback: 'yoki Telegramda yozing:',
     errors: {
       nameRequired: 'Ismingizni kiriting',
       emailRequired: 'Emailingizni kiriting',

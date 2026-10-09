@@ -9,6 +9,10 @@
 #   Secrets:   FIREBASE_SERVICE_ACCOUNT     (service account JSON'ining to'liq matni)
 #              TELEGRAM_BOT_TOKEN           (ixtiyoriy — forma xabarlari Telegram'ga)
 #              TELEGRAM_CHAT_ID             (ixtiyoriy)
+#   Ixtiyoriy:  FIREBASE_PLAN = spark       (Variables) — loyiha hali Blaze'da emas:
+#               faqat sayt (Hosting) chiqadi; Functions, Firestore va Telegram
+#               sirlari o'tkazib yuboriladi, forma Telegram havolasini ko'rsatadi.
+#               Blaze yoqilgach o'zgaruvchini o'chiring — hammasi deploy bo'ladi.
 #
 # FIREBASE_PROJECT_ID berilmaguncha job o'tkazib yuboriladi — sozlashdan oldingi
 # push'lar qizil bo'lmaydi.
@@ -29,6 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+      PLAN: ${{ vars.FIREBASE_PLAN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -67,18 +72,30 @@ jobs:
           TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          if [ -n "$TG_TOKEN" ] && [ -n "$TG_CHAT" ]; then
+          if [ "$PLAN" = "spark" ]; then
+            echo "FIREBASE_PLAN=spark — Secret Manager faqat Blaze'da, o'tkazib yuborildi."
+          elif [ -n "$TG_TOKEN" ] && [ -n "$TG_CHAT" ]; then
             printf '%s' "$TG_TOKEN" | npx --yes firebase-tools@latest functions:secrets:set TELEGRAM_BOT_TOKEN --project "$PROJECT_ID" --data-file=- --force --non-interactive
             printf '%s' "$TG_CHAT"  | npx --yes firebase-tools@latest functions:secrets:set TELEGRAM_CHAT_ID  --project "$PROJECT_ID" --data-file=- --force --non-interactive
           else
             echo "Telegram sirlari berilmagan — o'tkazib yuborildi."
           fi
 
+      # Spark'da Cloud Functions yo'q: funksiya bo'limi va /api/contact rewrite'i
+      # vaqtincha olib tashlanadi (faqat runner'da, repodagi fayl o'zgarmaydi).
+      - name: Spark rejimi (faqat sayt)
+        if: ${{ vars.FIREBASE_PLAN == 'spark' }}
+        run: |
+          jq 'del(.functions, .firestore) | .hosting.rewrites |= map(select(.function == null))' firebase.json > "$RUNNER_TEMP/firebase.json"
+          mv "$RUNNER_TEMP/firebase.json" firebase.json
+          echo "ONLY=--only hosting" >> "$GITHUB_ENV"
+          cat firebase.json | jq '.hosting.rewrites'
+
       # Birinchi Functions deploy'ida Google API'lar endigina yoqiladi va ruxsatlar
       # tarqalishiga bir-ikki daqiqa ketadi — shuning uchun bitta qayta urinish.
       - name: Deploy
         run: |
-          deploy() { npx --yes firebase-tools@latest deploy --project "$PROJECT_ID" --non-interactive --force; }
+          deploy() { npx --yes firebase-tools@latest deploy $ONLY --project "$PROJECT_ID" --non-interactive --force; }
           deploy || { echo "Birinchi urinish yiqildi — 90 soniyadan keyin qayta urinaman."; sleep 90; deploy; }
 
       - name: Kalitni o'chirish

@@ -98,7 +98,8 @@ export const en: Dictionary = {
     successTitle: 'Message sent',
     successBody: "Thank you! I'll get back to you shortly.",
     sendAnother: 'Send another',
-    errorGeneric: 'Could not send the message. Please try again.',
+    errorGeneric: 'Could not send the message. Please try again',
+    errorFallback: 'or message me on Telegram:',
     errors: {
       nameRequired: 'Please enter your name',
       emailRequired: 'Please enter your email',
