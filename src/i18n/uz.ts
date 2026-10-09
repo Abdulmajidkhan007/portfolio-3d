@@ -55,6 +55,7 @@ export const uz = {
     live: 'Jonli koʻrish',
     app: 'Ilovani yuklab olish',
     code: 'Kod',
+    details: 'Batafsil',
     featured: 'Tanlangan',
     empty: 'Bu kategoriyada loyiha yoʻq.',
   },

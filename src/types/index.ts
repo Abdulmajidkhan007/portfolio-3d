@@ -23,6 +23,8 @@ export interface Project {
   /** Where the mobile build can be installed from — store page or APK. */
   app?: string
   repo?: string
+  /** Batafsil sahifa — profil reposidagi docs/<repo>.md (to'liq URL). */
+  details?: string
   year: number
   featured?: boolean
   /**

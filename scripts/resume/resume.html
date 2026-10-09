@@ -1,457 +1,157 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uz">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Abdulmajid Sharipov — Frontend Developer</title>
-    <style>
-      /*
-       * Print-first stylesheet: greyscale only, no background fills, no web
-       * fonts. Recruiters print these and ATS parsers strip colour anyway, so
-       * hierarchy is carried by weight, size and rules instead.
-       */
-      @page {
-        size: A4;
-        margin: 11mm 13mm;
-      }
+<head>
+<meta charset="utf-8">
+<title>Abdulmajid Sharipov — Frontend Engineer</title>
+<style>
+  @page { size: A4; margin: 11mm 14mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Times New Roman", "Liberation Serif", "DejaVu Serif", serif;
+    font-size: 10.5pt;
+    line-height: 1.15;
+    color: #000;
+    margin: 0;
+  }
+  a { color: #0b3d91; text-decoration: underline; }
 
-      * {
-        box-sizing: border-box;
-      }
+  h1 { font-size: 19pt; font-weight: bold; margin: 0 0 1pt; }
+  .role { font-size: 11.5pt; margin-bottom: 3pt; }
+  .contacts { font-size: 10.5pt; line-height: 1.4; }
 
-      html {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
+  h2 {
+    font-size: 13pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 8pt 0 3pt;
+    padding-bottom: 1pt;
+    border-bottom: 1px solid #000;
+  }
 
-      body {
-        margin: 0;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 9.2pt;
-        line-height: 1.36;
-        color: #000;
-      }
+  p { margin: 0 0 4pt; text-align: justify; }
 
-      h1 {
-        margin: 0;
-        font-size: 19pt;
-        font-weight: 700;
-        letter-spacing: -0.4pt;
-        text-transform: uppercase;
-      }
+  .proj { margin-bottom: 5pt; page-break-inside: avoid; }
+  .proj-title { font-weight: bold; }
+  .proj-stack { font-size: 10pt; margin: 1pt 0 1pt; }
+  ul { margin: 1pt 0 0; padding-left: 15pt; }
+  li { margin-bottom: 1pt; }
+</style>
+</head>
+<body>
 
-      .role {
-        margin: 2pt 0 0;
-        font-size: 11pt;
-        font-weight: 400;
-        letter-spacing: 0.6pt;
-        color: #333;
-      }
+<h1>Abdulmajid Sharipov</h1>
+<div class="role">Frontend Engineer</div>
+<div class="contacts">
+  +998 90 854 56 03 &nbsp;|&nbsp;
+  <a href="mailto:abdullohhacker007@gmail.com">abdullohhacker007@gmail.com</a> &nbsp;|&nbsp;
+  Telegram: <a href="https://t.me/Abdulloh_77700">@Abdulloh_77700</a> &nbsp;|&nbsp;
+  Qo'qon, O'zbekiston<br>
+  <a href="https://github.com/Abdulmajidkhan007">github.com/Abdulmajidkhan007</a> &nbsp;|&nbsp;
+  <a href="https://linkedin.com/in/abdulmajid-sharipov-profile">linkedin.com/in/abdulmajid-sharipov-profile</a> &nbsp;|&nbsp;
+  <a href="https://abdulmajidkhan-portfolio.web.app">abdulmajidkhan-portfolio.web.app</a>
+</div>
 
-      .contact {
-        margin: 6pt 0 0;
-        font-size: 8.6pt;
-        color: #222;
-      }
+<h2>Profil</h2>
+<p>
+React va TypeScript bilan veb interfeyslar quraman. So'nggi yildagi asosiy ishim —
+Next.js asosidagi e-commerce platformasi: katalog, admin panel va buyurtma oqimi;
+u bugun ham real do'konda ishlatilmoqda, shu bitta baza ustida Android va desktop
+ilovalarini ham yig'dim. Backend tomonini o'zim yopaman (Node.js, Python) va kerak
+bo'lganda LLM integratsiyalarini qo'shaman — lekin asosiy yo'nalishim frontend.
+</p>
 
-      .contact span::after {
-        content: ' · ';
-        color: #888;
-      }
-      .contact span:last-child::after {
-        content: '';
-      }
+<h2>Texnik ko'nikmalar</h2>
+<p>
+<b>Frontend:</b> React 19, Next.js 16, TypeScript, JavaScript, Tailwind CSS v4, Redux Toolkit, TanStack Query<br>
+<b>Mobil va desktop:</b> React Native, Electron<br>
+<b>Backend:</b> Node.js, NestJS, Python (FastAPI, aiogram), REST API<br>
+<b>Ma'lumotlar bazasi:</b> Firestore, PostgreSQL, SQLite<br>
+<b>Vositalar:</b> Git, Docker, Firebase, Vite, Vitest, Playwright<br>
+<b>AI:</b> Gemini API, LangChain, ChromaDB
+</p>
 
-      header {
-        border-bottom: 1.4pt solid #000;
-        padding-bottom: 6pt;
-      }
+<h2>Loyihalar</h2>
 
-      h2 {
-        margin: 10pt 0 4.5pt;
-        font-size: 8.8pt;
-        font-weight: 700;
-        letter-spacing: 1.3pt;
-        text-transform: uppercase;
-        border-bottom: 0.5pt solid #999;
-        padding-bottom: 2.5pt;
-      }
+<div class="proj">
+  <div class="proj-title">Atoyo — e-commerce platformasi &nbsp;|&nbsp;
+    <a href="https://atoyo.uz">atoyo.uz</a> &nbsp;|&nbsp;
+    <a href="https://github.com/Abdulmajidkhan007/atoyo-e-commerce">kod</a>
+  </div>
+  <div class="proj-stack">Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS · Firebase (Auth, Firestore, Storage) · React Native · Electron</div>
+  <ul>
+    <li>Qo'qondagi santexnika do'koni uchun qurdim; bugun do'konda ishlatilmoqda.
+        Katalogni adminlar o'zlari to'ldirmoqda — hozirgacha 500 ga yaqin mahsulot
+        kiritildi.</li>
+    <li><b>Bitta baza — besh kanal.</b> Sayt, Android ilova, do'kon kompyuteri uchun ilova,
+        televizor ekrani va Telegram bot bir xil Firestore ma'lumoti ustida ishlaydi:
+        admin narxni bir joyda o'zgartiradi, hamma kanalda yangilanadi.</li>
+    <li><b>Android ilova</b> (<i>mobile/</i>) — React Native, @react-native-firebase
+        (Auth, Firestore, Messaging), Google Sign-In, React Navigation 7,
+        Redux Toolkit + redux-persist. Push bildirishnomalar FCM orqali.</li>
+    <li><b>Do'kon kompyuteri uchun ilova</b> (<i>desktop/</i>) — Electron +
+        electron-builder; Windows, Linux va macOS uchun yig'iladi, internet uzilganda
+        offline sahifa ko'rsatiladi.</li>
+    <li><b>Do'kon televizori</b> — <i>/tv</i> sahifasi. Alohida ilova kerak emas: Smart TV
+        brauzeri yoki Android TV box kiosk rejimida shu manzilni ochadi. Avtomatik
+        slayder, katta narx va QR kod; nima ko'rsatilishi admin panelda sozlanadi.</li>
+    <li>Katalog: cursor-based pagination va infinite scroll, kompozit indeksli filtrlar,
+        xatoga chidamli qidiruv (Firestore prefiks + Fuse.js).</li>
+    <li>Mahsulot kirimini tezlashtirish uchun alohida Telegram userbot yozdim: admin
+        guruh topic'iga mahsulot rasmini tashlaydi, bot uni Gemini Vision bilan tahlil
+        qilib tayyor katalog kartochkasini (nomi, kodi, kategoriya, narx, tavsif)
+        qaytaradi. pHash bilan bir xil rasm ikki marta ishlanmaydi.</li>
+    <li>Buyurtma Telegram guruhining forum topic'iga tushadi; xabar ostidagi tugmalar
+        webhook orqali Firestore statusini yangilaydi — operator saytga kirmaydi.
+        Admin yo'llari ikki qatlamda tekshiriladi, optom narx va tannarx mijozga
+        umuman uzatilmaydi.</li>
+    <li>E'lonlar (broadcast): admin paneldan yoki guruhdagi <code>/elon</code> buyrug'idan
+        bot mijozlariga Telegram'da, sayt foydalanuvchilariga email'da va ochiq kanalga
+        bir vaqtda tarqatiladi; bitta xato butun ro'yxatni to'xtatmaydi.</li>
+  </ul>
+</div>
 
-      ul {
-        margin: 0;
-        padding-left: 12pt;
-      }
+<div class="proj">
+  <div class="proj-title">Organick — organik oziq-ovqat do'koni &nbsp;|&nbsp;
+    <a href="https://organick-e1c5a.web.app">organick-e1c5a.web.app</a> &nbsp;|&nbsp;
+    <a href="https://github.com/Abdulmajidkhan007/organick_org">kod</a>
+  </div>
+  <div class="proj-stack">React 19 · TypeScript · Vite · Redux Toolkit · Tailwind CSS v4 · Firebase · i18next · Playwright</div>
+  <ul>
+    <li>Uch tilli interfeys (o'zbek, ingliz, rus), dark/light rejim, mobile-first layout.</li>
+    <li>Katalog (filtr, qidiruv, saralash), savat, mahsulot sahifasi; admin panelda
+        mahsulot va blog CRUD, reyting boshqaruvi.</li>
+    <li>Firebase Auth uch usulda: Google, email/parol va SMS OTP; aloqa formasi va obuna
+        Telegram guruhiga boradi.</li>
+    <li>Playwright e2e testlari; <i>master</i> ga push bo'lganda GitHub Actions Firebase
+        Hosting'ga avtomatik deploy qiladi.</li>
+  </ul>
+</div>
 
-      li {
-        margin-bottom: 1.2pt;
-      }
+<div class="proj">
+  <div class="proj-title">telegram-bots — 13 ta botning monorepo'si &nbsp;|&nbsp;
+    <a href="https://github.com/Abdulmajidkhan007/telegram-bots">github.com/Abdulmajidkhan007/telegram-bots</a>
+  </div>
+  <div class="proj-stack">Node.js · Python · TypeScript · Gemini API · PostgreSQL · SQLite · Docker</div>
+  <ul>
+    <li>13 ta mustaqil bot bitta repoda. Boshqaruv uchun o'z CLI mni yozdim: JSON reestr
+        asosida hammasini ro'yxatlaydi, o'rnatadi, sozlaydi va bittada ishga tushiradi.</li>
+    <li>Ichida: Gemini savol-javob va yozishmalarni xulosalovchi botlar; do'kon katalogi
+        ustida RAG qidiruv (LangChain + ChromaDB); rasmdan katalog kartochkasi yasovchi
+        userbot; spam filtri; VirusTotal tekshiruvi; video yuklovchi; xarajat hisobi
+        (NestJS API + React dashboard).</li>
+    <li>Telegram'da ochiq ishlaydi: <a href="https://t.me/KillSpam_007_Bot">@KillSpam_007_Bot</a> (spam filtri),
+        <a href="https://t.me/COUNTLIST_BOT">@COUNTLIST_BOT</a> (xarajat hisobi, ovozli xabar ham),
+        <a href="https://t.me/Uzb_saver_007_bot">@Uzb_saver_007_bot</a> (video yuklovchi),
+        <a href="https://t.me/Tekshiruvchi_07_bot">@Tekshiruvchi_07_bot</a> (virus tekshiruvi) va yana 5 ta.
+        Repo ochiq: har commit oldidan kalit skaneri ishlaydi.</li>
+  </ul>
+</div>
 
-      p {
-        margin: 0 0 3pt;
-      }
+<p style="margin-top:3pt">
+  <b>Boshqa loyihalar.</b> Yuqoridagilar — production'da ishlayotgani va chiqishga
+  tayyori. React Three Fiber portfolio — <a href="https://abdulmajidkhan-portfolio.web.app">abdulmajidkhan-portfolio.web.app</a>.
+  Qolganlari (veb+mobil monorepo, o'quv markazlar uchun CRM) GitHub profilimda.
+</p>
 
-      /* Role / company on the left, dates on the right, on one baseline. */
-      .entry-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 10pt;
-      }
-
-      .entry-title {
-        font-weight: 700;
-        font-size: 10pt;
-      }
-
-      .entry-meta {
-        font-size: 8.4pt;
-        color: #444;
-        white-space: nowrap;
-      }
-
-      .entry {
-        margin-bottom: 6pt;
-      }
-
-      .entry:last-child {
-        margin-bottom: 0;
-      }
-
-      .focus {
-        font-size: 8.8pt;
-        color: #222;
-        line-height: 1.6;
-      }
-
-      /* Project stack line — monospace so versions stay scannable. */
-      .stack {
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 8pt;
-        color: #333;
-        margin: 1pt 0 2.5pt;
-      }
-
-      code {
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 8.6pt;
-      }
-
-      .links {
-        font-size: 8pt;
-        color: #444;
-      }
-
-      /*
-       * Every URL on the page is a real anchor so the PDF is clickable. They
-       * keep the surrounding colour and take a hairline underline instead —
-       * blue link text would break the greyscale rule.
-       */
-      a {
-        color: inherit;
-        text-decoration: underline;
-        text-decoration-color: #aaa;
-        text-underline-offset: 1.5pt;
-        text-decoration-thickness: 0.4pt;
-      }
-
-      /* "Ilova + Veb" marker: outlined, not filled, so it survives greyscale. */
-      .badge {
-        display: inline-block;
-        border: 0.7pt solid #000;
-        border-radius: 2pt;
-        padding: 0.5pt 3.5pt;
-        font-size: 7.2pt;
-        font-weight: 700;
-        letter-spacing: 0.5pt;
-        text-transform: uppercase;
-        vertical-align: 1pt;
-        margin-left: 4pt;
-      }
-
-      .skills-grid {
-        display: grid;
-        grid-template-columns: 82pt 1fr;
-        gap: 2.5pt 8pt;
-        font-size: 9pt;
-      }
-
-      .skills-grid dt {
-        font-weight: 700;
-      }
-
-      .skills-grid dd {
-        margin: 0;
-      }
-
-      /* Keep an entry from splitting across the page break. */
-      .entry,
-      header {
-        break-inside: avoid;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Abdulmajid Sharipov</h1>
-      <p class="role">Frontend Developer</p>
-      <p class="contact">
-        <span><a href="tel:+998908545603">+998 90 854 56 03</a></span>
-        <span><a href="mailto:abdulmajidsharipovlc@gmail.com">abdulmajidsharipovlc@gmail.com</a></span>
-        <span>Qoʻqon, Oʻzbekiston</span>
-      </p>
-      <p class="contact">
-        <span><a href="https://github.com/Abdulmajidkhan007">github.com/Abdulmajidkhan007</a></span>
-        <span><a href="https://linkedin.com/in/abdulmajid-sharipov-profile">linkedin.com/in/abdulmajid-sharipov-profile</a></span>
-        <span><a href="https://abdulmajidkhan-portfolio.web.app">abdulmajidkhan-portfolio.web.app</a></span>
-      </p>
-    </header>
-
-    <h2>Profil</h2>
-    <ul>
-      <li>
-        React va TypeScript asosida toza, qayta ishlatiluvchi va miqyoslanuvchi veb-ilovalar
-        yaratishga ixtisoslashgan frontend dasturchi.
-      </li>
-      <li>
-        Komponentlar arxitekturasi, holatni boshqarish (Redux Toolkit, Zustand, TanStack Query)
-        hamda REST va Firebase API'lar bilan integratsiyada amaliy tajriba.
-      </li>
-      <li>
-        TailwindCSS, MUI va Bootstrap yordamida piksel darajasida aniq, responsiv interfeyslar;
-        Framer Motion va GSAP bilan silliq animatsiya va interaksiyalar.
-      </li>
-      <li>
-        Bitta repodan ikkita mahsulot chiqarish tajribasi: Next.js sayti va React Native
-        ilovasi umumiy Firebase backendi va umumiy domen modelidan foydalanadi.
-      </li>
-      <li>
-        Real vaqt rejimidagi ilovalar, autentifikatsiya tizimlari va admin panellarni noldan
-        toʻliq ishlab chiqish boʻyicha tajriba.
-      </li>
-    </ul>
-
-    <h2>Asosiy yoʻnalishlar</h2>
-    <p class="focus">
-      Komponent arxitekturasi · Holatni boshqarish · Veb + mobil bitta repoda · Responsiv dizayn ·
-      Performans optimizatsiyasi · UI / UX implementatsiyasi · Animatsiya va interaksiya · REST &
-      Firebase integratsiyasi · Avtomatik deploy (CI/CD)
-    </p>
-
-    <h2>Tajriba</h2>
-
-    <div class="entry">
-      <div class="entry-head">
-        <span class="entry-title">Frontend Developer — Freelance</span>
-        <span class="entry-meta">Sentyabr 2025 — hozirgacha · Qoʻqon</span>
-      </div>
-      <ul>
-        <li>
-          Mijoz talablariga mos pixel-perfect interfeyslarni HTML, CSS, JavaScript va React
-          yordamida ishlab chiqdim.
-        </li>
-        <li>
-          Firebase (Auth, Firestore, Storage) integratsiyasi orqali real vaqt rejimida ishlovchi
-          funksiyalarni joriy etdim.
-        </li>
-        <li>
-          Framer Motion yordamida foydalanuvchi tajribasini yaxshilovchi animatsiya va
-          oʻtishlarni qoʻshdim.
-        </li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-head">
-        <span class="entry-title">Mustaqil loyihalar — GitHub</span>
-        <span class="entry-meta">2025 — hozirgacha</span>
-      </div>
-      <ul>
-        <li>
-          26 ta ochiq repozitoriy: veb-ilovalar, React Native mobil ilovalar va Telegram botlar.
-        </li>
-        <li>
-          Monorepo va workspace arxitekturasini amalda oʻzlashtirdim — veb va mobil ilova bitta kod bazasi,
-          TanStack Query bilan server holati, Turborepo bilan build orkestratsiyasi.
-        </li>
-      </ul>
-    </div>
-
-    <h2>Loyihalar</h2>
-
-    <div class="entry">
-      <div class="entry-head">
-        <span class="entry-title"
-          >ATOYO Santexnika — E-commerce platformasi<span class="badge">Ilova + Veb</span></span
-        >
-        <span class="entry-meta">2025 — 2026</span>
-      </div>
-      <p class="stack">
-        Veb: Next.js 16.2 (App Router, Turbopack) · Tailwind + MUI · Redux Toolkit ·
-        Firebase App Hosting
-      </p>
-      <p class="stack">
-        Ilova: React Native 0.76 (bare CLI) · @react-native-firebase · React Navigation v7 ·
-        Google Sign-In
-      </p>
-      <p class="links">
-        <a href="https://atoyo-uz.web.app">atoyo-uz.web.app</a> ·
-        <a href="https://github.com/Abdulmajidkhan007/atoyo-e-commerce"
-          >github.com/Abdulmajidkhan007/atoyo-e-commerce</a
-        >
-      </p>
-      <ul>
-        <li>
-          Bitta repoda ikkita mahsulot: Next.js sayti va React Native ilovasi (com.atoyo).
-          Umumiy Firebase backendi — Auth, Cloud Firestore va Storage.
-        </li>
-        <li>
-          10 000+ mahsulotli katalog: cursor-based pagination (<code>startAfter</code> +
-          <code>limit</code>), infinite scroll, kompozit indeksli filtrlar
-          (kategoriya / material / brend / davlat / narx) va typo-tolerant qidiruv —
-          Firestore prefiks qidiruvi ustiga Fuse.js.
-        </li>
-        <li>
-          Buyurtma oqimi: localStorage’da saqlanuvchi savat, geolokatsiya bilan checkout va
-          <code>onSnapshot</code> orqali real vaqtda status kuzatuvi.
-        </li>
-        <li>
-          Telegram bot integratsiyasi — buyurtma, kontakt va obuna xabarlari guruhning tegishli
-          forum topicʼiga yoʻnaltiriladi; xabar ostidagi inline tugmalar webhook orqali
-          Firestoreʼdagi buyurtma statusini yangilaydi.
-        </li>
-        <li>
-          Admin panel: tushum va eng koʻp sotilganlar dashboardi, inline narx/zaxira tahriri,
-          bulk narx yangilash, rasm yuklash, foydalanuvchi rollari va bot Thread ID sozlamalari.
-        </li>
-        <li>
-          Xavfsizlik ikki mustaqil qatlamda: <code>proxy.ts</code> (Node runtime — session
-          cookie va Firestore rol tekshiruvi) hamda <code>admin/layout.tsx</code>da qayta
-          tekshiruv, middleware-bypass sinfidagi zaifliklarga qarshi defense-in-depth.
-        </li>
-        <li>
-          GitHub Actions CI: sayt va ilova uchun typecheck + lint, ular oʻtgach Gradle bilan
-          release APK yigʻiladi (JS bundle APK ichida — Metroʻsiz mustaqil ishlaydi).
-        </li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-head">
-        <span class="entry-title">Organick — Organik oziq-ovqat platformasi</span>
-        <span class="entry-meta">Veb</span>
-      </div>
-      <p class="stack">React 19 · TypeScript · Redux Toolkit · Tailwind v4 · Firebase · i18next</p>
-      <p class="links">
-        <a href="https://github.com/Abdulmajidkhan007/Organick_org"
-          >github.com/Abdulmajidkhan007/Organick_org</a
-        >
-      </p>
-      <ul>
-        <li>
-          Toʻliq onlayn-doʻkon: kategoriya boʻyicha filtrlash, qidiruv va saralash, reyting
-          tizimi, localStorageʼda saqlanuvchi savatcha (slide-in sidebar + alohida sahifa).
-        </li>
-        <li>
-          Firebase autentifikatsiyasining uch usuli — Google Sign-In, Email/parol va telefon
-          orqali SMS OTP; himoyalangan admin dashboard (mahsulot va blog uchun CRUD).
-        </li>
-        <li>i18next bilan 3 tilli interfeys, dark/light rejim va mobil-birinchi responsiv dizayn.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-head">
-        <span class="entry-title"
-          >Lumina — Ijtimoiy tarmoq ilovasi<span class="badge">Ilova + Veb</span></span
-        >
-        <span class="entry-meta">2026</span>
-      </div>
-      <p class="stack">
-        React Native 0.79 (bare CLI, New Architecture) · React Navigation v7 · TanStack Query ·
-        Zustand · Reanimated
-      </p>
-      <p class="links">
-        <a href="https://lumina-007app.web.app">lumina-007app.web.app</a> ·
-        <a href="https://github.com/Abdulmajidkhan007/lumina"
-          >github.com/Abdulmajidkhan007/lumina</a
-        >
-      </p>
-      <ul>
-        <li>
-          Toʻliq tiplangan navigatsiya (native-stack + bottom-tabs) va strict TypeScript rejimi.
-        </li>
-        <li>
-          Server holati AsyncStorageʼda offline saqlanadi; formalar React Hook Form + Zod bilan
-          validatsiyadan oʻtadi.
-        </li>
-        <li>Autentifikatsiya tokenlari react-native-keychain orqali xavfsiz saqlanadi.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-head">
-        <span class="entry-title">3D Portfolio — Shaxsiy portfolio sayti</span>
-        <span class="entry-meta">Veb / 3D</span>
-      </div>
-      <p class="stack">React 19 · Three.js / React Three Fiber · GSAP · Tailwind v4 · Firebase (Hosting, Cloud Functions, Firestore)</p>
-      <p class="links">
-        <a href="https://abdulmajidkhan-portfolio.web.app">abdulmajidkhan-portfolio.web.app</a>
-      </p>
-      <ul>
-        <li>
-          Oʻzim yozgan GLSL shaderlardagi zarrachalar maydoni: butun maydon bitta draw callʼda,
-          harakat va sichqonchaga reaksiya vertex shaderda hisoblanadi.
-        </li>
-        <li>
-          three.js bundle (~235 kB gzip) kritik yoʻldan chiqarilgan (lazy + requestIdleCallback):
-          sahifa 3D yuklanishini kutmasdan ochiladi.
-        </li>
-        <li>Ikki tilli interfeys (uz/en), dark/light rejim; aloqa formasi oʻz backendiga boradi — Cloud Function (honeypot, IP boʻyicha rate limit, server validatsiya) xabarni Firestoreʼga yozadi.</li>
-      </ul>
-    </div>
-
-    <h2>Texnik koʻnikmalar</h2>
-    <dl class="skills-grid">
-      <dt>Tillar</dt>
-      <dd>TypeScript, JavaScript (ES6+), HTML5, CSS3</dd>
-
-      <dt>Frameworklar</dt>
-      <dd>React, React Native, Next.js, Expo, Vite</dd>
-
-      <dt>Holat</dt>
-      <dd>Redux Toolkit, Zustand, TanStack Query, React Hook Form + Zod</dd>
-
-      <dt>Uslublash</dt>
-      <dd>TailwindCSS, MUI, Bootstrap, NativeWind, React Native Paper</dd>
-
-      <dt>Animatsiya</dt>
-      <dd>Framer Motion, GSAP, Reanimated, Three.js / React Three Fiber</dd>
-
-      <dt>Vositalar</dt>
-      <dd>Firebase, Supabase, Turborepo, Git, GitHub, Figma</dd>
-    </dl>
-
-    <h2>Taʼlim</h2>
-    <div class="entry">
-      <div class="entry-head">
-        <span class="entry-title">Pro Teach — Frontend dasturlash</span>
-        <span class="entry-meta">Sentyabr 2024 — Avgust 2025</span>
-      </div>
-      <ul>
-        <li>
-          Bir yillik toʻliq kurs: kompyuter savodxonligidan boshlanib, frontend dasturlash
-          yoʻnalishi bilan yakunlandi.
-        </li>
-        <li>
-          Dastur qamrovi — HTML5 va CSS3 (Flexbox, Grid, responsiv maketlar), JavaScript ES6+
-          (DOM, asinxron kod, fetch/REST), Git va GitHub bilan jamoaviy ish, soʻngra React:
-          komponentlar, props va state, hooklar, routing hamda holatni boshqarish.
-        </li>
-        <li>
-          Har modul amaliy loyiha bilan yakunlangan; kurs davomida yigʻilgan ishlar keyinchalik
-          shaxsiy portfolioning va GitHub repozitoriylarimning asosini tashkil qildi.
-        </li>
-        <li>Oʻqish tugagan oyda birinchi tijoriy loyihamni frontend dasturchi sifatida boshladim.</li>
-      </ul>
-    </div>
-  </body>
+</body>
 </html>

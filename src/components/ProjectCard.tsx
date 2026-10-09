@@ -95,7 +95,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
             ))}
           </ul>
 
-          <div className="mt-5 flex items-center gap-4">
+          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
             {project.live && (
               <a
                 href={project.live}
@@ -126,6 +126,17 @@ export default function ProjectCard({ project, index }: { project: Project; inde
                 className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink"
               >
                 {t.projects.code}
+                <span aria-hidden>↗</span>
+              </a>
+            )}
+            {project.details && (
+              <a
+                href={project.details}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink"
+              >
+                {t.projects.details}
                 <span aria-hidden>↗</span>
               </a>
             )}

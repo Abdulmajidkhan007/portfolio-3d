@@ -13,6 +13,9 @@ import type { SiteContent } from '@/types'
  * preferred when they load; `image` (a committed SVG) and the 3D avatar are
  * the fallbacks. Set `avatarImageHd: null` to keep the 3D avatar always.
  */
+// Har loyihaning to'liq tavsifi profil reposida yuritiladi — kartada qisqasi.
+const DOCS = 'https://github.com/Abdulmajidkhan007/Abdulmajidkhan007/blob/main/docs'
+
 export const content: SiteContent = {
   profile: {
     name: 'Abdulmajid Sharipov',
@@ -21,7 +24,7 @@ export const content: SiteContent = {
       en: 'Frontend Developer',
     },
     location: { uz: 'Qoʻqon, Oʻzbekiston', en: 'Qoqon, Uzbekistan' },
-    email: 'abdulmajidsharipovlc@gmail.com',
+    email: 'abdullohhacker007@gmail.com',
     phone: '+998 90 854 56 03',
     resume: '/resume.pdf',
     avatarImage: null,
@@ -60,13 +63,14 @@ export const content: SiteContent = {
         'I have shipped realtime applications, authentication systems and admin panels end to end. Performance and code quality get particular attention.',
       ],
     },
-    // Derived from the public GitHub account: 26 repositories of my own, one of
-    // which is still in progress.
+    // Faqat tekshirsa bo'ladigan raqamlar (2026-10-09): dasturlash 2024-yil
+    // sentyabrdan (Pro Teach); jonli saytlar — atoyo.uz, Organick, Lumina, shu
+    // sayt; botlar — telegram-bots reposi; real do'kon — atoyo.uz.
     stats: [
-      { value: '2', label: { uz: 'yillik tajriba', en: 'years of experience' } },
-      { value: '25', label: { uz: 'tugallangan loyiha', en: 'projects completed' } },
-      { value: '7', label: { uz: 'mamnun mijoz', en: 'happy clients' } },
-      { value: '26', label: { uz: 'jami loyiha', en: 'projects in total' } },
+      { value: '2', label: { uz: 'yil dasturlashda', en: 'years of coding' } },
+      { value: '4', label: { uz: 'jonli sayt', en: 'live websites' } },
+      { value: '13', label: { uz: 'Telegram bot', en: 'Telegram bots' } },
+      { value: '1', label: { uz: 'real doʻkon har kuni ishlatadi', en: 'real store using it daily' } },
     ],
   },
 
@@ -75,8 +79,8 @@ export const content: SiteContent = {
       id: 'atoyo',
       title: 'ATOYO Santexnika',
       description: {
-        uz: '10 000+ mahsulotli santexnika doʻkoni — bitta repoda Next.js 16 sayti va React Native ilovasi. Cursor-based pagination, typo-tolerant qidiruv, Telegram bot orqali buyurtma boshqaruvi va ikki qatlamli himoyalangan admin panel.',
-        en: 'A plumbing store with 10,000+ products — a Next.js 16 site and a React Native app in one repo. Cursor-based pagination, typo-tolerant search, order management over a Telegram bot and an admin panel behind two independent authorisation layers.',
+        uz: 'Qoʻqondagi santexnika doʻkonida ishlatilmoqda: Next.js 16 sayti, React Native ilovasi, desktop va doʻkon TV ekrani bitta Firestore bazasida. Buyurtmalar Telegram guruhida boshqariladi, eʼlonlar (broadcast) bot, email va kanal orqali tarqatiladi; typo-tolerant qidiruv, ikki qatlamli himoyalangan admin panel.',
+        en: 'In daily use at a plumbing store in Qoqon: a Next.js 16 site, a React Native app, a desktop app and an in-store TV screen on one Firestore database. Orders are handled in a Telegram group, announcements are broadcast over the bot, email and channel; typo-tolerant search and an admin panel behind two authorisation layers.',
       },
       category: 'web',
       platform: { uz: 'Ilova + Veb', en: 'App + Web' },
@@ -87,6 +91,7 @@ export const content: SiteContent = {
       live: 'https://atoyo.uz',
       // `app` goes here once the build has a store page or a release to link to.
       repo: 'https://github.com/Abdulmajidkhan007/atoyo-e-commerce',
+      details: `${DOCS}/atoyo-e-commerce.md`,
       year: 2026,
       featured: true,
     },
@@ -104,6 +109,7 @@ export const content: SiteContent = {
       imageHd: '/images/projects/project-3.webp',
       live: 'https://lumina-007app.web.app',
       repo: 'https://github.com/Abdulmajidkhan007/lumina',
+      details: `${DOCS}/lumina.md`,
       year: 2026,
       featured: true,
     },
@@ -120,6 +126,21 @@ export const content: SiteContent = {
       imageHd: '/images/projects/project-4.webp',
       live: 'https://organick-e1c5a.web.app',
       repo: 'https://github.com/Abdulmajidkhan007/Organick_org',
+      details: `${DOCS}/organick_org.md`,
+      year: 2026,
+    },
+    {
+      id: 'telegram-bots',
+      title: 'Telegram Bots',
+      description: {
+        uz: '13 ta bot bitta monorepoda, bitta buyruq bilan ishga tushadi: spam filtri, video yuklovchi, virus tekshiruvi, xarajat hisobi (ovozli xabar ham), Gemini bilan savol-javob va IT testlari. Har commitdan oldin testlar va kalit skaneri.',
+        en: '13 bots in one monorepo, started with a single command: spam filter, video downloader, virus check, expense tracker (voice messages too), Gemini Q&A and IT quizzes. Tests and a secret scanner run before every commit.',
+      },
+      category: 'tool',
+      tags: ['Node.js', 'Python', 'aiogram 3', 'Gemini API'],
+      image: '/images/projects/project-2.svg',
+      repo: 'https://github.com/Abdulmajidkhan007/telegram-bots',
+      details: `${DOCS}/telegram-bots.md`,
       year: 2026,
     },
     {
@@ -134,6 +155,7 @@ export const content: SiteContent = {
       image: '/images/projects/project-6.svg',
       imageHd: '/images/projects/project-6.webp',
       live: 'https://abdulmajidkhan-portfolio.web.app',
+      details: `${DOCS}/portfolio-3d.md`,
       year: 2026,
     },
   ],
@@ -192,7 +214,7 @@ export const content: SiteContent = {
         uz: 'Monorepo arxitekturasini amalda oʻrgandim: KidsWear va ATOYO loyihalarida veb va mobil ilova bitta kod bazasidan chiqadi. Zod bilan yagona domen modeli, TanStack Query bilan server holati, Turborepo bilan build orkestratsiyasi.',
         en: 'Learned monorepo architecture in practice: on KidsWear and ATOYO the web and mobile apps ship from one codebase. A single Zod-defined domain model, server state via TanStack Query, build orchestration with Turborepo.',
       },
-      stack: ['React Native', 'Expo', 'Turborepo', 'TanStack Query'],
+      stack: ['React Native', 'Zod', 'Turborepo', 'TanStack Query'],
     },
     {
       id: 'exp-proteach',
@@ -226,9 +248,14 @@ export const content: SiteContent = {
       handle: '+998 90 854 56 03',
     },
     {
+      label: 'Telegram',
+      href: 'https://t.me/Abdulloh_77700',
+      handle: '@Abdulloh_77700',
+    },
+    {
       label: 'Email',
-      href: 'mailto:abdulmajidsharipovlc@gmail.com',
-      handle: 'abdulmajidsharipovlc@gmail.com',
+      href: 'mailto:abdullohhacker007@gmail.com',
+      handle: 'abdullohhacker007@gmail.com',
     },
   ],
 }

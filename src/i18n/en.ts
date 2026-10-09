@@ -57,6 +57,7 @@ export const en: Dictionary = {
     live: 'Live demo',
     app: 'Get the app',
     code: 'Code',
+    details: 'Details',
     featured: 'Featured',
     empty: 'No projects in this category.',
   },
