@@ -28,7 +28,8 @@ export const content: SiteContent = {
     phone: '+998 90 854 56 03',
     resume: '/resume.pdf',
     avatarImage: null,
-    avatarImageHd: '/images/avatar.webp',
+    // No generated portrait: a photoreal AI face reads as a picture of a real
+    // person, which this is not. The 3D neon avatar renders instead (2026-10-09).
   },
 
   hero: {
