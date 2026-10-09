@@ -101,10 +101,10 @@ firebase login
 
 [console.firebase.google.com](https://console.firebase.google.com) → **Add project**.
 
-Keyin `.firebaserc` dagi `BU_YERGA_FIREBASE_PROJECT_ID` ni haqiqiy ID ga almashtiring:
+Keyin `.firebaserc` dagi ID sizdagi Project ID bilan bir xil bo'lsin:
 
 ```json
-{ "projects": { "default": "abdullohkhan-portfolio" } }
+{ "projects": { "default": "abdulmajidkhan-portfolio" } }
 ```
 
 ### 3. Firestore'ni yoqish
@@ -133,7 +133,7 @@ Sozlanmasa funksiya baribir ishlaydi — xabar faqat Firestore'ga yoziladi.
 ### 6. Sayt manzilini to'g'rilash
 
 `index.html` dagi `canonical`, `og:url`, `og:image` va `src/data/content.ts`
-dagi `live` manzili hozir `https://abdullohkhan-portfolio.web.app` ga ishora
+dagi `live` manzili hozir `https://abdulmajidkhan-portfolio.web.app` ga ishora
 qiladi. Loyiha ID ingiz boshqa bo'lsa — o'zgartiring.
 
 ### 7. Deploy
@@ -163,7 +163,7 @@ bir marta brauzerda sozlaysiz (hammasi telefondan qilinadi).
 
 ### 1. Firebase loyiha
 [console.firebase.google.com](https://console.firebase.google.com) → **Add project**.
-Nomi: `abdullohkhan-portfolio`. Pastdagi **Project ID** ham aynan shunday
+Nomi: `abdulmajidkhan-portfolio`. Pastdagi **Project ID** ham aynan shunday
 bo'lsin — saytdagi manzillar (`canonical`, sitemap, rezyume) shu nomga
 bog'langan. Band bo'lsa — boshqa ID oling va Claude'ga ayting, manzillar
 yangilanadi. Google Analytics — o'chiq.
@@ -197,7 +197,7 @@ variables → Actions**:
 
 | Tab | Nomi | Qiymati |
 |---|---|---|
-| Variables | `FIREBASE_PROJECT_ID` | `abdullohkhan-portfolio` (yoki sizdagi ID) |
+| Variables | `FIREBASE_PROJECT_ID` | `abdulmajidkhan-portfolio` (yoki sizdagi ID) |
 | Secrets | `FIREBASE_SERVICE_ACCOUNT` | JSON faylning **to'liq matni** (faylni matn ko'ruvchida oching → hammasini belgilang → nusxalang) |
 | Secrets | `TELEGRAM_BOT_TOKEN` | ixtiyoriy — forma xabarlari keladigan bot tokeni |
 | Secrets | `TELEGRAM_CHAT_ID` | ixtiyoriy — o'zingizning Telegram ID'ingiz (@IDFINDER007BOT) |

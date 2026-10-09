@@ -133,7 +133,7 @@ export const content: SiteContent = {
       tags: ['React 19', 'Three.js', 'GSAP', 'Tailwind v4'],
       image: '/images/projects/project-6.svg',
       imageHd: '/images/projects/project-6.webp',
-      live: 'https://abdullohkhan-portfolio.web.app',
+      live: 'https://abdulmajidkhan-portfolio.web.app',
       year: 2026,
     },
   ],

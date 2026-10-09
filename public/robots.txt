@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://abdullohkhan-portfolio.web.app/sitemap.xml
+Sitemap: https://abdulmajidkhan-portfolio.web.app/sitemap.xml
