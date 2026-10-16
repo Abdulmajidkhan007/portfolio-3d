@@ -2,7 +2,7 @@ import type { Dictionary } from './uz'
 
 export const en: Dictionary = {
   meta: {
-    title: 'Abdullohkhan Sharipov | Frontend Developer & 3D Enthusiast',
+    title: 'Abdulmajid Sharipov | Frontend Developer &amp; 3D Enthusiast',
     description:
       'Frontend developer building modern web applications and 3D experiences with React, TypeScript, Three.js and WebGL.',
   },

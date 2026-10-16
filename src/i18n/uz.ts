@@ -1,6 +1,6 @@
 export const uz = {
   meta: {
-    title: 'Abdullohkhan Sharipov | Frontend Developer & 3D Enthusiast',
+    title: 'Abdulmajid Sharipov | Frontend Developer &amp; 3D Enthusiast',
     description:
       'Zamonaviy veb-ilovalar va 3D tajribalar yaratuvchi frontend dasturchi. React, TypeScript, Three.js va WebGL.',
   },
