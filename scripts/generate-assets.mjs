@@ -250,7 +250,7 @@ function card(index) {
 
 function ogImage() {
   const id = 'og'
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Abdullohkhan Sharipov — Frontend Developer &amp; 3D Enthusiast">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Abdulmajid Sharipov — Frontend Developer &amp; 3D Enthusiast">
   ${defs(id, NEON, CYAN, 20)}
   <rect width="1200" height="630" fill="${BG}"/>
   <rect width="1200" height="630" fill="url(#grid-${id})"/>
@@ -259,7 +259,7 @@ function ogImage() {
   <text x="90" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="30" fill="${NEON}"
         letter-spacing="6">FRONTEND DEVELOPER</text>
   <text x="86" y="345" font-family="ui-sans-serif, system-ui, sans-serif" font-size="66" font-weight="700"
-        fill="#e8ecf4">Abdullohkhan</text>
+        fill="#e8ecf4">Abdulmajid</text>
   <text x="86" y="420" font-family="ui-sans-serif, system-ui, sans-serif" font-size="66" font-weight="700"
         fill="url(#g-${id})">Sharipov</text>
   <text x="90" y="486" font-family="ui-monospace, monospace" font-size="24" fill="#8b93a7">

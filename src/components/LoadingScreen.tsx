@@ -130,7 +130,7 @@ export default function LoadingScreen({ onDone }: Props) {
           </p>
           <p className="mt-3 font-display text-2xl font-bold sm:text-3xl">
             <span className="neon-text">{'{ '}</span>
-            Abdullohkhan
+            Abdulmajid
             <span className="neon-text">{' }'}</span>
           </p>
         </div>
