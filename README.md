@@ -6,6 +6,14 @@ Tailwind CSS v4 for styling, Lenis for smooth scrolling. Bilingual (Uzbek / Engl
 theme only. Deployed on **Firebase Hosting**, with a **Cloud Functions** backend for the
 contact form.
 
+## Status (2026-10-21)
+
+- **Live:** https://abdulmajidkhan-portfolio.web.app — deployed from `main` by GitHub Actions.
+- **Contact form backend is not deployed yet.** The project is on the Spark plan
+  (`FIREBASE_PLAN=spark`), so only Hosting goes out; the `contact` function waits for Blaze.
+  Until then a failed submit shows a Telegram link instead of a silent error.
+- Last code change: 2026-10-16 (display name unified to "Abdulmajid Sharipov").
+
 ## Quick start
 
 ```bash
