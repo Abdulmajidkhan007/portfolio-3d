@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="utf-8">
-<title>Abdulmajid Sharipov — Frontend Engineer</title>
+<title>Abdulmajid Sharipov — Middle Frontend Engineer</title>
 <style>
   @page { size: A4; margin: 11mm 14mm; }
   * { box-sizing: border-box; }
@@ -40,7 +40,7 @@
 <body>
 
 <h1>Abdulmajid Sharipov</h1>
-<div class="role">Frontend Engineer</div>
+<div class="role">Middle Frontend Engineer</div>
 <div class="contacts">
   +998 90 854 56 03 &nbsp;|&nbsp;
   <a href="mailto:abdullohhacker007@gmail.com">abdullohhacker007@gmail.com</a> &nbsp;|&nbsp;
@@ -85,15 +85,9 @@ bo'lganda LLM integratsiyalarini qo'shaman — lekin asosiy yo'nalishim frontend
     <li><b>Bitta baza — besh kanal.</b> Sayt, Android ilova, do'kon kompyuteri uchun ilova,
         televizor ekrani va Telegram bot bir xil Firestore ma'lumoti ustida ishlaydi:
         admin narxni bir joyda o'zgartiradi, hamma kanalda yangilanadi.</li>
-    <li><b>Android ilova</b> (<i>mobile/</i>) — React Native, @react-native-firebase
-        (Auth, Firestore, Messaging), Google Sign-In, React Navigation 7,
-        Redux Toolkit + redux-persist. Push bildirishnomalar FCM orqali.</li>
-    <li><b>Do'kon kompyuteri uchun ilova</b> (<i>desktop/</i>) — Electron +
-        electron-builder; Windows, Linux va macOS uchun yig'iladi, internet uzilganda
-        offline sahifa ko'rsatiladi.</li>
-    <li><b>Do'kon televizori</b> — <i>/tv</i> sahifasi. Alohida ilova kerak emas: Smart TV
-        brauzeri yoki Android TV box kiosk rejimida shu manzilni ochadi. Avtomatik
-        slayder, katta narx va QR kod; nima ko'rsatilishi admin panelda sozlanadi.</li>
+    <li><b>Android ilova</b> — React Native, @react-native-firebase, Google Sign-In, FCM push;
+        <b>desktop</b> — Electron (Windows/Linux/macOS, offline sahifa); <b>do'kon televizori</b> —
+        <i>/tv</i> sahifasi kiosk rejimida: slayder, katta narx, QR kod.</li>
     <li>Katalog: cursor-based pagination va infinite scroll, kompozit indeksli filtrlar,
         xatoga chidamli qidiruv (Firestore prefiks + Fuse.js).</li>
     <li>Mahsulot kirimini tezlashtirish uchun alohida Telegram userbot yozdim: admin
@@ -120,20 +114,18 @@ bo'lganda LLM integratsiyalarini qo'shaman — lekin asosiy yo'nalishim frontend
     <li>Uch tilli interfeys (o'zbek, ingliz, rus), dark/light rejim, mobile-first layout.</li>
     <li>Katalog (filtr, qidiruv, saralash), savat, mahsulot sahifasi; admin panelda
         mahsulot va blog CRUD, reyting boshqaruvi.</li>
-    <li>Firebase Auth uch usulda: Google, email/parol va SMS OTP; aloqa formasi va obuna
-        Telegram guruhiga boradi.</li>
-    <li>Playwright e2e testlari; <i>master</i> ga push bo'lganda GitHub Actions Firebase
-        Hosting'ga avtomatik deploy qiladi.</li>
+    <li>Firebase Auth: Google, email/parol, SMS OTP; Playwright e2e; <i>master</i> ga push'da
+        GitHub Actions orqali avtomatik deploy.</li>
   </ul>
 </div>
 
 <div class="proj">
-  <div class="proj-title">telegram-bots — 13 ta botning monorepo'si &nbsp;|&nbsp;
+  <div class="proj-title">telegram-bots — 15 ta botning monorepo'si &nbsp;|&nbsp;
     <a href="https://github.com/Abdulmajidkhan007/telegram-bots">github.com/Abdulmajidkhan007/telegram-bots</a>
   </div>
   <div class="proj-stack">Node.js · Python · TypeScript · Gemini API · PostgreSQL · SQLite · Docker</div>
   <ul>
-    <li>13 ta mustaqil bot bitta repoda. Boshqaruv uchun o'z CLI mni yozdim: JSON reestr
+    <li>15 ta mustaqil bot bitta repoda. Boshqaruv uchun o'z CLI mni yozdim: JSON reestr
         asosida hammasini ro'yxatlaydi, o'rnatadi, sozlaydi va bittada ishga tushiradi.</li>
     <li>Ichida: Gemini savol-javob va yozishmalarni xulosalovchi botlar; do'kon katalogi
         ustida RAG qidiruv (LangChain + ChromaDB); rasmdan katalog kartochkasi yasovchi
@@ -148,9 +140,13 @@ bo'lganda LLM integratsiyalarini qo'shaman — lekin asosiy yo'nalishim frontend
 </div>
 
 <p style="margin-top:3pt">
-  <b>Boshqa loyihalar.</b> Yuqoridagilar — production'da ishlayotgani va chiqishga
-  tayyori. React Three Fiber portfolio — <a href="https://abdulmajidkhan-portfolio.web.app">abdulmajidkhan-portfolio.web.app</a>.
-  Qolganlari (veb+mobil monorepo, o'quv markazlar uchun CRM) GitHub profilimda.
+  <b>Boshqa loyihalar.</b>
+  <b>KidsWear</b> — bolalar kiyimi do'koni, veb + Android monorepo (Turborepo, umumiy Zod va dizayn tokenlari) —
+  <a href="https://kids-wear-007.web.app">kids-wear-007.web.app</a>.
+  <b>Lumina</b> — Instagram uslubidagi tarmoq (bare React Native + veb), real foydalanuvchilar bilan —
+  <a href="https://lumina-007app.web.app">lumina-007app.web.app</a>.
+  <b>Suhbat</b> — messenjer: NestJS + PostgreSQL + WebSocket, WebRTC qo'ng'iroqlar (beta).
+  <a href="https://abdulmajidkhan-portfolio.web.app">3D portfolio</a> (React Three Fiber).
 </p>
 
 </body>
