@@ -64,12 +64,13 @@ export const content: SiteContent = {
         'I have shipped realtime applications, authentication systems and admin panels end to end. Performance and code quality get particular attention.',
       ],
     },
-    // Faqat tekshirsa bo'ladigan raqamlar (2026-10-09): dasturlash 2024-yil
-    // sentyabrdan (Pro Teach); jonli saytlar — atoyo.uz, Organick, Lumina, shu
-    // sayt; botlar — telegram-bots reposi; real do'kon — atoyo.uz.
+    // Faqat tekshirsa bo'ladigan raqamlar (2026-10-22): dasturlash 2024-yil
+    // sentyabrdan (Pro Teach); jonli saytlar — atoyo.uz, Organick, Lumina,
+    // KidsWear, Suhbat (veb), shu sayt; botlar — telegram-bots reposi; real
+    // do'kon — atoyo.uz.
     stats: [
       { value: '2', label: { uz: 'yil dasturlashda', en: 'years of coding' } },
-      { value: '4', label: { uz: 'jonli sayt', en: 'live websites' } },
+      { value: '6', label: { uz: 'jonli sayt', en: 'live websites' } },
       { value: '15', label: { uz: 'Telegram bot', en: 'Telegram bots' } },
       { value: '1', label: { uz: 'real doʻkon har kuni ishlatadi', en: 'real store using it daily' } },
     ],
