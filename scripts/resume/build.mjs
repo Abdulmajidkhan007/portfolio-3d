@@ -1,5 +1,5 @@
 /**
- * Prints scripts/resume/resume.html to public/resume.pdf.
+ * Prints scripts/resume/resume.html to public/Abdulmajid_Sharipov_Frontend_CV.pdf.
  *
  * Run by hand when the resume changes — it is NOT part of `npm run build`,
  * because it needs a Chromium and the output is committed:
@@ -17,7 +17,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const source = resolve(here, 'resume.html')
-const target = resolve(here, '..', '..', 'public', 'resume.pdf')
+const target = resolve(here, '..', '..', 'public', 'Abdulmajid_Sharipov_Frontend_CV.pdf')
 // PDF qaysi resume.html dan yig'ilganini eslab qoladi. src/__tests__/resume.test.ts
 // shu hashni tekshiradi: HTML o'zgarib, PDF qayta yig'ilmasa — test qizil bo'ladi
 // va saytda eski rezyume qolib ketmaydi.

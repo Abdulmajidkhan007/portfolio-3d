@@ -50,7 +50,7 @@ does not render that link. Shipping a link to `example.com` or to a bare `linked
 worse than shipping none, so `npm test` rejects both.
 
 `npm run assets` regenerates the project artwork and the OG source SVG deterministically.
-`public/images/og-image.png` and `public/resume.pdf` are committed binaries — the PNG is a
+`public/images/og-image.png` and `public/Abdulmajid_Sharipov_Frontend_CV.pdf` are committed binaries — the PNG is a
 1200×630 render of `og-image.svg` (social platforms do not accept SVG previews), and the PDF
 is a placeholder résumé built from the same content.
 

@@ -6,7 +6,7 @@ import { content } from '@/data/content'
 
 /**
  * Rezyume ikki joyda yashaydi: manba — scripts/resume/resume.html, saytdan
- * yuklanadigani — public/resume.pdf. Ilgari HTML yangilanib, PDF eskisicha
+ * yuklanadigani — public/Abdulmajid_Sharipov_Frontend_CV.pdf. Ilgari HTML yangilanib, PDF eskisicha
  * qolib ketgan. Bu testlar ikkisini va saytdagi ma'lumotni bir-biriga bog'laydi.
  */
 const read = (relative: string) =>
@@ -37,7 +37,7 @@ describe('rezyume', () => {
   })
 
   it('eskirgan ma\'lumot qaytib kelmagan', () => {
-    for (const stale of ['netlify', 'abdulmajidsharipovlc', '10 000+', '12 ta bot']) {
+    for (const stale of ['netlify', 'abdullohhacker007', '10 000+', '12 ta bot']) {
       expect(html.toLowerCase()).not.toContain(stale.toLowerCase())
     }
   })

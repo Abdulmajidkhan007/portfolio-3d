@@ -2,6 +2,9 @@
   "hosting": {
     "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      { "source": "/resume.pdf", "destination": "/Abdulmajid_Sharipov_Frontend_CV.pdf", "type": 301 }
+    ],
     "rewrites": [
       {
         "source": "/api/contact",
