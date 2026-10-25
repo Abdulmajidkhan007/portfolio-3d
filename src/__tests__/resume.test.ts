@@ -37,7 +37,7 @@ describe('rezyume', () => {
   })
 
   it('eskirgan ma\'lumot qaytib kelmagan', () => {
-    for (const stale of ['netlify', 'abdulmajidsharipovlc', '10 000+', '12 ta bot']) {
+    for (const stale of ['netlify', 'abdullohhacker007', '10 000+', '12 ta bot']) {
       expect(html.toLowerCase()).not.toContain(stale.toLowerCase())
     }
   })

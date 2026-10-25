@@ -24,7 +24,7 @@ export const content: SiteContent = {
       en: 'Frontend Developer',
     },
     location: { uz: 'Qoʻqon, Oʻzbekiston', en: 'Qoqon, Uzbekistan' },
-    email: 'abdullohhacker007@gmail.com',
+    email: 'abdulmajidsharipovlc@gmail.com',
     phone: '+998 90 854 56 03',
     resume: '/resume.pdf',
     avatarImage: null,
@@ -256,8 +256,8 @@ export const content: SiteContent = {
     },
     {
       label: 'Email',
-      href: 'mailto:abdullohhacker007@gmail.com',
-      handle: 'abdullohhacker007@gmail.com',
+      href: 'mailto:abdulmajidsharipovlc@gmail.com',
+      handle: 'abdulmajidsharipovlc@gmail.com',
     },
   ],
 }
