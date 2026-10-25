@@ -26,7 +26,7 @@ export const content: SiteContent = {
     location: { uz: 'Qoʻqon, Oʻzbekiston', en: 'Qoqon, Uzbekistan' },
     email: 'abdulmajidsharipovlc@gmail.com',
     phone: '+998 90 854 56 03',
-    resume: '/resume.pdf',
+    resume: '/Abdulmajid_Sharipov_Frontend_CV.pdf',
     avatarImage: null,
     // No generated portrait: a photoreal AI face reads as a picture of a real
     // person, which this is not. The 3D neon avatar renders instead (2026-10-09).

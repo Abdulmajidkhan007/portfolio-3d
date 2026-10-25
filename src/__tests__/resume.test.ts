@@ -6,7 +6,7 @@ import { content } from '@/data/content'
 
 /**
  * Rezyume ikki joyda yashaydi: manba — scripts/resume/resume.html, saytdan
- * yuklanadigani — public/resume.pdf. Ilgari HTML yangilanib, PDF eskisicha
+ * yuklanadigani — public/Abdulmajid_Sharipov_Frontend_CV.pdf. Ilgari HTML yangilanib, PDF eskisicha
  * qolib ketgan. Bu testlar ikkisini va saytdagi ma'lumotni bir-biriga bog'laydi.
  */
 const read = (relative: string) =>
