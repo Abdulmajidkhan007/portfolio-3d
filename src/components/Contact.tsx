@@ -5,8 +5,12 @@ import { content } from '@/data/content'
 import { cn } from '@/utils/cn'
 import SectionHeading from './SectionHeading'
 
-/** Firebase Hosting rewrite bilan Cloud Function'ga boradi (firebase.json). */
-const ENDPOINT = '/api/contact'
+/**
+ * Aloqa formasi qayerga yuboriladi:
+ * - `VITE_CONTACT_URL` berilsa — Cloudflare Worker (…/contact), Blaze kerak emas;
+ * - aks holda Firebase Hosting rewrite bilan Cloud Function'ga (/api/contact, firebase.json).
+ */
+const ENDPOINT = (import.meta.env.VITE_CONTACT_URL as string | undefined)?.trim() || '/api/contact'
 // Server yiqilsa yoki hali deploy qilinmagan bo'lsa (Spark rejimi) — xabar yo'qolmasin.
 const TELEGRAM_URL = 'https://t.me/Abdulloh_77700'
 

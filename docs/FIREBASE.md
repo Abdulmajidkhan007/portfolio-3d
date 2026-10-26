@@ -217,6 +217,19 @@ Saytdagi forma bu rejimda xabar yubora olmaydi va xato o'rniga Telegram
 havolasini (@Abdulloh_77700) ko'rsatadi. Blaze yoqilgach `FIREBASE_PLAN` ni
 o'chiring va workflow'ni qayta ishga tushiring — forma ham jonlanadi.
 
+### Aloqa formasi: Cloudflare Worker (Blaze'siz, tavsiya)
+Forma xabarlari Telegram'ga Firebase Functions'siz ham borishi mumkin — profil repodagi
+`ariza-worker` (Cloudflare, bepul) `/contact` yo'li orqali. Bot tokeni saytda emas,
+Cloudflare'da turadi.
+1. `Abdulmajidkhan007/Abdulmajidkhan007` reposida `ariza-worker/README.md` bo'yicha Worker'ni
+   joylang (bir marta; xizmatlar saytining ariza formasi ham shuni ishlatadi) va manzilni oling:
+   `https://ariza-worker.<nom>.workers.dev`.
+2. Shu repoda: **Settings → Secrets and variables → Actions → Variables** →
+   `CONTACT_URL` = `https://ariza-worker.<nom>.workers.dev/contact`.
+3. **Actions → Deploy (Firebase) → Run workflow**. Build `VITE_CONTACT_URL` ni sayt ichiga
+   yozadi; `FIREBASE_PLAN=spark` o'zgarmaydi, Blaze kerak emas.
+`CONTACT_URL` bo'sh bo'lsa forma eskicha `/api/contact` ga yuboradi (Spark'da Telegram havolasi).
+
 ---
 
 ## Lokal sinov (emulyator)

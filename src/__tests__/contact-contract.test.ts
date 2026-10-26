@@ -18,7 +18,10 @@ const contactSource = read('src/components/Contact.tsx')
 const validatorSource = read('functions/src/validate.ts')
 const indexHtml = read('index.html')
 const firebaseJson = JSON.parse(read('firebase.json')) as {
-  hosting: { rewrites: { source: string; function?: { functionId: string }; destination?: string }[] }
+  hosting: {
+    rewrites: { source: string; function?: { functionId: string }; destination?: string }[]
+    headers: { source: string; headers: { key: string; value: string }[] }[]
+  }
 }
 
 /** Formadagi input/textarea maydonlari (form elementining o'z nomi emas). */
@@ -26,9 +29,18 @@ const fieldNames = (source: string) =>
   [...source.matchAll(/<(?:input|textarea)\b[^>]*?\bname="([^"]+)"/g)].map((match) => match[1])
 
 describe('aloqa formasi shartnomasi', () => {
-  it('forma /api/contact ga yuboradi', () => {
-    expect(contactSource).toContain("const ENDPOINT = '/api/contact'")
+  it('forma /api/contact ga yuboradi (yoki VITE_CONTACT_URL dagi Worker ga)', () => {
+    expect(contactSource).toContain("|| '/api/contact'")
+    expect(contactSource).toContain('VITE_CONTACT_URL')
     expect(contactSource).toContain('fetch(ENDPOINT')
+  })
+
+  it('CSP Cloudflare Worker ga ulanishga ruxsat beradi', () => {
+    const csp = firebaseJson.hosting.headers
+      .flatMap((h) => h.headers)
+      .find((h) => h.key === 'Content-Security-Policy')?.value
+    expect(csp).toContain('connect-src')
+    expect(csp).toContain('https://*.workers.dev')
   })
 
   it('firebase.json /api/contact ni funksiyaga yo\'naltiradi', () => {

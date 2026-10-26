@@ -53,6 +53,8 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
+        env:
+          VITE_CONTACT_URL: ${{ vars.CONTACT_URL }}
 
       - name: Service account kaliti
         env:
