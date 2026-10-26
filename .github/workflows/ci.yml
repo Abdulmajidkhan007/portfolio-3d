@@ -35,6 +35,8 @@ jobs:
       # and catches anything that only breaks in a production bundle.
       - name: Build
         run: npm run build
+        env:
+          VITE_CONTACT_URL: ${{ vars.CONTACT_URL }}
 
       # The Cloud Function has its own package.json; the root build never
       # compiles it, so a type error there would only surface on deploy.
