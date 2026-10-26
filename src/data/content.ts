@@ -64,15 +64,15 @@ export const content: SiteContent = {
         'I have shipped realtime applications, authentication systems and admin panels end to end. Performance and code quality get particular attention.',
       ],
     },
-    // Faqat tekshirsa bo'ladigan raqamlar (2026-10-22): dasturlash 2024-yil
-    // sentyabrdan (Pro Teach); jonli saytlar — atoyo.uz, Organick, Lumina,
-    // KidsWear, Suhbat (veb), shu sayt; botlar — telegram-bots reposi; real
-    // do'kon — atoyo.uz.
+    // Faqat tekshirsa bo'ladigan raqamlar (2026-10-26): dasturlash 2024-yil
+    // sentyabrdan (Pro Teach); jonli saytlar — Organick, Lumina, KidsWear,
+    // Suhbat (veb), shu sayt (atoyo.uz 2026-10-26 da to'xtatildi); botlar —
+    // telegram-bots reposi; real do'kon — atoyo.uz (oktabrgacha ishlatilgan).
     stats: [
       { value: '2', label: { uz: 'yil dasturlashda', en: 'years of coding' } },
-      { value: '6', label: { uz: 'jonli sayt', en: 'live websites' } },
+      { value: '5', label: { uz: 'jonli sayt', en: 'live websites' } },
       { value: '15', label: { uz: 'Telegram bot', en: 'Telegram bots' } },
-      { value: '1', label: { uz: 'real doʻkon har kuni ishlatadi', en: 'real store using it daily' } },
+      { value: '1', label: { uz: 'real doʻkonda ishlatilgan', en: 'real store used it' } },
     ],
   },
 
@@ -81,8 +81,8 @@ export const content: SiteContent = {
       id: 'atoyo',
       title: 'ATOYO Santexnika',
       description: {
-        uz: 'Qoʻqondagi santexnika doʻkonida ishlatilmoqda: Next.js 16 sayti, React Native ilovasi, desktop va doʻkon TV ekrani bitta Firestore bazasida. Buyurtmalar Telegram guruhida boshqariladi, eʼlonlar (broadcast) bot, email va kanal orqali tarqatiladi; typo-tolerant qidiruv, ikki qatlamli himoyalangan admin panel.',
-        en: 'In daily use at a plumbing store in Qoqon: a Next.js 16 site, a React Native app, a desktop app and an in-store TV screen on one Firestore database. Orders are handled in a Telegram group, announcements are broadcast over the bot, email and channel; typo-tolerant search and an admin panel behind two authorisation layers.',
+        uz: 'Qoʻqondagi santexnika doʻkonida ishlatilgan (2026-yil oktabrgacha; hozir server xarajati sababli toʻxtatilgan, kod ochiq): Next.js 16 sayti, React Native ilovasi, desktop va doʻkon TV ekrani bitta Firestore bazasida. Buyurtmalar Telegram guruhida boshqariladi, eʼlonlar (broadcast) bot, email va kanal orqali tarqatiladi; typo-tolerant qidiruv, ikki qatlamli himoyalangan admin panel.',
+        en: 'Used at a plumbing store in Qoqon until October 2026 (paused now over server costs; the code is open): a Next.js 16 site, a React Native app, a desktop app and an in-store TV screen on one Firestore database. Orders are handled in a Telegram group, announcements are broadcast over the bot, email and channel; typo-tolerant search and an admin panel behind two authorisation layers.',
       },
       category: 'web',
       platform: { uz: 'Ilova + Veb', en: 'App + Web' },
@@ -90,7 +90,6 @@ export const content: SiteContent = {
       // The APK link lands here once the CI publishes a Release (see the repo).
       image: '/images/projects/project-1.svg',
       imageHd: '/images/projects/project-1.webp',
-      live: 'https://atoyo.uz',
       // `app` goes here once the build has a store page or a release to link to.
       repo: 'https://github.com/Abdulmajidkhan007/atoyo-e-commerce',
       details: `${DOCS}/atoyo-e-commerce.md`,
