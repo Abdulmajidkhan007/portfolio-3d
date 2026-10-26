@@ -81,8 +81,8 @@ export const content: SiteContent = {
       id: 'atoyo',
       title: 'ATOYO Santexnika',
       description: {
-        uz: 'Qoʻqondagi santexnika doʻkonida ishlatilgan (2026-yil oktabrgacha; hozir server xarajati sababli toʻxtatilgan, kod ochiq): Next.js 16 sayti, React Native ilovasi, desktop va doʻkon TV ekrani bitta Firestore bazasida. Buyurtmalar Telegram guruhida boshqariladi, eʼlonlar (broadcast) bot, email va kanal orqali tarqatiladi; typo-tolerant qidiruv, ikki qatlamli himoyalangan admin panel.',
-        en: 'Used at a plumbing store in Qoqon until October 2026 (paused now over server costs; the code is open): a Next.js 16 site, a React Native app, a desktop app and an in-store TV screen on one Firestore database. Orders are handled in a Telegram group, announcements are broadcast over the bot, email and channel; typo-tolerant search and an admin panel behind two authorisation layers.',
+        uz: 'Qoʻqondagi santexnika doʻkonida ishlatilgan (2026-yil oktabrgacha; hozir toʻxtatilgan: doʻkon xodimlarining saytni boshqarishga vaqti yoʻq, server uchun toʻlash imkoni ham yoʻq; repo private): Next.js 16 sayti, React Native ilovasi, desktop va doʻkon TV ekrani bitta Firestore bazasida. Buyurtmalar Telegram guruhida boshqariladi, eʼlonlar (broadcast) bot, email va kanal orqali tarqatiladi; typo-tolerant qidiruv, ikki qatlamli himoyalangan admin panel.',
+        en: 'Used at a plumbing store in Qoqon until October 2026 (paused now: the store staff have no time to run the site and there is no way to pay for the server; the repo is private): a Next.js 16 site, a React Native app, a desktop app and an in-store TV screen on one Firestore database. Orders are handled in a Telegram group, announcements are broadcast over the bot, email and channel; typo-tolerant search and an admin panel behind two authorisation layers.',
       },
       category: 'web',
       platform: { uz: 'Ilova + Veb', en: 'App + Web' },
@@ -91,7 +91,6 @@ export const content: SiteContent = {
       image: '/images/projects/project-1.svg',
       imageHd: '/images/projects/project-1.webp',
       // `app` goes here once the build has a store page or a release to link to.
-      repo: 'https://github.com/Abdulmajidkhan007/atoyo-e-commerce',
       details: `${DOCS}/atoyo-e-commerce.md`,
       year: 2026,
       featured: true,
