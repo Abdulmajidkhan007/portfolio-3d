@@ -19,10 +19,17 @@ type Status = 'idle' | 'sending' | 'success' | 'error'
 interface Fields {
   name: string
   email: string
+  /** Ixtiyoriy. Server ham shu qoida bilan tekshiradi (functions/src/validate.ts). */
+  phone: string
   message: string
 }
 
-const EMPTY: Fields = { name: '', email: '', message: '' }
+const EMPTY: Fields = { name: '', email: '', phone: '', message: '' }
+
+const isValidPhone = (value: string): boolean => {
+  const digits = value.replace(/\D/g, '').length
+  return /^\+?[\d\s()-]{7,20}$/.test(value) && digits >= 7 && digits <= 15
+}
 
 export default function Contact() {
   const { t } = useLanguage()
@@ -37,6 +44,7 @@ export default function Contact() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(fields.email.trim())) {
       next.email = t.contact.errors.emailInvalid
     }
+    if (fields.phone.trim() && !isValidPhone(fields.phone.trim())) next.phone = t.contact.errors.phoneInvalid
     if (!fields.message.trim()) next.message = t.contact.errors.messageRequired
     else if (fields.message.trim().length < 10) next.message = t.contact.errors.messageShort
 
@@ -217,6 +225,30 @@ export default function Contact() {
                         </p>
                       )}
                     </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="contact-phone" className="mb-2 block text-sm text-muted">
+                      {t.contact.phone}
+                    </label>
+                    <input
+                      id="contact-phone"
+                      name="phone"
+                      type="tel"
+                      inputMode="tel"
+                      value={fields.phone}
+                      onChange={update('phone')}
+                      placeholder={t.contact.phonePlaceholder}
+                      autoComplete="tel"
+                      aria-invalid={Boolean(errors.phone)}
+                      aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
+                      className={inputClass(Boolean(errors.phone))}
+                    />
+                    {errors.phone && (
+                      <p id="contact-phone-error" className="mt-1.5 text-xs text-red-400">
+                        {errors.phone}
+                      </p>
+                    )}
                   </div>
 
                   <div>

@@ -9,6 +9,8 @@
 export interface ContactInput {
   name: string
   email: string
+  /** Ixtiyoriy — mijoz qo'ng'iroq qilishimni xohlasa. */
+  phone?: string
   message: string
   /** Honeypot — odamlar ko'rmaydi, botlar to'ldiradi. */
   botField?: string
@@ -17,6 +19,8 @@ export interface ContactInput {
 export interface ContactData {
   name: string
   email: string
+  /** Bo'sh satr — telefon kiritilmagan. */
+  phone: string
   message: string
 }
 
@@ -25,6 +29,9 @@ export type ParseResult =
   | { ok: false; error: string; field?: keyof ContactInput }
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+/** +998 90 123 45 67, (90) 123-45-67 va h.k.: faqat raqam, bo'shliq, +, -, qavs; 7–15 raqam. */
+const PHONE = /^\+?[\d\s()-]{7,20}$/
+const PHONE_DIGITS = { min: 7, max: 15 } as const
 
 export const LIMITS = {
   name: 100,
@@ -55,6 +62,7 @@ export function parseContact(body: unknown): ParseResult {
 
   const name = clean(raw.name)
   const email = clean(raw.email)
+  const phone = clean(raw.phone)
   const message = clean(raw.message)
 
   if (!name) return { ok: false, error: 'Ism kiritilmagan', field: 'name' }
@@ -67,6 +75,13 @@ export function parseContact(body: unknown): ParseResult {
     return { ok: false, error: "Email formati noto'g'ri", field: 'email' }
   }
 
+  if (phone) {
+    const digits = phone.replace(/\D/g, '').length
+    if (!PHONE.test(phone) || digits < PHONE_DIGITS.min || digits > PHONE_DIGITS.max) {
+      return { ok: false, error: "Telefon raqami noto'g'ri", field: 'phone' }
+    }
+  }
+
   if (!message) return { ok: false, error: 'Xabar kiritilmagan', field: 'message' }
   if (message.length < LIMITS.messageMin) {
     return { ok: false, error: 'Xabar juda qisqa', field: 'message' }
@@ -75,5 +90,5 @@ export function parseContact(body: unknown): ParseResult {
     return { ok: false, error: `Xabar ${LIMITS.message} belgidan uzun`, field: 'message' }
   }
 
-  return { ok: true, data: { name, email, message } }
+  return { ok: true, data: { name, email, phone, message } }
 }
