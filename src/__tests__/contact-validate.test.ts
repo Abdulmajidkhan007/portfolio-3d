@@ -68,4 +68,25 @@ describe('parseContact', () => {
     const result = parseContact({ ...valid, name: 'Ali\u0000\u001bBek' })
     expect(result.ok && result.data.name).toBe('AliBek')
   })
+
+  it('telefon ixtiyoriy: kiritilmasa bo\'sh satr', () => {
+    const result = parseContact(valid)
+    expect(result.ok && result.data.phone).toBe('')
+  })
+
+  it('to\'g\'ri telefon raqamlarini qabul qiladi', () => {
+    for (const phone of ['+998 90 123 45 67', '+998901234567', '(90) 123-45-67', '901234567']) {
+      const result = parseContact({ ...valid, phone })
+      expect(result.ok, `${phone} rad etildi`).toBe(true)
+      if (result.ok) expect(result.data.phone).toBe(phone)
+    }
+  })
+
+  it('noto\'g\'ri telefon raqamini rad etadi', () => {
+    for (const phone of ['12345', 'abc1234567', '+998 90 123 45 67 89 01 23', '++998901234567']) {
+      const result = parseContact({ ...valid, phone })
+      expect(result.ok, `${phone} o'tib ketdi`).toBe(false)
+      if (!result.ok) expect(result.field).toBe('phone')
+    }
+  })
 })
