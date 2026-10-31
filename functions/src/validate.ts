@@ -11,6 +11,8 @@ export interface ContactInput {
   email: string
   /** Ixtiyoriy — mijoz qo'ng'iroq qilishimni xohlasa. */
   phone?: string
+  /** Ixtiyoriy — Telegram username, @ bilan yoki @siz. */
+  telegram?: string
   message: string
   /** Honeypot — odamlar ko'rmaydi, botlar to'ldiradi. */
   botField?: string
@@ -21,6 +23,8 @@ export interface ContactData {
   email: string
   /** Bo'sh satr — telefon kiritilmagan. */
   phone: string
+  /** `@username` ko'rinishida yoki bo'sh satr. */
+  telegram: string
   message: string
 }
 
@@ -32,6 +36,8 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 /** +998 90 123 45 67, (90) 123-45-67 va h.k.: faqat raqam, bo'shliq, +, -, qavs; 7–15 raqam. */
 const PHONE = /^\+?[\d\s()-]{7,20}$/
 const PHONE_DIGITS = { min: 7, max: 15 } as const
+/** Telegram qoidasi: harf bilan boshlanadi, 5–32 belgi (harf, raqam, _). */
+const TELEGRAM = /^@?[A-Za-z][A-Za-z0-9_]{4,31}$/
 
 export const LIMITS = {
   name: 100,
@@ -63,6 +69,7 @@ export function parseContact(body: unknown): ParseResult {
   const name = clean(raw.name)
   const email = clean(raw.email)
   const phone = clean(raw.phone)
+  const telegramRaw = clean(raw.telegram)
   const message = clean(raw.message)
 
   if (!name) return { ok: false, error: 'Ism kiritilmagan', field: 'name' }
@@ -82,6 +89,11 @@ export function parseContact(body: unknown): ParseResult {
     }
   }
 
+  if (telegramRaw && !TELEGRAM.test(telegramRaw)) {
+    return { ok: false, error: "Telegram username noto'g'ri", field: 'telegram' }
+  }
+  const telegram = telegramRaw ? `@${telegramRaw.replace(/^@/, '')}` : ''
+
   if (!message) return { ok: false, error: 'Xabar kiritilmagan', field: 'message' }
   if (message.length < LIMITS.messageMin) {
     return { ok: false, error: 'Xabar juda qisqa', field: 'message' }
@@ -90,5 +102,5 @@ export function parseContact(body: unknown): ParseResult {
     return { ok: false, error: `Xabar ${LIMITS.message} belgidan uzun`, field: 'message' }
   }
 
-  return { ok: true, data: { name, email, phone, message } }
+  return { ok: true, data: { name, email, phone, telegram, message } }
 }

@@ -21,10 +21,14 @@ interface Fields {
   email: string
   /** Ixtiyoriy. Server ham shu qoida bilan tekshiradi (functions/src/validate.ts). */
   phone: string
+  /** Ixtiyoriy Telegram username. */
+  telegram: string
   message: string
 }
 
-const EMPTY: Fields = { name: '', email: '', phone: '', message: '' }
+const EMPTY: Fields = { name: '', email: '', phone: '', telegram: '', message: '' }
+
+const isValidTelegram = (value: string): boolean => /^@?[A-Za-z][A-Za-z0-9_]{4,31}$/.test(value)
 
 const isValidPhone = (value: string): boolean => {
   const digits = value.replace(/\D/g, '').length
@@ -45,6 +49,9 @@ export default function Contact() {
       next.email = t.contact.errors.emailInvalid
     }
     if (fields.phone.trim() && !isValidPhone(fields.phone.trim())) next.phone = t.contact.errors.phoneInvalid
+    if (fields.telegram.trim() && !isValidTelegram(fields.telegram.trim())) {
+      next.telegram = t.contact.errors.telegramInvalid
+    }
     if (!fields.message.trim()) next.message = t.contact.errors.messageRequired
     else if (fields.message.trim().length < 10) next.message = t.contact.errors.messageShort
 
@@ -227,28 +234,54 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="contact-phone" className="mb-2 block text-sm text-muted">
-                      {t.contact.phone}
-                    </label>
-                    <input
-                      id="contact-phone"
-                      name="phone"
-                      type="tel"
-                      inputMode="tel"
-                      value={fields.phone}
-                      onChange={update('phone')}
-                      placeholder={t.contact.phonePlaceholder}
-                      autoComplete="tel"
-                      aria-invalid={Boolean(errors.phone)}
-                      aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
-                      className={inputClass(Boolean(errors.phone))}
-                    />
-                    {errors.phone && (
-                      <p id="contact-phone-error" className="mt-1.5 text-xs text-red-400">
-                        {errors.phone}
-                      </p>
-                    )}
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="contact-phone" className="mb-2 block text-sm text-muted">
+                        {t.contact.phone}
+                      </label>
+                      <input
+                        id="contact-phone"
+                        name="phone"
+                        type="tel"
+                        inputMode="tel"
+                        value={fields.phone}
+                        onChange={update('phone')}
+                        placeholder={t.contact.phonePlaceholder}
+                        autoComplete="tel"
+                        aria-invalid={Boolean(errors.phone)}
+                        aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
+                        className={inputClass(Boolean(errors.phone))}
+                      />
+                      {errors.phone && (
+                        <p id="contact-phone-error" className="mt-1.5 text-xs text-red-400">
+                          {errors.phone}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="contact-telegram" className="mb-2 block text-sm text-muted">
+                        {t.contact.telegram}
+                      </label>
+                      <input
+                        id="contact-telegram"
+                        name="telegram"
+                        autoCapitalize="none"
+                        spellCheck={false}
+                        value={fields.telegram}
+                        onChange={update('telegram')}
+                        placeholder={t.contact.telegramPlaceholder}
+                        autoComplete="off"
+                        aria-invalid={Boolean(errors.telegram)}
+                        aria-describedby={errors.telegram ? 'contact-telegram-error' : undefined}
+                        className={inputClass(Boolean(errors.telegram))}
+                      />
+                      {errors.telegram && (
+                        <p id="contact-telegram-error" className="mt-1.5 text-xs text-red-400">
+                          {errors.telegram}
+                        </p>
+                      )}
+                    </div>
                   </div>
 
                   <div>
