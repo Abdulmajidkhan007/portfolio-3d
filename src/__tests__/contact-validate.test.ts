@@ -89,4 +89,21 @@ describe('parseContact', () => {
       if (!result.ok) expect(result.field).toBe('phone')
     }
   })
+
+  it('telegram ixtiyoriy va @ bilan bir xil ko\'rinishga keltiriladi', () => {
+    const none = parseContact(valid)
+    expect(none.ok && none.data.telegram).toBe('')
+    for (const telegram of ['Abdulloh_77700', '@Abdulloh_77700']) {
+      const result = parseContact({ ...valid, telegram })
+      expect(result.ok && result.data.telegram).toBe('@Abdulloh_77700')
+    }
+  })
+
+  it('noto\'g\'ri telegram username\'ni rad etadi', () => {
+    for (const telegram of ['abc', '1abcdef', '@ab cd ef', 'a'.repeat(33), 'https://t.me/abcdef']) {
+      const result = parseContact({ ...valid, telegram })
+      expect(result.ok, `${telegram} o'tib ketdi`).toBe(false)
+      if (!result.ok) expect(result.field).toBe('telegram')
+    }
+  })
 })

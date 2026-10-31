@@ -45,7 +45,7 @@ async function rateLimited(ip: string): Promise<boolean> {
   })
 }
 
-async function notifyTelegram(name: string, email: string, phone: string, message: string): Promise<void> {
+async function notifyTelegram(name: string, email: string, phone: string, telegram: string, message: string): Promise<void> {
   const token = TELEGRAM_BOT_TOKEN.value()
   const chatId = TELEGRAM_CHAT_ID.value()
   if (!token || !chatId) return
@@ -56,6 +56,7 @@ async function notifyTelegram(name: string, email: string, phone: string, messag
     `<b>Ism:</b> ${escape(name)}\n` +
     `<b>Email:</b> ${escape(email)}\n` +
     (phone ? `<b>Telefon:</b> ${escape(phone)}\n` : '') +
+    (telegram ? `<b>Telegram:</b> ${escape(telegram)}\n` : '') +
     `\n${escape(message)}`
 
   try {
@@ -105,12 +106,13 @@ export const contact = onRequest(
       return
     }
 
-    const { name, email, phone, message } = parsed.data
+    const { name, email, phone, telegram, message } = parsed.data
 
     await getFirestore().collection('messages').add({
       name,
       email,
       phone: phone || null,
+      telegram: telegram || null,
       message,
       ip,
       userAgent: request.get('user-agent') ?? null,
@@ -118,7 +120,7 @@ export const contact = onRequest(
     })
 
     logger.info('Yangi xabar saqlandi', { email })
-    await notifyTelegram(name, email, phone, message)
+    await notifyTelegram(name, email, phone, telegram, message)
 
     response.status(200).json({ ok: true })
   },
