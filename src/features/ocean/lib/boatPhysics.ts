@@ -6,7 +6,8 @@ import { shoreRadiusAt } from './island'
 export const initialBoatState = (): BoatState => ({
   x: BOAT.start.x,
   z: BOAT.start.z,
-  heading: BOAT.start.heading,
+  // Same (-PI, PI] range stepBoat keeps it in.
+  heading: wrapAngle(BOAT.start.heading),
   speed: 0,
 })
 

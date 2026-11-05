@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest'
 import { BOAT, ISLAND, WORLD } from '@/features/ocean/config'
 import { BoatInput } from '@/features/ocean/lib/boatInput'
 import { initialBoatState, stepBoat } from '@/features/ocean/lib/boatPhysics'
-import { shoreRadiusAt } from '@/features/ocean/lib/island'
+import { ROCK_COLLIDERS, shoreRadiusAt } from '@/features/ocean/lib/island'
 import { pickQuality, qualitySettings, MAX_DPR } from '@/features/ocean/lib/quality'
 import { hullPose, waveHeight } from '@/features/ocean/lib/waves'
 import { oceanStrings } from '@/features/ocean/i18n'
@@ -19,22 +19,29 @@ const run = (state: BoatState, controls: BoatControls, seconds: number, dt = 1 /
   return current
 }
 
+/** Open water south of the island, bow facing +Z (away from it). */
+const OPEN_WATER: BoatState = { x: 0, z: 60, heading: 0, speed: 0 }
+
 describe('boat physics', () => {
-  it('stays put without input', () => {
+  it('starts outside the island and clear of every rock', () => {
     const start = initialBoatState()
-    expect(run(start, { throttle: 0, steer: 0 }, 2)).toEqual(start)
+    expect(stepBoat(start, { throttle: 0, steer: 0 }, 1 / 60, ROCK_COLLIDERS)).toEqual(start)
+  })
+
+  it('stays put without input', () => {
+    expect(run(OPEN_WATER, { throttle: 0, steer: 0 }, 2)).toEqual(OPEN_WATER)
   })
 
   it('accelerates ahead along its heading and respects the top speed', () => {
-    const end = run(initialBoatState(), { throttle: 1, steer: 0 }, 10)
+    const end = run(OPEN_WATER, { throttle: 1, steer: 0 }, 10)
     expect(end.speed).toBeGreaterThan(0)
     expect(end.speed).toBeLessThanOrEqual(BOAT.maxSpeed)
     // Heading 0 faces +Z.
-    expect(end.z).toBeGreaterThan(initialBoatState().z)
+    expect(end.z).toBeGreaterThan(OPEN_WATER.z)
   })
 
   it('turns to starboard (right, -X when facing +Z) on positive steer', () => {
-    const moving = { ...initialBoatState(), z: 60, speed: 6 }
+    const moving = { ...OPEN_WATER, speed: 6 }
     const end = run(moving, { throttle: 0.5, steer: 1 }, 0.5)
     expect(end.heading).toBeLessThan(0)
     expect(end.x).toBeLessThan(moving.x)
