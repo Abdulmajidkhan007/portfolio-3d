@@ -8,8 +8,9 @@
 
 export interface ContactInput {
   name: string
-  email: string
-  /** Ixtiyoriy — mijoz qo'ng'iroq qilishimni xohlasa. */
+  /** Ixtiyoriy. Berilsa — format va domen MX tekshiriladi (mx.ts). */
+  email?: string
+  /** Majburiy: +998 va 9 raqam. */
   phone?: string
   /** Ixtiyoriy — Telegram username, @ bilan yoki @siz. */
   telegram?: string
@@ -20,8 +21,9 @@ export interface ContactInput {
 
 export interface ContactData {
   name: string
+  /** Bo'sh satr — email kiritilmagan. */
   email: string
-  /** Bo'sh satr — telefon kiritilmagan. */
+  /** Normallashgan: `+998901234567`. */
   phone: string
   /** `@username` ko'rinishida yoki bo'sh satr. */
   telegram: string
@@ -30,12 +32,22 @@ export interface ContactData {
 
 export type ParseResult =
   | { ok: true; data: ContactData }
-  | { ok: false; error: string; field?: keyof ContactInput }
+  | { ok: false; error: string; code?: ContactErrorCode; field?: keyof ContactInput }
+
+/** Frontend i18n kalitlari bilan bir xil (src/lib/contactRules.ts). */
+export type ContactErrorCode =
+  | 'nameRequired'
+  | 'phoneRequired'
+  | 'phoneInvalid'
+  | 'emailInvalid'
+  | 'emailDomain'
+  | 'telegramInvalid'
+  | 'messageRequired'
+  | 'messageShort'
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-/** +998 90 123 45 67, (90) 123-45-67 va h.k.: faqat raqam, bo'shliq, +, -, qavs; 7–15 raqam. */
-const PHONE = /^\+?[\d\s()-]{7,20}$/
-const PHONE_DIGITS = { min: 7, max: 15 } as const
+/** +998 va 9 raqam; bo'shliq, qavs, defis olib tashlangach. */
+const PHONE = /^\+998\d{9}$/
 /** Telegram qoidasi: harf bilan boshlanadi, 5–32 belgi (harf, raqam, _). */
 const TELEGRAM = /^@?[A-Za-z][A-Za-z0-9_]{4,31}$/
 
@@ -68,38 +80,41 @@ export function parseContact(body: unknown): ParseResult {
 
   const name = clean(raw.name)
   const email = clean(raw.email)
-  const phone = clean(raw.phone)
+  const phoneRaw = clean(raw.phone)
   const telegramRaw = clean(raw.telegram)
   const message = clean(raw.message)
 
-  if (!name) return { ok: false, error: 'Ism kiritilmagan', field: 'name' }
+  const fail = (code: ContactErrorCode, error: string, field: keyof ContactInput): ParseResult => ({
+    ok: false,
+    error,
+    code,
+    field,
+  })
+
+  if (!name) return fail('nameRequired', 'Ism kiritilmagan', 'name')
   if (name.length > LIMITS.name) {
-    return { ok: false, error: `Ism ${LIMITS.name} belgidan uzun`, field: 'name' }
+    return fail('nameRequired', `Ism ${LIMITS.name} belgidan uzun`, 'name')
   }
 
-  if (!email) return { ok: false, error: 'Email kiritilmagan', field: 'email' }
-  if (email.length > LIMITS.email || !EMAIL.test(email)) {
-    return { ok: false, error: "Email formati noto'g'ri", field: 'email' }
+  if (!phoneRaw) return fail('phoneRequired', 'Telefon kiritilmagan', 'phone')
+  const phone = phoneRaw.replace(/[\s()-]/g, '')
+  if (!PHONE.test(phone)) {
+    return fail('phoneInvalid', "Telefon +998 va 9 raqamdan iborat bo'lishi kerak", 'phone')
   }
 
-  if (phone) {
-    const digits = phone.replace(/\D/g, '').length
-    if (!PHONE.test(phone) || digits < PHONE_DIGITS.min || digits > PHONE_DIGITS.max) {
-      return { ok: false, error: "Telefon raqami noto'g'ri", field: 'phone' }
-    }
+  if (email && (email.length > LIMITS.email || !EMAIL.test(email))) {
+    return fail('emailInvalid', "Email formati noto'g'ri", 'email')
   }
 
   if (telegramRaw && !TELEGRAM.test(telegramRaw)) {
-    return { ok: false, error: "Telegram username noto'g'ri", field: 'telegram' }
+    return fail('telegramInvalid', "Telegram username noto'g'ri", 'telegram')
   }
   const telegram = telegramRaw ? `@${telegramRaw.replace(/^@/, '')}` : ''
 
-  if (!message) return { ok: false, error: 'Xabar kiritilmagan', field: 'message' }
-  if (message.length < LIMITS.messageMin) {
-    return { ok: false, error: 'Xabar juda qisqa', field: 'message' }
-  }
+  if (!message) return fail('messageRequired', 'Xabar kiritilmagan', 'message')
+  if (message.length < LIMITS.messageMin) return fail('messageShort', 'Xabar juda qisqa', 'message')
   if (message.length > LIMITS.message) {
-    return { ok: false, error: `Xabar ${LIMITS.message} belgidan uzun`, field: 'message' }
+    return fail('messageShort', `Xabar ${LIMITS.message} belgidan uzun`, 'message')
   }
 
   return { ok: true, data: { name, email, phone, telegram, message } }

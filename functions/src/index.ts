@@ -12,6 +12,7 @@ import { defineSecret } from 'firebase-functions/params'
 import { onRequest } from 'firebase-functions/v2/https'
 import * as logger from 'firebase-functions/logger'
 
+import { domainAcceptsMail } from './mx'
 import { parseContact } from './validate'
 
 initializeApp()
@@ -54,8 +55,8 @@ async function notifyTelegram(name: string, email: string, phone: string, telegr
   const text =
     `📬 <b>Portfoliodan yangi xabar</b>\n\n` +
     `<b>Ism:</b> ${escape(name)}\n` +
-    `<b>Email:</b> ${escape(email)}\n` +
-    (phone ? `<b>Telefon:</b> ${escape(phone)}\n` : '') +
+    `<b>Telefon:</b> ${escape(phone)}\n` +
+    (email ? `<b>Email:</b> ${escape(email)}\n` : '') +
     (telegram ? `<b>Telegram:</b> ${escape(telegram)}\n` : '') +
     `\n${escape(message)}`
 
@@ -95,7 +96,17 @@ export const contact = onRequest(
         response.status(200).json({ ok: true })
         return
       }
-      response.status(400).json({ error: parsed.error, field: parsed.field })
+      response.status(400).json({ error: parsed.error, code: parsed.code, field: parsed.field })
+      return
+    }
+
+    // Email berilgan bo'lsa — domen haqiqatan pochta qabul qiladimi (DNS MX).
+    if (parsed.data.email && !(await domainAcceptsMail(parsed.data.email.split('@').pop() ?? ''))) {
+      response.status(400).json({
+        error: "Email domeni pochta qabul qilmaydi",
+        code: 'emailDomain',
+        field: 'email',
+      })
       return
     }
 
@@ -110,8 +121,8 @@ export const contact = onRequest(
 
     await getFirestore().collection('messages').add({
       name,
-      email,
-      phone: phone || null,
+      email: email || null,
+      phone,
       telegram: telegram || null,
       message,
       ip,

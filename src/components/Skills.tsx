@@ -106,7 +106,7 @@ export default function Skills() {
               <ul>
                 {visible.map((skill) => (
                   <li key={skill.name}>
-                    {skill.name}: {skill.level}%
+                    {skill.name}
                   </li>
                 ))}
               </ul>
@@ -124,18 +124,6 @@ export default function Skills() {
               {active ? (
                 <>
                   <p className="font-display text-2xl font-bold text-ink">{active.name}</p>
-                  <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-line">
-                    <div
-                      className="h-full rounded-full"
-                      style={{
-                        width: `${active.level}%`,
-                        background: `linear-gradient(90deg, ${active.color}, #00d4ff)`,
-                      }}
-                    />
-                  </div>
-                  <p className="mt-3 font-mono text-sm text-muted">
-                    {active.level}% · {t.skills.groups[active.group]}
-                  </p>
                 </>
               ) : (
                 <p className="text-sm text-muted">{t.skills.subtitle}</p>

@@ -28,11 +28,10 @@ export interface Project {
   year: number
   featured?: boolean
   /**
-   * What the project actually ships on, when that is more than the category
-   * says — the two monorepos are a mobile app *and* a web app from one
-   * codebase. Rendered as a badge on the card.
+   * What the project actually consists of (site, app, bot, admin panel…),
+   * taken from its repo/README. One small badge per entry on the card.
    */
-  platform?: Localized
+  kinds: Localized[]
 }
 
 export type SkillGroup = 'core' | 'threed' | 'tooling'
@@ -42,8 +41,6 @@ export type SkillTab = 'skills' | 'tools'
 
 export interface Skill {
   name: string
-  /** Self-assessed proficiency, 0-100. Drives the About progress bars. */
-  level: number
   group: SkillGroup
   tab: SkillTab
   /** Short label rendered inside the 3D sphere nodes. */

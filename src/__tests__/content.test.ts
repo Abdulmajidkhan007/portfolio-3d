@@ -42,11 +42,23 @@ describe('projects', () => {
   })
 })
 
+describe('project kinds', () => {
+  it('names what each project consists of', () => {
+    for (const project of content.projects) {
+      expect(project.kinds.length).toBeGreaterThan(0)
+    }
+  })
+
+  it('Atoyo does not claim a server-cost reason for the pause', () => {
+    const atoyo = content.projects.find((project) => project.id === 'atoyo')
+    expect(JSON.stringify(atoyo?.description)).not.toMatch(/server uchun|pay for the server/i)
+  })
+})
+
 describe('skills', () => {
-  it('keeps every level inside the 0-100 range the progress bars assume', () => {
+  it('carries names only: no proficiency numbers', () => {
     for (const skill of content.skills) {
-      expect(skill.level).toBeGreaterThan(0)
-      expect(skill.level).toBeLessThanOrEqual(100)
+      expect(Object.keys(skill)).not.toContain('level')
     }
   })
 

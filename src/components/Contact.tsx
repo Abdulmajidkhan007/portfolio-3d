@@ -3,6 +3,14 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { content } from '@/data/content'
 import { cn } from '@/utils/cn'
+import {
+  domainAcceptsMail,
+  emailDomain,
+  isValidEmail,
+  isValidTelegram,
+  normalizePhone,
+  type ContactErrorCode,
+} from '@/lib/contactRules'
 import SectionHeading from './SectionHeading'
 
 /**
@@ -19,7 +27,7 @@ type Status = 'idle' | 'sending' | 'success' | 'error'
 interface Fields {
   name: string
   email: string
-  /** Ixtiyoriy. Server ham shu qoida bilan tekshiradi (functions/src/validate.ts). */
+  /** Majburiy: +998 va 9 raqam. Server ham shu qoida bilan tekshiradi (functions/src/validate.ts). */
   phone: string
   /** Ixtiyoriy Telegram username. */
   telegram: string
@@ -28,32 +36,28 @@ interface Fields {
 
 const EMPTY: Fields = { name: '', email: '', phone: '', telegram: '', message: '' }
 
-const isValidTelegram = (value: string): boolean => /^@?[A-Za-z][A-Za-z0-9_]{4,31}$/.test(value)
-
-const isValidPhone = (value: string): boolean => {
-  const digits = value.replace(/\D/g, '').length
-  return /^\+?[\d\s()-]{7,20}$/.test(value) && digits >= 7 && digits <= 15
-}
-
 export default function Contact() {
   const { t } = useLanguage()
   const [fields, setFields] = useState<Fields>(EMPTY)
   const [errors, setErrors] = useState<Partial<Fields>>({})
   const [status, setStatus] = useState<Status>('idle')
 
-  const validate = (): boolean => {
+  const validate = async (): Promise<boolean> => {
     const next: Partial<Fields> = {}
-    if (!fields.name.trim()) next.name = t.contact.errors.nameRequired
-    if (!fields.email.trim()) next.email = t.contact.errors.emailRequired
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(fields.email.trim())) {
-      next.email = t.contact.errors.emailInvalid
+    const e = t.contact.errors
+    const email = fields.email.trim()
+    const telegram = fields.telegram.trim()
+
+    if (!fields.name.trim()) next.name = e.nameRequired
+    if (!fields.phone.trim()) next.phone = e.phoneRequired
+    else if (!normalizePhone(fields.phone.trim())) next.phone = e.phoneInvalid
+    if (email) {
+      if (!isValidEmail(email)) next.email = e.emailInvalid
+      else if (!(await domainAcceptsMail(emailDomain(email)))) next.email = e.emailDomain
     }
-    if (fields.phone.trim() && !isValidPhone(fields.phone.trim())) next.phone = t.contact.errors.phoneInvalid
-    if (fields.telegram.trim() && !isValidTelegram(fields.telegram.trim())) {
-      next.telegram = t.contact.errors.telegramInvalid
-    }
-    if (!fields.message.trim()) next.message = t.contact.errors.messageRequired
-    else if (fields.message.trim().length < 10) next.message = t.contact.errors.messageShort
+    if (telegram && !isValidTelegram(telegram)) next.telegram = e.telegramInvalid
+    if (!fields.message.trim()) next.message = e.messageRequired
+    else if (fields.message.trim().length < 10) next.message = e.messageShort
 
     setErrors(next)
     return Object.keys(next).length === 0
@@ -62,22 +66,32 @@ export default function Contact() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (status === 'sending') return
-    if (!validate()) return
-
-    setStatus('sending')
     const form = event.currentTarget
+    setStatus('sending')
+    if (!(await validate())) {
+      setStatus('idle')
+      return
+    }
     const botField = (form.elements.namedItem('botField') as HTMLInputElement | null)?.value ?? ''
 
     try {
       const response = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...fields, botField }),
+        body: JSON.stringify({ ...fields, phone: normalizePhone(fields.phone.trim()) ?? fields.phone, botField }),
       })
       // Server o'z tekshiruvini qiladi — maydon xatosini foydalanuvchiga qaytaramiz.
       if (response.status === 400) {
-        const body = (await response.json()) as { error?: string; field?: keyof Fields }
-        if (body.field) setErrors({ [body.field]: body.error } as Partial<Fields>)
+        const body = (await response.json()) as {
+          error?: string
+          code?: ContactErrorCode
+          field?: keyof Fields
+        }
+        if (body.field) {
+          // Server kodi i18n matniga o'giriladi (UZ/EN); kod noma'lum bo'lsa — server matni.
+          const text = (body.code && t.contact.errors[body.code]) || body.error
+          setErrors({ [body.field]: text } as Partial<Fields>)
+        }
         setStatus('idle')
         return
       }
@@ -191,9 +205,11 @@ export default function Contact() {
                     <div>
                       <label htmlFor="contact-name" className="mb-2 block text-sm text-muted">
                         {t.contact.name}
+                        <span aria-hidden className="text-neon"> *</span>
                       </label>
                       <input
                         id="contact-name"
+                        aria-required="true"
                         name="name"
                         value={fields.name}
                         onChange={update('name')}
@@ -238,9 +254,11 @@ export default function Contact() {
                     <div>
                       <label htmlFor="contact-phone" className="mb-2 block text-sm text-muted">
                         {t.contact.phone}
+                        <span aria-hidden className="text-neon"> *</span>
                       </label>
                       <input
                         id="contact-phone"
+                        aria-required="true"
                         name="phone"
                         type="tel"
                         inputMode="tel"
@@ -287,9 +305,11 @@ export default function Contact() {
                   <div>
                     <label htmlFor="contact-message" className="mb-2 block text-sm text-muted">
                       {t.contact.message}
+                      <span aria-hidden className="text-neon"> *</span>
                     </label>
                     <textarea
                       id="contact-message"
+                      aria-required="true"
                       name="message"
                       rows={6}
                       value={fields.message}

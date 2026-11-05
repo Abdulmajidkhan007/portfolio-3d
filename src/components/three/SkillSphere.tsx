@@ -41,8 +41,8 @@ function createLabelTexture(skill: Skill): THREE.CanvasTexture {
   ctx.fillText(skill.short, size / 2, y + h / 2 - 16)
 
   ctx.fillStyle = 'rgba(232, 236, 244, 0.72)'
-  ctx.font = '500 32px ui-monospace, monospace'
-  ctx.fillText(`${skill.level}%`, size / 2, y + h / 2 + 42)
+  ctx.font = '500 32px ui-sans-serif, system-ui, sans-serif'
+  ctx.fillText(skill.name, size / 2, y + h / 2 + 42, w - 40)
 
   const texture = new THREE.CanvasTexture(canvas)
   texture.colorSpace = THREE.SRGBColorSpace
