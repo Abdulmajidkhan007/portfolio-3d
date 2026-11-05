@@ -1,7 +1,9 @@
 import { useEffect, useMemo } from 'react'
 import { LatheGeometry, Vector2 } from 'three'
 import { shoreScale, PROPS } from '../lib/island'
+import { UNDERWATER_PROFILE } from '../lib/seabed'
 import { ISLAND } from '../config'
+import { useCausticSand } from './useCausticSand'
 import { cloneWithShadows, useOceanKit } from './useOceanKit'
 
 /**
@@ -10,9 +12,8 @@ import { cloneWithShadows, useOceanKit } from './useOceanKit'
  * is what makes LatheGeometry's faces point outwards.
  */
 const SAND_PROFILE: ReadonlyArray<readonly [number, number]> = [
-  [1.45, -1.8],
-  [1.18, -0.6],
-  [1, 0],
+  // The slope under water runs down to the sea floor; the water shader reads the same numbers.
+  ...UNDERWATER_PROFILE.toReversed(),
   [0.82, 0.5],
   [0.62, 0.95],
   [0.35, 1.2],
@@ -47,8 +48,15 @@ function useMound(profile: ReadonlyArray<readonly [number, number]>, segments: n
   return geometry
 }
 
-export default function Island({ shadows }: { shadows: boolean }) {
+interface Props {
+  shadows: boolean
+  caustics: boolean
+  motion: number
+}
+
+export default function Island({ shadows, caustics, motion }: Props) {
   const kit = useOceanKit()
+  const sandMaterial = useCausticSand(caustics, motion)
   const sand = useMound(SAND_PROFILE, 56)
   const grass = useMound(GRASS_PROFILE, 40)
 
@@ -63,9 +71,7 @@ export default function Island({ shadows }: { shadows: boolean }) {
 
   return (
     <group>
-      <mesh geometry={sand} receiveShadow={shadows}>
-        <meshStandardMaterial color="#e9d29b" roughness={0.95} flatShading />
-      </mesh>
+      <mesh geometry={sand} material={sandMaterial} receiveShadow={shadows} />
       <mesh geometry={grass} receiveShadow={shadows}>
         <meshStandardMaterial color="#7fb351" roughness={0.9} flatShading />
       </mesh>

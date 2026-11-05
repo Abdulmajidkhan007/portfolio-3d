@@ -3,7 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { PMREMGenerator, Scene } from 'three'
 import type { Vector3 } from 'three'
 import { Sky } from 'three/examples/jsm/objects/Sky.js'
-import { WORLD } from '../config'
+import { SURFACE_NAMES, WORLD } from '../config'
 
 interface Props {
   sun: Vector3
@@ -36,6 +36,7 @@ export default function OceanSky({ sun, animate }: Props) {
 
   const sky = useMemo(() => {
     const mesh = new Sky()
+    mesh.name = SURFACE_NAMES.sky
     configure(mesh, sun)
     return mesh
   }, [sun])
