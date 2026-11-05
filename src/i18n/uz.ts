@@ -16,7 +16,9 @@ export const uz = {
     close: 'Yopish',
     switchLanguage: 'Tilni almashtirish',
     switchTheme: 'Mavzuni almashtirish',
+    lab: '3D Lab',
   },
+
 
   loading: {
     booting: 'Tizim ishga tushmoqda',

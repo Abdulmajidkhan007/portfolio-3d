@@ -16,6 +16,11 @@ contact form.
   Until then a failed submit shows a Telegram link instead of a silent error.
 - Last code change: 2026-10-16 (display name unified to "Abdulmajid Sharipov").
 
+## 3D Lab
+
+`/ocean` — interactive ocean scene (three.js `Sky` + `Water`, Kenney CC0 models, keyboard and
+touch-joystick boat controls). Loaded only when opened; see [docs/OCEAN.md](docs/OCEAN.md).
+
 ## Quick start
 
 ```bash

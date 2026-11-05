@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { LanguageProvider } from '@/i18n/LanguageContext'
 import { useLenis } from '@/hooks/useLenis'
 import Navbar from '@/components/Navbar'
@@ -12,6 +12,10 @@ import Skills from '@/components/Skills'
 import Experience from '@/components/Experience'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import { isOceanPath } from '@/routes'
+
+// The 3D Lab is a separate page with its own chunk; the portfolio never loads it.
+const OceanPage = lazy(() => import('@/features/ocean/OceanPage'))
 
 function Site() {
   const [intro, setIntro] = useState(() => !introAlreadySeen())
@@ -39,7 +43,13 @@ function Site() {
 export default function App() {
   return (
     <LanguageProvider>
-      <Site />
+      {isOceanPath(window.location.pathname) ? (
+        <Suspense fallback={null}>
+          <OceanPage />
+        </Suspense>
+      ) : (
+        <Site />
+      )}
     </LanguageProvider>
   )
 }

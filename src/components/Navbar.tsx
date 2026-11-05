@@ -4,6 +4,7 @@ import { useLanguage } from '@/i18n/LanguageContext'
 import { useActiveSection } from '@/hooks/useScrollProgress'
 import { scrollToSection, setScrollLocked } from '@/hooks/useLenis'
 import { cn } from '@/utils/cn'
+import { OCEAN_PATH } from '@/routes'
 import LanguageToggle from './LanguageToggle'
 import ThemeToggle from './ThemeToggle'
 
@@ -100,6 +101,12 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href={OCEAN_PATH}
+              className="hidden rounded-full border border-line px-4 py-2 text-sm text-muted transition-colors hover:border-cyan/50 hover:text-cyan md:block"
+            >
+              {t.nav.lab}
+            </a>
             <LanguageToggle />
             <ThemeToggle />
             <button
@@ -171,6 +178,18 @@ export default function Navbar() {
                   </button>
                 </motion.li>
               ))}
+              <motion.li
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.06 * links.length, duration: 0.4 }}
+              >
+                <a
+                  href={OCEAN_PATH}
+                  className="block px-6 py-3 font-display text-3xl font-bold text-cyan"
+                >
+                  {t.nav.lab}
+                </a>
+              </motion.li>
             </ul>
           </motion.div>
         )}
