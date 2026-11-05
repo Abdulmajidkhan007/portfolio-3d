@@ -87,10 +87,7 @@ export default function SkillIconGrid() {
             style={activeSkill ? { color: markColour(activeSkill) } : undefined}
           >
             {activeSkill ? (
-              <>
-                {activeSkill.name}
-                <span className="ml-2 text-muted">{activeSkill.level}%</span>
-              </>
+              activeSkill.name
             ) : (
               <span className="text-muted">{t.about.skillsHint}</span>
             )}
@@ -114,7 +111,7 @@ export default function SkillIconGrid() {
             <li key={skill.name}>
               <button
                 type="button"
-                aria-label={`${skill.name} — ${skill.level}%`}
+                aria-label={skill.name}
                 aria-pressed={selected}
                 onClick={() => setActive((current) => (current === skill.name ? null : skill.name))}
                 onMouseEnter={() => setActive(skill.name)}

@@ -8,7 +8,7 @@
 import { describe, expect, it } from 'vitest'
 import { LIMITS, parseContact } from '../../functions/src/validate'
 
-const valid = { name: 'Abdulmajid', email: 'a@b.uz', message: 'Salom, loyiha bo\'yicha yozmoqchi edim.' }
+const valid = { name: 'Abdulmajid', phone: '+998 90 123 45 67', message: 'Salom, loyiha bo\'yicha yozmoqchi edim.' }
 
 describe('parseContact', () => {
   it('to\'g\'ri ma\'lumotni qabul qiladi', () => {
@@ -32,18 +32,38 @@ describe('parseContact', () => {
     expect(result).toEqual({ ok: false, error: 'bot' })
   })
 
-  it('bo\'sh maydonlarni rad etadi', () => {
-    for (const key of ['name', 'email', 'message'] as const) {
+  it('Ism, Telefon, Xabar majburiy', () => {
+    for (const key of ['name', 'phone', 'message'] as const) {
       const result = parseContact({ ...valid, [key]: '   ' })
       expect(result.ok, `${key} bo'sh bo'lsa ham o'tib ketdi`).toBe(false)
       if (!result.ok) expect(result.field).toBe(key)
     }
   })
 
-  it('noto\'g\'ri emailni rad etadi', () => {
+  it('Email va Telegram ixtiyoriy', () => {
+    const result = parseContact(valid)
+    expect(result.ok && result.data.email).toBe('')
+    expect(result.ok && result.data.telegram).toBe('')
+  })
+
+  it("berilgan noto'g'ri emailni rad etadi", () => {
     for (const email of ['a@b', 'a b@c.uz', '@b.uz', 'a@.uz', 'oddiy-matn']) {
       const result = parseContact({ ...valid, email })
       expect(result.ok, `${email} o'tib ketdi`).toBe(false)
+      if (!result.ok) expect(result.code).toBe('emailInvalid')
+    }
+    expect(parseContact({ ...valid, email: 'a@b.uz' }).ok).toBe(true)
+  })
+
+  it('telefon: faqat +998 va 9 raqam, normallashadi', () => {
+    for (const phone of ['+998 90 123 45 67', '+998901234567', '+998 (90) 123-45-67']) {
+      const result = parseContact({ ...valid, phone })
+      expect(result.ok && result.data.phone, phone).toBe('+998901234567')
+    }
+    for (const phone of ['901234567', '+7 900 123 45 67', '+99890123456', '+9989012345678', 'abc', '++998901234567']) {
+      const result = parseContact({ ...valid, phone })
+      expect(result.ok, `${phone} o'tib ketdi`).toBe(false)
+      if (!result.ok) expect(result.field).toBe('phone')
     }
   })
 
@@ -67,27 +87,6 @@ describe('parseContact', () => {
   it('nazorat belgilarini tozalaydi', () => {
     const result = parseContact({ ...valid, name: 'Ali\u0000\u001bBek' })
     expect(result.ok && result.data.name).toBe('AliBek')
-  })
-
-  it('telefon ixtiyoriy: kiritilmasa bo\'sh satr', () => {
-    const result = parseContact(valid)
-    expect(result.ok && result.data.phone).toBe('')
-  })
-
-  it('to\'g\'ri telefon raqamlarini qabul qiladi', () => {
-    for (const phone of ['+998 90 123 45 67', '+998901234567', '(90) 123-45-67', '901234567']) {
-      const result = parseContact({ ...valid, phone })
-      expect(result.ok, `${phone} rad etildi`).toBe(true)
-      if (result.ok) expect(result.data.phone).toBe(phone)
-    }
-  })
-
-  it('noto\'g\'ri telefon raqamini rad etadi', () => {
-    for (const phone of ['12345', 'abc1234567', '+998 90 123 45 67 89 01 23', '++998901234567']) {
-      const result = parseContact({ ...valid, phone })
-      expect(result.ok, `${phone} o'tib ketdi`).toBe(false)
-      if (!result.ok) expect(result.field).toBe('phone')
-    }
   })
 
   it('telegram ixtiyoriy va @ bilan bir xil ko\'rinishga keltiriladi', () => {

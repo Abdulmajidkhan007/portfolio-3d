@@ -40,7 +40,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
       exit={{ opacity: 0, scale: 0.96 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5, delay: Math.min(index * 0.06, 0.3) }}
-      className="[perspective:1000px]"
+      className="h-full [perspective:1000px]"
     >
       <div
         ref={cardRef}
@@ -50,7 +50,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
           transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
           transition: tilt.x === 0 && tilt.y === 0 ? 'transform 500ms ease-out' : 'none',
         }}
-        className="group glass relative h-full overflow-hidden rounded-2xl [transform-style:preserve-3d]"
+        className="group glass relative flex h-full flex-col overflow-hidden rounded-2xl [transform-style:preserve-3d]"
       >
         <div className="relative aspect-16/10 overflow-hidden bg-bg-soft">
           <img
@@ -74,18 +74,24 @@ export default function ProjectCard({ project, index }: { project: Project; inde
             {project.year}
           </span>
 
-          {project.platform && (
-            <span className="absolute bottom-3 left-3 rounded-full border border-cyan/40 bg-bg/80 px-2.5 py-1 font-mono text-[10px] tracking-wide text-cyan uppercase">
-              {pick(project.platform)}
-            </span>
-          )}
+          <ul className="absolute right-3 bottom-3 left-3 flex flex-wrap gap-1.5">
+            {project.kinds.map((kind) => (
+              <li
+                key={kind.en}
+                className="rounded-full border border-cyan/40 bg-bg/80 px-2 py-0.5 font-mono text-[10px] tracking-wide text-cyan uppercase"
+              >
+                {pick(kind)}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="relative p-5 [transform:translateZ(28px)]">
+        <div className="relative flex flex-1 flex-col p-5 [transform:translateZ(28px)]">
           <h3 className="font-display text-xl font-bold text-ink transition-colors group-hover:text-neon">
             {project.title}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted">{pick(project.description)}</p>
+          {/* Same clamp and reserved height on every card; "Batafsil" has the full text. */}
+          <p className="mt-2 line-clamp-4 min-h-[6.5em] text-sm leading-relaxed text-muted">{pick(project.description)}</p>
 
           <ul className="mt-4 flex flex-wrap gap-1.5">
             {project.tags.map((tag) => (
@@ -95,7 +101,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
             ))}
           </ul>
 
-          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
             {project.live && (
               <a
                 href={project.live}
