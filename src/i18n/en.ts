@@ -18,7 +18,9 @@ export const en: Dictionary = {
     close: 'Close',
     switchLanguage: 'Switch language',
     switchTheme: 'Switch theme',
+    lab: '3D Lab',
   },
+
 
   loading: {
     booting: 'Booting system',
