@@ -3,9 +3,11 @@ import LanguageToggle from '@/components/LanguageToggle'
 import ThemeToggle from '@/components/ThemeToggle'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { useOceanStrings } from '../hooks/useOceanStrings'
+import type { OceanStrings } from '../i18n'
 import { cn } from '@/utils/cn'
 import type { BoatInput } from '../lib/boatInput'
-import type { CameraMode, OceanQuality } from '../types'
+import { QUALITY_PREFERENCES, isQualityPreference } from '../lib/quality'
+import type { CameraMode, OceanQuality, QualityPreference } from '../types'
 import TouchJoystick from './TouchJoystick'
 
 interface Props {
@@ -13,10 +15,24 @@ interface Props {
   cameraMode: CameraMode
   onToggleCamera: () => void
   quality: OceanQuality
+  /** The HUD's graphics choice; null hides the picker (a `?quality=` test link). */
+  preference: QualityPreference | null
+  onPreference: (next: QualityPreference) => void
+  underwater: boolean
   touch: boolean
   reducedMotion: boolean
   fps: number | null
 }
+
+const LEVEL_LABEL = {
+  auto: 'qualityAuto',
+  high: 'qualityHigh',
+  medium: 'qualityMedium',
+  low: 'qualityLow',
+} as const satisfies Record<QualityPreference, keyof OceanStrings>
+
+// Inline, not utilities: a class used only here would grow the CSS the portfolio downloads.
+const OPTION_STYLE = { background: 'var(--color-surface)', color: 'var(--color-ink)' } as const
 
 const panel = 'rounded-2xl border border-line bg-surface/80 text-ink shadow-lg backdrop-blur-md'
 const chip =
@@ -28,6 +44,9 @@ export default function OceanHud({
   cameraMode,
   onToggleCamera,
   quality,
+  preference,
+  onPreference,
+  underwater,
   touch,
   reducedMotion,
   fps,
@@ -37,6 +56,7 @@ export default function OceanHud({
   // Phones start with the help folded away: it would cover half the sea.
   const [helpOpen, setHelpOpen] = useState(!touch)
   const showScene = quality !== 'fallback'
+  const levelName = (level: QualityPreference) => copy[LEVEL_LABEL[level]]
 
   return (
     <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-3 sm:p-5">
@@ -82,9 +102,9 @@ export default function OceanHud({
                     </>
                   )}
                 </ul>
-                {(reducedMotion || quality === 'lite') && (
+                {(reducedMotion || quality === 'low') && (
                   <p className="mt-3 border-t border-line pt-2 text-xs text-muted">
-                    {[reducedMotion && copy.reducedMotion, quality === 'lite' && copy.liteMode]
+                    {[reducedMotion && copy.reducedMotion, quality === 'low' && copy.liteMode]
                       .filter(Boolean)
                       .join(' · ')}
                   </p>
@@ -108,6 +128,33 @@ export default function OceanHud({
               <output className={cn(panel, 'px-3 py-1 font-mono text-xs')} aria-live="off">
                 {fps.toFixed(0)} FPS · {quality}
               </output>
+            )}
+            {underwater && (
+              <p className={cn(panel, 'px-3 py-1 font-mono text-xs')} role="status">
+                {copy.underwater}
+              </p>
+            )}
+            {preference !== null && (
+              <label className={cn(chip, 'flex items-center gap-2')}>
+                <span className="text-muted">{copy.qualityLabel}</span>
+                <select
+                  value={preference}
+                  onChange={(event) => {
+                    const next = event.target.value
+                    if (isQualityPreference(next)) onPreference(next)
+                  }}
+                  className="bg-transparent font-medium text-ink"
+                  style={{ outline: 'none' }}
+                >
+                  {QUALITY_PREFERENCES.map((level) => (
+                    <option key={level} value={level} style={OPTION_STYLE}>
+                      {level === 'auto'
+                        ? `${levelName('auto')} · ${levelName(quality)}`
+                        : levelName(level)}
+                    </option>
+                  ))}
+                </select>
+              </label>
             )}
             <button
               type="button"

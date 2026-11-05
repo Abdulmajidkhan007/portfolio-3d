@@ -3,7 +3,9 @@ import { useFrame, useLoader } from '@react-three/fiber'
 import { Color, MeshStandardMaterial, PlaneGeometry, RepeatWrapping, TextureLoader, Mesh } from 'three'
 import type { Texture, Vector3 } from 'three'
 import { Water } from 'three/examples/jsm/objects/Water.js'
-import { ASSETS, WORLD } from '../config'
+import { ASSETS, SURFACE_NAMES, WORLD } from '../config'
+import { ROCK_COLLIDERS } from '../lib/island'
+import { addWaterEffects } from './shaders/waterEffects'
 
 interface Props {
   sun: Vector3
@@ -11,11 +13,25 @@ interface Props {
   reflectionSize: number
   /** Multiplier on how fast the surface moves. */
   speed: number
+  /** Clear shallows (shader water only). */
+  shallowWater: boolean
+  /** Foam on the beach and around rocks (shader water only). */
+  shoreFoam: boolean
 }
+
+interface ShaderWaterProps {
+  sun: Vector3
+  size: number
+  normals: Texture
+  speed: number
+  shallowWater: boolean
+  shoreFoam: boolean
+}
+
 
 const WATER_COLOR = '#0c5a70'
 
-function ShaderWater({ sun, size, normals, speed }: { sun: Vector3; size: number; normals: Texture; speed: number }) {
+function ShaderWater({ sun, size, normals, speed, shallowWater, shoreFoam }: ShaderWaterProps) {
   const water = useMemo(() => {
     const mesh = new Water(new PlaneGeometry(WORLD.waterSize, WORLD.waterSize), {
       textureWidth: size,
@@ -28,10 +44,14 @@ function ShaderWater({ sun, size, normals, speed }: { sun: Vector3; size: number
       alpha: 0.96,
       fog: true,
     })
+    mesh.name = SURFACE_NAMES.water
     mesh.rotation.x = -Math.PI / 2
     mesh.material.uniforms.size.value = 1.6
+    if (shallowWater || shoreFoam) {
+      addWaterEffects(mesh.material, { shallowWater, shoreFoam, rocks: ROCK_COLLIDERS })
+    }
     return mesh
-  }, [sun, size, normals])
+  }, [sun, size, normals, shallowWater, shoreFoam])
 
   useEffect(
     () => () => {
@@ -68,6 +88,7 @@ function LiteWater({ normals, speed }: { normals: Texture; speed: number }) {
     })
     material.normalScale.set(0.5, 0.5)
     const plane = new Mesh(new PlaneGeometry(WORLD.waterSize, WORLD.waterSize), material)
+    plane.name = SURFACE_NAMES.water
     plane.rotation.x = -Math.PI / 2
     return { mesh: plane, texture: map }
   }, [normals])
@@ -89,7 +110,7 @@ function LiteWater({ normals, speed }: { normals: Texture; speed: number }) {
   return <primitive object={mesh} />
 }
 
-export default function OceanWater({ sun, reflectionSize, speed }: Props) {
+export default function OceanWater({ sun, reflectionSize, speed, shallowWater, shoreFoam }: Props) {
   const normals = useLoader(TextureLoader, ASSETS.waterNormals)
 
   useEffect(() => {
@@ -99,7 +120,14 @@ export default function OceanWater({ sun, reflectionSize, speed }: Props) {
   }, [normals])
 
   return reflectionSize > 0 ? (
-    <ShaderWater sun={sun} size={reflectionSize} normals={normals} speed={speed} />
+    <ShaderWater
+      sun={sun}
+      size={reflectionSize}
+      normals={normals}
+      speed={speed}
+      shallowWater={shallowWater}
+      shoreFoam={shoreFoam}
+    />
   ) : (
     <LiteWater normals={normals} speed={speed} />
   )

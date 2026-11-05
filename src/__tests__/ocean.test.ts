@@ -3,11 +3,21 @@
  * quality decision and the lab's own dictionary.
  */
 import { describe, expect, it } from 'vitest'
-import { BOAT, ISLAND, WORLD } from '@/features/ocean/config'
+import { BOAT, ISLAND, SEABED, WAKE, WORLD } from '@/features/ocean/config'
 import { BoatInput } from '@/features/ocean/lib/boatInput'
 import { initialBoatState, stepBoat } from '@/features/ocean/lib/boatPhysics'
 import { ROCK_COLLIDERS, shoreRadiusAt } from '@/features/ocean/lib/island'
-import { pickQuality, qualitySettings, MAX_DPR } from '@/features/ocean/lib/quality'
+import {
+  lowerQuality,
+  MAX_DPR,
+  parseQuality,
+  pickQuality,
+  qualitySettings,
+  SCENE_QUALITIES,
+} from '@/features/ocean/lib/quality'
+import { profileDepth, seabedDepth, seabedDepthGlsl, UNDERWATER_PROFILE } from '@/features/ocean/lib/seabed'
+import { isUnderwater, underwaterFog } from '@/features/ocean/lib/underwater'
+import { WakeEmitter, wakeStrength } from '@/features/ocean/lib/wake'
 import { hullPose, waveHeight } from '@/features/ocean/lib/waves'
 import { oceanStrings } from '@/features/ocean/i18n'
 import { isOceanPath } from '@/routes'
@@ -89,23 +99,113 @@ describe('quality', () => {
   const base = { tier: 'high' as const, coarsePointer: false, cores: 8, memory: 8, override: null }
 
   it('falls back to the still image without WebGL, whatever the override says', () => {
-    expect(pickQuality({ ...base, tier: 'none', override: 'full' })).toBe('fallback')
+    expect(pickQuality({ ...base, tier: 'none', override: 'high' })).toBe('fallback')
   })
 
-  it('uses the lite scene on a CPU rasteriser and on a weak phone', () => {
-    expect(pickQuality({ ...base, tier: 'low' })).toBe('lite')
-    expect(pickQuality({ ...base, coarsePointer: true, cores: 4 })).toBe('lite')
-    expect(pickQuality(base)).toBe('full')
+  it('picks low on a CPU rasteriser and a weak phone, medium on other touch devices, high on desktop', () => {
+    expect(pickQuality({ ...base, tier: 'low' })).toBe('low')
+    expect(pickQuality({ ...base, coarsePointer: true, cores: 4 })).toBe('low')
+    expect(pickQuality({ ...base, coarsePointer: true })).toBe('medium')
+    expect(pickQuality(base)).toBe('high')
+  })
+
+  it('honours ?quality=, including the stage-1 names', () => {
+    expect(pickQuality({ ...base, tier: 'low', override: 'high' })).toBe('high')
+    expect(parseQuality('full')).toBe('high')
+    expect(parseQuality('lite')).toBe('low')
+    expect(parseQuality('medium')).toBe('medium')
+    expect(parseQuality('ultra')).toBeNull()
+  })
+
+  it('steps down one level at a time and stops at low', () => {
+    expect(lowerQuality('high')).toBe('medium')
+    expect(lowerQuality('medium')).toBe('low')
+    expect(lowerQuality('low')).toBe('low')
   })
 
   it('never renders above the DPR cap', () => {
-    for (const quality of ['full', 'lite'] as const) {
+    for (const quality of SCENE_QUALITIES) {
       for (const coarse of [true, false]) {
         const { dpr } = qualitySettings(quality, coarse)
         const max = Array.isArray(dpr) ? dpr[1] : dpr
         expect(max).toBeLessThanOrEqual(MAX_DPR)
       }
     }
+  })
+
+  it('turns every stage-2 effect off on low, and keeps the light shafts for high', () => {
+    const low = qualitySettings('low', true)
+    expect(Object.values(low.effects).every((on) => !on)).toBe(true)
+    expect(low.wakeSegments).toBe(0)
+    expect(qualitySettings('medium', true).effects.godRays).toBe(false)
+    expect(qualitySettings('medium', true).effects.wake).toBe(true)
+    expect(Object.values(qualitySettings('high', false).effects).every(Boolean)).toBe(true)
+  })
+})
+
+describe('seabed', () => {
+  it('is dry on the beach, deepens monotonically, and is flat far out', () => {
+    expect(profileDepth(0.5)).toBe(0)
+    expect(profileDepth(1)).toBe(0)
+    let previous = 0
+    for (let r = 1; r < 5; r += 0.05) {
+      const depth = profileDepth(r)
+      expect(depth).toBeGreaterThanOrEqual(previous)
+      previous = depth
+    }
+    expect(seabedDepth(0, WORLD.radius)).toBe(SEABED.depth)
+  })
+
+  it('matches the profile points the sand mesh is built from', () => {
+    for (const [r, y] of UNDERWATER_PROFILE) expect(profileDepth(r)).toBeCloseTo(-y)
+  })
+
+  it('emits GLSL with one branch per profile segment', () => {
+    const glsl = seabedDepthGlsl()
+    expect(glsl).toContain('float seabedDepth(vec2 xz)')
+    expect(glsl.match(/if \(r <= /g)).toHaveLength(UNDERWATER_PROFILE.length)
+  })
+
+  it('keeps the free camera above the sand', () => {
+    expect(SEABED.cameraFloor).toBeGreaterThan(-SEABED.depth)
+  })
+})
+
+describe('wake', () => {
+  const moving = (z: number, speed: number = BOAT.maxSpeed): BoatState => ({ x: 0, z, heading: 0, speed })
+
+  it('scales with speed and ignores direction', () => {
+    expect(wakeStrength(0)).toBe(0)
+    expect(wakeStrength(BOAT.maxSpeed)).toBe(1)
+    expect(wakeStrength(-BOAT.maxSpeed / 2)).toBeCloseTo(0.5)
+  })
+
+  it('lays a slice every WAKE.spacing units, behind the stern', () => {
+    const emitter = new WakeEmitter()
+    const first = emitter.update(moving(60), 0)
+    expect(first?.z).toBeCloseTo(60 - WAKE.sternOffset)
+    expect(emitter.update(moving(60 + WAKE.spacing / 2), 0.1)).toBeNull()
+    expect(emitter.update(moving(60 + WAKE.spacing * 1.01), 0.2)).not.toBeNull()
+  })
+
+  it('leaves nothing while drifting', () => {
+    const emitter = new WakeEmitter()
+    expect(emitter.update(moving(60, 0.1), 0)).toBeNull()
+  })
+})
+
+describe('underwater', () => {
+  it('switches just below the surface', () => {
+    expect(isUnderwater(0.5)).toBe(false)
+    expect(isUnderwater(-1)).toBe(true)
+  })
+
+  it('darkens and closes in with depth', () => {
+    const shallow = underwaterFog(0.5)
+    const deep = underwaterFog(SEABED.depth)
+    expect(deep.far).toBeLessThan(shallow.far)
+    const brightness = (fog: typeof shallow) => fog.color[0] + fog.color[1] + fog.color[2]
+    expect(brightness(deep)).toBeLessThan(brightness(shallow))
   })
 })
 
