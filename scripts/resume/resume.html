@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <title>Abdulmajid Sharipov — Strong Junior Frontend Developer</title>
 <style>
-  @page { size: A4; margin: 9mm 12mm; }
+  @page { size: A4; margin: 8mm 12mm; }
   * { box-sizing: border-box; }
   body {
     font-family: "Times New Roman", "Liberation Serif", "DejaVu Serif", serif;
     font-size: 10pt;
-    line-height: 1.15;
+    line-height: 1.12;
     color: #000;
     margin: 0;
   }
@@ -23,7 +23,7 @@
     font-size: 13pt;
     font-weight: bold;
     text-transform: uppercase;
-    margin: 6pt 0 2pt;
+    margin: 5pt 0 2pt;
     padding-bottom: 1pt;
     border-bottom: 1px solid #000;
   }
@@ -54,24 +54,22 @@
 <h2>Profil</h2>
 <p>
 React va TypeScript bilan veb va mobil interfeyslar quraman. 2025-yil oktabrdan beri
-mustaqil ishlayman: amaliy loyihalarni real ishlatiladigan holatga keltiraman. Asosiy
-ishim — Qo'qondagi santexnika do'koni uchun qurgan e-commerce platformasi
-(sayt, Android, desktop, TV ekran va Telegram bot — bitta baza ustida). Backendni
-o'zim yopaman (Node.js, Python) va kerak bo'lganda AI integratsiyasini qo'shaman.
+mustaqil ishlayman. Hozir ikki loyiha ustidaman: A.L.I.A. o'quv markazi platformasida
+frontend team lead sifatida va Atoyo do'koni uchun ombor-savdo-kassa tizimi (Savdo CRM).
+Avval shu do'kon uchun e-commerce platformasi qurganman (sayt, Android, desktop, TV ekran,
+Telegram bot — bitta baza ustida). Backendni o'zim yopaman (Node.js, Python), kerak bo'lsa AI qo'shaman.
 </p>
 
 <h2>Ish tajribasi</h2>
 
 <div class="proj">
-  <div class="proj-title">Learning Center — o'quv markazlarini avtomatlashtirish startapi</div>
-  <div class="proj-stack"><i>2026-yil avgustdan hozirgacha</i> · Frontend team lead</div>
+  <div class="proj-title">Learning Center (A.L.I.A., aliya.uz) — o'quv markazlarini avtomatlashtirish platformasi</div>
+  <div class="proj-stack"><i>2026-yil avgustdan hozirgacha</i> · Frontend team lead · jamoaviy loyiha</div>
   <ul>
     <li>Butun frontendni JSX'dan strict TypeScript'ga o'tkazdim — tip xatolari endi
         build bosqichida ushlanadi; 75 ta commit.</li>
-    <li>Backend kodini tahlil qilib, jamoa e'tibordan chetda qoldirgan bir nechta xatoni
-        topdim — backend dasturchilar tuzatdi.</li>
-    <li>Jamoa uchun umumiy qoidalar va hujjatlar yozdim (<i>CLAUDE.md</i>, <i>docs/</i>) —
-        frontendchilar bir uslubda kod yozadi.</li>
+    <li>Backend kodini tahlil qilib, jamoa e'tibordan chetda qoldirgan bir nechta xatoni topdim — backend
+        dasturchilar tuzatdi. Jamoa uchun umumiy qoidalar va hujjatlar yozdim (<i>CLAUDE.md</i>, <i>docs/</i>).</li>
     <li>Ikki bosqichli login, developer va super-admin panellar, telefon bo'yicha
         dublikat tekshiruvi, o'qituvchi KPI ekranlari.</li>
   </ul>
@@ -81,71 +79,70 @@ o'zim yopaman (Node.js, Python) va kerak bo'lganda AI integratsiyasini qo'shaman
   <div class="proj-title">Mustaqil dasturchi, frilanser</div>
   <div class="proj-stack"><i>2025-yil oktabrdan hozirgacha</i></div>
   <ul>
-    <li>2025-yil oktabr — 2026-yil iyul: amaliy loyihalar (e-commerce, ijtimoiy tarmoq,
-        messenjer, Telegram botlar).</li>
-    <li>2026-yil iyuldan: loyihalarni production holatiga keltirish — deploy, testlar,
-        CI, xavfsizlik qoidalari.</li>
-    <li>2026-yil oktabrdan: buyurtmaga ishlayman — Telegram bot, do'kon sayti, landing.</li>
+    <li>2025-yil oktabr — 2026-yil iyul: amaliy loyihalar (e-commerce, ijtimoiy tarmoq, messenjer,
+        Telegram botlar); 2026-yil iyuldan — production holatiga keltirish: deploy, testlar, CI, xavfsizlik.</li>
+    <li>2026-yil oktabrdan: buyurtmaga ishlayman — Telegram bot, do'kon sayti, landing;
+        2026-yil noyabrdan — Atoyo do'koni uchun Savdo CRM (pastda).</li>
   </ul>
 </div>
 
 <h2>Loyihalar</h2>
 
 <div class="proj">
+  <div class="proj-title">Savdo CRM — ombor, savdo va kassa tizimi <span style="font-weight:normal">(qurilmoqda)</span></div>
+  <div class="proj-stack">React 19 · TypeScript · Vite · Redux Toolkit · Tailwind CSS · NestJS · Prisma 7 · PostgreSQL · pnpm monorepo</div>
+  <ul>
+    <li>Qo'qondagi santexnika do'koni (Atoyo) uchun: kirim va qoldiq, spiska va sotuv, to'lov va qarz,
+        chek, ombor oqimi, kassa smenasi — bitta tizimda; ulgurji va dona savdo, so'm va dollar.</li>
+    <li>Sakkiz xil rol va qo'shimcha ruxsatlar; har o'zgarish harakatlar jurnaliga yoziladi
+        (kim, qachon, oldin → keyin); pul butun sonda saqlanadi, bazadan o'chirish yo'q — faqat bekor qilish.</li>
+    <li>AI agentlar bilan quraman: har o'zgarish PR orqali, CI'da typecheck, lint va 300 dan ortiq test.
+        Holat: 1–6-bosqichlar tayyor, hisobotlar qisman; serverga hali o'rnatilmagan.</li>
+  </ul>
+</div>
+
+<div class="proj">
   <div class="proj-title">Atoyo — e-commerce platformasi</div>
   <div class="proj-stack">Next.js 16 · React 19 · TypeScript · Tailwind CSS · Firebase · React Native · Electron · Gemini API</div>
   <ul>
-    <li>Qo'qondagi santexnika do'konida 2026-yil oktabrgacha ishlatildi (katalogga 500 ga yaqin mahsulot kiritilgan); 2026-10-26 da to'xtatilgan: do'kon xodimlarining saytni boshqarishga vaqti yo'q, server uchun to'lash imkoni ham yo'q; repo private.</li>
+    <li>Qo'qondagi santexnika do'konida 2026-yil oktabrgacha ishlatildi (500 ga yaqin mahsulot); 2026-10-26 da to'xtatilgan: xodimlarning vaqti va server to'lovi yo'q; repo private.</li>
     <li><b>Bitta baza — besh kanal:</b> sayt, Android ilova, do'kon kompyuteri ilovasi,
         televizor ekrani va Telegram bot bir xil Firestore ma'lumotida — narx bir joyda
         o'zgarsa, hamma kanalda yangilanadi.</li>
-    <li>Mahsulot kirimini AI bilan avtomatlashtirdim: admin rasm tashlaydi, Gemini Vision
-        tayyor katalog kartasini (nomi, kodi, kategoriya, narx, tavsif) qaytaradi —
-        kartani qo'lda yozish shart emas; bir xil rasm ikki marta ishlanmaydi (pHash).</li>
-    <li>Buyurtmalar Telegram guruhida boshqariladi — operator saytga kirmaydi; e'lonlar
-        bot, email va kanalga bir vaqtda tarqatiladi. Ulgurji narx va tannarx mijozga
-        umuman uzatilmaydi.</li>
+    <li>Mahsulot kirimi AI bilan: admin rasm tashlaydi, Gemini Vision tayyor katalog kartasini
+        (nomi, kodi, kategoriya, narx, tavsif) qaytaradi; bir xil rasm ikki marta ishlanmaydi (pHash).</li>
+    <li>Buyurtmalar Telegram guruhida boshqariladi; ulgurji narx va tannarx mijozga umuman uzatilmaydi.</li>
   </ul>
 </div>
 
 <div class="proj">
-  <div class="proj-title">telegram-bots — 15 ta botning monorepo'si</div>
+  <div class="proj-title">telegram-bots — 16 ta botning monorepo'si</div>
   <div class="proj-stack">Node.js · Python · TypeScript · Gemini API · PostgreSQL · SQLite · Docker</div>
   <ul>
-    <li>15 ta bot bitta repoda, o'zim yozgan CLI bilan bitta buyruqda ishga tushadi;
+    <li>16 ta bot bitta repoda, o'zim yozgan CLI bilan bitta buyruqda ishga tushadi;
         har commit oldidan test va kalit skaneri ishlaydi.</li>
-    <li>Ochiq ishlaydi: <a href="https://t.me/KillSpam_007_Bot">@KillSpam_007_Bot</a> (spam filtri),
-        <a href="https://t.me/COUNTLIST_BOT">@COUNTLIST_BOT</a> (xarajat hisobi, ovozli xabar),
-        <a href="https://t.me/Uzb_saver_007_bot">@Uzb_saver_007_bot</a> (video yuklovchi),
-        <a href="https://t.me/Tekshiruvchi_07_bot">@Tekshiruvchi_07_bot</a> (virus tekshiruvi) va yana 5 ta.</li>
-  </ul>
-</div>
-
-<div class="proj">
-  <div class="proj-title">Organick — organik oziq-ovqat do'koni</div>
-  <div class="proj-stack">React 19 · TypeScript · Vite · Redux Toolkit · Tailwind CSS v4 · Firebase · i18next · Playwright</div>
-  <ul>
-    <li>Uch tilli interfeys, dark/light rejim, admin panel; Firebase Auth uch usulda
-        (Google, email, SMS); Playwright e2e va GitHub Actions orqali avtomatik deploy.</li>
+    <li>Hozir hammasi to'xtatilgan (jonli havola yo'q); kod ochiq:
+        <a href="https://github.com/Abdulmajidkhan007/telegram-bots">github.com/Abdulmajidkhan007/telegram-bots</a></li>
   </ul>
 </div>
 
 <p style="margin-top:3pt">
   <b>Boshqa loyihalar:</b>
+  <b>Organick</b> — organik oziq-ovqat do'koni, uch til, admin panel, Playwright e2e (repo private);
   <b>KidsWear</b> — veb + Android do'kon;
   <b>Lumina</b> — Instagram uslubidagi tarmoq, React Native;
   <b>Suhbat</b> — messenjer, NestJS + WebSocket + WebRTC (beta);
+  <b>uzbek-tg</b> — Telegram mijozi, React Native + TDLib (qurilmoqda);
   <a href="https://abdulmajidkhan-portfolio.web.app">3D portfolio</a> (React Three Fiber).
 </p>
 
 <h2>Texnik ko'nikmalar</h2>
 <p>
 <b>Frontend:</b> React 19, Next.js 16, TypeScript, JavaScript, Tailwind CSS v4, Redux Toolkit, TanStack Query<br>
-<b>Mobil va desktop:</b> React Native, Electron<br>
-<b>Backend:</b> Node.js, NestJS, Python (FastAPI, aiogram), REST API<br>
+<b>Mobil va desktop:</b> React Native (bare CLI), Electron<br>
+<b>Backend:</b> Node.js, NestJS, Prisma, Python (FastAPI, aiogram), REST API<br>
 <b>Ma'lumotlar bazasi:</b> Firestore, PostgreSQL, SQLite<br>
-<b>Vositalar:</b> Git, Docker, Firebase, Vite, Vitest, Playwright<br>
-<b>AI:</b> Gemini API, LangChain, ChromaDB
+<b>Vositalar va AI:</b> Git, Docker, Firebase, Vite, Vitest, Playwright; Gemini API, LangChain, ChromaDB
 </p>
 
 <h2>Ta'lim</h2>

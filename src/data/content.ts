@@ -71,7 +71,7 @@ export const content: SiteContent = {
     stats: [
       { value: '2', label: { uz: 'yil dasturlashda', en: 'years of coding' } },
       { value: '5', label: { uz: 'jonli sayt', en: 'live websites' } },
-      { value: '15', label: { uz: 'Telegram bot', en: 'Telegram bots' } },
+      { value: '16', label: { uz: 'Telegram bot', en: 'Telegram bots' } },
       { value: '1', label: { uz: 'real doʻkonda ishlatilgan', en: 'real store used it' } },
     ],
   },
@@ -134,8 +134,8 @@ export const content: SiteContent = {
       id: 'telegram-bots',
       title: 'Telegram Bots',
       description: {
-        uz: '15 ta bot bitta monorepoda, bitta buyruq bilan ishga tushadi: spam filtri, video yuklovchi, virus tekshiruvi, xarajat hisobi (ovozli xabar ham), Gemini bilan savol-javob va IT testlari. Har commitdan oldin testlar va kalit skaneri.',
-        en: '15 bots in one monorepo, started with a single command: spam filter, video downloader, virus check, expense tracker (voice messages too), Gemini Q&A and IT quizzes. Tests and a secret scanner run before every commit.',
+        uz: '16 ta bot bitta monorepoda, bitta buyruq bilan ishga tushadi (hozir toʻxtatilgan, kod ochiq): spam filtri, video yuklovchi, virus tekshiruvi, xarajat hisobi (ovozli xabar ham), Gemini bilan savol-javob va IT testlari. Har commitdan oldin testlar va kalit skaneri.',
+        en: '16 bots in one monorepo, started with a single command (currently stopped, code is public): spam filter, video downloader, virus check, expense tracker (voice messages too), Gemini Q&A and IT quizzes. Tests and a secret scanner run before every commit.',
       },
       category: 'tool',
       kinds: [{ uz: 'Bot', en: 'Bot' }],
