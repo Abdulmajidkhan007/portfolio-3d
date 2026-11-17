@@ -24,7 +24,7 @@ export const content: SiteContent = {
       en: 'Frontend Developer',
     },
     location: { uz: 'Qoʻqon, Oʻzbekiston', en: 'Qoqon, Uzbekistan' },
-    email: 'abdulmajidsharipovlc@gmail.com',
+    email: 'abdulmajidsharipovish@gmail.com',
     phone: '+998 90 854 56 03',
     resume: '/Abdulmajid_Sharipov_Frontend_CV.pdf',
     avatarImage: null,
@@ -252,13 +252,13 @@ export const content: SiteContent = {
     },
     {
       label: 'Telegram',
-      href: 'https://t.me/Abdulloh_77700',
-      handle: '@Abdulloh_77700',
+      href: 'https://t.me/abdulmajid_sharipov',
+      handle: '@abdulmajid_sharipov',
     },
     {
       label: 'Email',
-      href: 'mailto:abdulmajidsharipovlc@gmail.com',
-      handle: 'abdulmajidsharipovlc@gmail.com',
+      href: 'mailto:abdulmajidsharipovish@gmail.com',
+      handle: 'abdulmajidsharipovish@gmail.com',
     },
   ],
 }

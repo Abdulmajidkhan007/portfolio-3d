@@ -214,7 +214,7 @@ yoki Blaze'ga hali o'tilmagan bo'lsa: **Variables** ga `FIREBASE_PLAN` =
 va Telegram sirlari o'tkazib yuboriladi (ular Blaze talab qiladi; bo'lmasa
 `secretmanager.googleapis.com ... Billing must be enabled` xatosi chiqadi).
 Saytdagi forma bu rejimda xabar yubora olmaydi va xato o'rniga Telegram
-havolasini (@Abdulloh_77700) ko'rsatadi. Blaze yoqilgach `FIREBASE_PLAN` ni
+havolasini (@abdulmajid_sharipov) ko'rsatadi. Blaze yoqilgach `FIREBASE_PLAN` ni
 o'chiring va workflow'ni qayta ishga tushiring — forma ham jonlanadi.
 
 ### Aloqa formasi: Cloudflare Worker (Blaze'siz, tavsiya)

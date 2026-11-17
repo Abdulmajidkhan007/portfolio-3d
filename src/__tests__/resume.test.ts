@@ -26,14 +26,14 @@ describe('rezyume', () => {
   })
 
   it('Telegram va portfolio havolasi bor', () => {
-    expect(html).toContain('https://t.me/Abdulloh_77700')
+    expect(html).toContain('https://t.me/abdulmajid_sharipov')
     expect(html).toContain('https://abdulmajidkhan-portfolio.web.app')
   })
 
   it('botlar soni saytdagi raqam bilan bir xil', () => {
     const bots = content.about.stats.find((stat) => stat.label.en === 'Telegram bots')
     expect(bots).toBeDefined()
-    expect(html).toContain(`${bots!.value} ta bot`)
+    expect(html).toContain(`${bots!.value} bots`)
   })
 
   it('eskirgan ma\'lumot qaytib kelmagan', () => {
