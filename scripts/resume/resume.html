@@ -1,164 +1,149 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Abdulmajid Sharipov — Strong Junior Frontend Developer</title>
+<title>Abdulmajid Sharipov — Frontend Developer</title>
 <style>
-  @page { size: A4; margin: 9mm 12mm; }
+  @page { size: A4; margin: 8mm 11mm; }
   * { box-sizing: border-box; }
   body {
-    font-family: "Times New Roman", "Liberation Serif", "DejaVu Serif", serif;
-    font-size: 10pt;
+    font-family: "Liberation Serif", "Times New Roman", serif;
+    font-size: 9.6pt;
     line-height: 1.15;
     color: #000;
     margin: 0;
   }
-  a { color: #0b3d91; text-decoration: underline; }
-
-  h1 { font-size: 19pt; font-weight: bold; margin: 0 0 1pt; }
-  .role { font-size: 11.5pt; margin-bottom: 3pt; }
-  .contacts { font-size: 10.5pt; line-height: 1.4; }
-
+  a { color: #000; text-decoration: none; }
+  header { text-align: center; }
+  h1 { font-size: 19pt; margin: 0 0 1pt; }
+  .role { font-size: 11pt; margin-bottom: 2pt; }
+  .contacts { font-size: 10pt; line-height: 1.3; }
   h2 {
-    font-size: 13pt;
-    font-weight: bold;
+    font-size: 11.5pt;
     text-transform: uppercase;
-    margin: 6pt 0 2pt;
+    margin: 5pt 0 2pt;
     padding-bottom: 1pt;
     border-bottom: 1px solid #000;
   }
-
-  p { margin: 0 0 4pt; text-align: justify; }
-
-  .proj { margin-bottom: 4pt; page-break-inside: avoid; }
-  .proj-title { font-weight: bold; }
-  .proj-stack { font-size: 10pt; margin: 1pt 0 1pt; }
-  ul { margin: 1pt 0 0; padding-left: 15pt; }
-  li { margin-bottom: 1pt; }
+  p { margin: 0 0 2pt; text-align: justify; }
+  .row { display: flex; justify-content: space-between; gap: 8pt; margin-top: 3pt; }
+  .row b { flex: 1; }
+  .row span { font-style: italic; white-space: nowrap; }
+  .stack { font-style: italic; margin: 0.5pt 0 0; }
+  ul { margin: 0.5pt 0 0; padding-left: 13pt; }
+  li { margin-bottom: 0.5pt; text-align: justify; }
+  .lines p { margin: 0 0 1pt; text-align: left; }
 </style>
 </head>
 <body>
 
-<h1>Abdulmajid Sharipov</h1>
-<div class="role">Strong Junior Frontend Developer</div>
-<div class="contacts">
-  +998 90 854 56 03 &nbsp;|&nbsp;
-  <a href="mailto:abdulmajidsharipovlc@gmail.com">abdulmajidsharipovlc@gmail.com</a> &nbsp;|&nbsp;
-  Telegram: <a href="https://t.me/Abdulloh_77700">@Abdulloh_77700</a> &nbsp;|&nbsp;
-  Qo'qon, O'zbekiston<br>
-  <a href="https://github.com/Abdulmajidkhan007">github.com/Abdulmajidkhan007</a> &nbsp;|&nbsp;
-  <a href="https://linkedin.com/in/abdulmajid-sharipov-profile">linkedin.com/in/abdulmajid-sharipov-profile</a> &nbsp;|&nbsp;
-  <a href="https://abdulmajidkhan-portfolio.web.app">abdulmajidkhan-portfolio.web.app</a>
-</div>
+<header>
+  <h1>Abdulmajid Sharipov</h1>
+  <div class="role">Frontend Developer | Kokand, Uzbekistan</div>
+  <div class="contacts">
+    +998 90 854 56 03 |
+    <a href="mailto:abdulmajidsharipovish@gmail.com">abdulmajidsharipovish@gmail.com</a> |
+    Telegram: <a href="https://t.me/abdulmajid_sharipov">@abdulmajid_sharipov</a><br>
+    <a href="https://github.com/Abdulmajidkhan007">github.com/Abdulmajidkhan007</a> |
+    <a href="https://linkedin.com/in/abdulmajid-sharipov-profile">linkedin.com/in/abdulmajid-sharipov-profile</a> |
+    <a href="https://abdulmajidkhan-portfolio.web.app">abdulmajidkhan-portfolio.web.app</a>
+  </div>
+</header>
 
-<h2>Profil</h2>
+<h2>Summary</h2>
 <p>
-React va TypeScript bilan veb va mobil interfeyslar quraman. 2025-yil oktabrdan beri
-mustaqil ishlayman: amaliy loyihalarni real ishlatiladigan holatga keltiraman. Asosiy
-ishim — Qo'qondagi santexnika do'koni uchun qurgan e-commerce platformasi
-(sayt, Android, desktop, TV ekran va Telegram bot — bitta baza ustida). Backendni
-o'zim yopaman (Node.js, Python) va kerak bo'lganda AI integratsiyasini qo'shaman.
+Frontend developer working with React and TypeScript since October 2025. I lead the frontend of
+A.L.I.A., a platform for learning centers, and I build interfaces for real businesses: an
+e-commerce platform that a plumbing store in Kokand used, and now a warehouse, sales and cash
+system for the same store. I also write backend code (Node.js, NestJS) and work with AI coding
+agents, checking and testing what they produce.
 </p>
 
-<h2>Ish tajribasi</h2>
+<h2>Experience</h2>
+<div class="row"><b>A.L.I.A. Learning Center (alia.uz), Frontend Team Lead</b><span>Aug 2026 – Present</span></div>
+<ul>
+  <li>Moved the whole frontend from JSX to strict TypeScript, so type errors are now caught at build
+      time. 128 of the repository's 440+ commits are mine.</li>
+  <li>Read the backend code and reported several bugs, which the backend developers fixed. Wrote the
+      shared rules and docs for the team.</li>
+  <li>Built two-step login, developer and super-admin panels, a duplicate check by phone number, and
+      teacher KPI screens.</li>
+</ul>
+<div class="row"><b>Freelance Developer</b><span>Oct 2025 – Present</span></div>
+<ul>
+  <li>Oct 2025 to Jul 2026: built practice projects (e-commerce, social network, messenger, Telegram
+      bots), then brought them to production level with deploys, tests, CI and security checks.</li>
+  <li>Since Oct 2026: client work, including a Telegram bot, a store website and a landing page.</li>
+</ul>
 
-<div class="proj">
-  <div class="proj-title">Learning Center — o'quv markazlarini avtomatlashtirish startapi</div>
-  <div class="proj-stack"><i>2026-yil avgustdan hozirgacha</i> · Frontend team lead</div>
-  <ul>
-    <li>Butun frontendni JSX'dan strict TypeScript'ga o'tkazdim — tip xatolari endi
-        build bosqichida ushlanadi; 75 ta commit.</li>
-    <li>Backend kodini tahlil qilib, jamoa e'tibordan chetda qoldirgan bir nechta xatoni
-        topdim — backend dasturchilar tuzatdi.</li>
-    <li>Jamoa uchun umumiy qoidalar va hujjatlar yozdim (<i>CLAUDE.md</i>, <i>docs/</i>) —
-        frontendchilar bir uslubda kod yozadi.</li>
-    <li>Ikki bosqichli login, developer va super-admin panellar, telefon bo'yicha
-        dublikat tekshiruvi, o'qituvchi KPI ekranlari.</li>
-  </ul>
-</div>
+<h2>Projects</h2>
+<div class="row"><b>Atoyo, e-commerce platform for a plumbing store</b><span>used until Oct 2026</span></div>
+<div class="stack">Next.js 16, React 19, TypeScript, Tailwind CSS, MUI, Redux Toolkit, Firebase, React Native, Electron, Gemini API</div>
+<ul>
+  <li><b>Problem:</b> the store sold through a Telegram channel and phone calls. Customers had to ask
+      for every price, and old prices stayed in channel posts.</li>
+  <li><b>Solution:</b> one database serves five channels (website, Android app, desktop app, TV screen,
+      Telegram bot), so a price changed in one place updates everywhere. The admin uploads a product
+      photo and Gemini Vision returns a ready catalog card; the same photo is never processed twice (pHash).</li>
+  <li>About 500 products, 300 commits. Stopped in Oct 2026: the staff had no time to run it. Private repository.</li>
+</ul>
 
-<div class="proj">
-  <div class="proj-title">Mustaqil dasturchi, frilanser</div>
-  <div class="proj-stack"><i>2025-yil oktabrdan hozirgacha</i></div>
-  <ul>
-    <li>2025-yil oktabr — 2026-yil iyul: amaliy loyihalar (e-commerce, ijtimoiy tarmoq,
-        messenjer, Telegram botlar).</li>
-    <li>2026-yil iyuldan: loyihalarni production holatiga keltirish — deploy, testlar,
-        CI, xavfsizlik qoidalari.</li>
-    <li>2026-yil oktabrdan: buyurtmaga ishlayman — Telegram bot, do'kon sayti, landing.</li>
-  </ul>
-</div>
+<div class="row"><b>Savdo CRM, warehouse, sales and cash system</b><span>in progress</span></div>
+<div class="stack">React 19, TypeScript, Vite, Redux Toolkit (RTK Query), Tailwind CSS, shadcn/ui, NestJS, Prisma 7, PostgreSQL</div>
+<ul>
+  <li><b>Problem:</b> the same store runs on an offline 1C setup that the owner does not understand, and
+      sales agents in the regions write orders in notebooks.</li>
+  <li><b>Solution:</b> one online system for purchases, sales, payments and debts, and cash shifts;
+      wholesale and retail, UZS and USD. 8 roles with permissions, money stored as integers, an audit
+      log of every change, UI in Uzbek, Russian and English.</li>
+  <li>Most of the code is written by AI agents (Claude Code); I set the architecture and check every pull
+      request: 31 merged, CI runs typecheck, lint, build and 340+ tests. Not deployed yet.</li>
+</ul>
 
-<h2>Loyihalar</h2>
+<div class="row"><b>Suhbat, messenger for web, desktop and Android</b><span>beta, web version live</span></div>
+<div class="stack">React, TypeScript, Vite, MUI, Tailwind CSS, Redux Toolkit, Electron, React Native, NestJS, Socket.IO, WebRTC</div>
+<ul>
+  <li>A personal project to build a full messenger myself: private chats, groups, channels, 1:1 voice
+      and video calls, push notifications. Web, macOS, Windows and Android builds come from one
+      Turborepo monorepo. 134 commits, 36 pull requests, release v0.6.0.</li>
+</ul>
 
-<div class="proj">
-  <div class="proj-title">Atoyo — e-commerce platformasi</div>
-  <div class="proj-stack">Next.js 16 · React 19 · TypeScript · Tailwind CSS · Firebase · React Native · Electron · Gemini API</div>
-  <ul>
-    <li>Qo'qondagi santexnika do'konida 2026-yil oktabrgacha ishlatildi (katalogga 500 ga yaqin mahsulot kiritilgan); 2026-10-26 da to'xtatilgan: do'kon xodimlarining saytni boshqarishga vaqti yo'q, server uchun to'lash imkoni ham yo'q; repo private.</li>
-    <li><b>Bitta baza — besh kanal:</b> sayt, Android ilova, do'kon kompyuteri ilovasi,
-        televizor ekrani va Telegram bot bir xil Firestore ma'lumotida — narx bir joyda
-        o'zgarsa, hamma kanalda yangilanadi.</li>
-    <li>Mahsulot kirimini AI bilan avtomatlashtirdim: admin rasm tashlaydi, Gemini Vision
-        tayyor katalog kartasini (nomi, kodi, kategoriya, narx, tavsif) qaytaradi —
-        kartani qo'lda yozish shart emas; bir xil rasm ikki marta ishlanmaydi (pHash).</li>
-    <li>Buyurtmalar Telegram guruhida boshqariladi — operator saytga kirmaydi; e'lonlar
-        bot, email va kanalga bir vaqtda tarqatiladi. Ulgurji narx va tannarx mijozga
-        umuman uzatilmaydi.</li>
-  </ul>
-</div>
+<div class="row"><b>KidsWear, kids' clothing store for web and Android</b><span>in progress</span></div>
+<div class="stack">React, React Native (bare CLI), TypeScript, MUI, React Native Paper, Firebase</div>
+<ul>
+  <li><b>Problem:</b> separate web and mobile apps keep cart logic, data layer and translations in two
+      places, and they drift apart. <b>Solution:</b> a monorepo where everything except the UI is shared;
+      one design-token system drives MUI (web) and Paper (mobile). 141 commits.</li>
+</ul>
 
-<div class="proj">
-  <div class="proj-title">telegram-bots — 15 ta botning monorepo'si</div>
-  <div class="proj-stack">Node.js · Python · TypeScript · Gemini API · PostgreSQL · SQLite · Docker</div>
-  <ul>
-    <li>15 ta bot bitta repoda, o'zim yozgan CLI bilan bitta buyruqda ishga tushadi;
-        har commit oldidan test va kalit skaneri ishlaydi.</li>
-    <li>Ochiq ishlaydi: <a href="https://t.me/KillSpam_007_Bot">@KillSpam_007_Bot</a> (spam filtri),
-        <a href="https://t.me/COUNTLIST_BOT">@COUNTLIST_BOT</a> (xarajat hisobi, ovozli xabar),
-        <a href="https://t.me/Uzb_saver_007_bot">@Uzb_saver_007_bot</a> (video yuklovchi),
-        <a href="https://t.me/Tekshiruvchi_07_bot">@Tekshiruvchi_07_bot</a> (virus tekshiruvi) va yana 5 ta.</li>
-  </ul>
-</div>
-
-<div class="proj">
-  <div class="proj-title">Organick — organik oziq-ovqat do'koni</div>
-  <div class="proj-stack">React 19 · TypeScript · Vite · Redux Toolkit · Tailwind CSS v4 · Firebase · i18next · Playwright</div>
-  <ul>
-    <li>Uch tilli interfeys, dark/light rejim, admin panel; Firebase Auth uch usulda
-        (Google, email, SMS); Playwright e2e va GitHub Actions orqali avtomatik deploy.</li>
-  </ul>
-</div>
+<div class="row"><b>Organick, organic food store</b><span>live</span></div>
+<div class="stack">React 19, TypeScript, Vite 8, Redux Toolkit, Tailwind CSS v4, Firebase, i18next, Playwright</div>
+<ul>
+  <li>A small store needs a catalog, cart and admin panel without paying for a server. Built on Firebase:
+      three languages, dark/light mode, Google, email and SMS login, orders sent to the owner in Telegram,
+      Playwright e2e tests and auto-deploy. 82 commits.</li>
+</ul>
 
 <p style="margin-top:3pt">
-  <b>Boshqa loyihalar:</b>
-  <b>KidsWear</b> — veb + Android do'kon;
-  <b>Lumina</b> — Instagram uslubidagi tarmoq, React Native;
-  <b>Suhbat</b> — messenjer, NestJS + WebSocket + WebRTC (beta);
-  <a href="https://abdulmajidkhan-portfolio.web.app">3D portfolio</a> (React Three Fiber).
+  <b>Other:</b> 3D portfolio with React Three Fiber and GSAP (live, public repository); telegram-bots, 16 bots in one monorepo with a CLI (stopped, code public); katalog-bot,
+  a catalog and order bot for stores (running); Nafi Editor, a code editor on Tauri 2 and Monaco (in
+  progress); Lumina and uzbek-tg, React Native apps.
 </p>
 
-<h2>Texnik ko'nikmalar</h2>
-<p>
-<b>Frontend:</b> React 19, Next.js 16, TypeScript, JavaScript, Tailwind CSS v4, Redux Toolkit, TanStack Query<br>
-<b>Mobil va desktop:</b> React Native, Electron<br>
-<b>Backend:</b> Node.js, NestJS, Python (FastAPI, aiogram), REST API<br>
-<b>Ma'lumotlar bazasi:</b> Firestore, PostgreSQL, SQLite<br>
-<b>Vositalar:</b> Git, Docker, Firebase, Vite, Vitest, Playwright<br>
-<b>AI:</b> Gemini API, LangChain, ChromaDB
-</p>
+<h2>Skills</h2>
+<div class="lines">
+  <p><b>Frontend:</b> React 19, Next.js 16, TypeScript, JavaScript, Redux Toolkit, TanStack Query, Tailwind CSS v4, MUI, shadcn/ui</p>
+  <p><b>3D, mobile and desktop:</b> React Three Fiber, three.js, GSAP, React Native (bare CLI), Electron</p>
+  <p><b>Backend:</b> Node.js, NestJS, Prisma, Python (FastAPI, aiogram), REST API, WebSocket</p>
+  <p><b>Databases:</b> PostgreSQL, Firestore, SQLite</p>
+  <p><b>Tools and AI:</b> Git, Docker, Firebase, Vite, Vitest, Playwright, GitHub Actions, Gemini API, Claude Code</p>
+</div>
 
-<h2>Ta'lim</h2>
-<p>
-<b>Umumta'lim maktabi</b> — <i>2015-yil sentabr – 2026-yil may</i> · umumiy o'rta ta'lim<br>
-<b>Proteach o'quv markazi, Qo'qon</b> — <i>2024-yil sentabr – 2025-yil avgust</i> · dasturlash yo'nalishi (maktab bilan parallel)
-</p>
+<h2>Education</h2>
+<div class="row" style="margin-top:0"><b style="font-weight:normal"><b>Proteach Learning Center</b>, Kokand. Programming course; general secondary school (2015 – 2026)</b><span>Sep 2024 – Aug 2025</span></div>
 
-<h2>Qo'shimcha</h2>
-<p>
-<b>Tillar:</b> o'zbek — ona tili; ingliz — texnik hujjatlarni o'qiy olaman; rus — boshlang'ich.<br>
-<b>Ish formati:</b> masofaviy ishga tayyorman; Toshkentga ko'chish — kelishuv asosida.
-</p>
+<h2>Additional</h2>
+<p><b>Languages:</b> Uzbek (native), English (technical), Russian (basic). <b>Work format:</b> remote; relocation to Tashkent negotiable.</p>
 
 </body>
 </html>

@@ -20,7 +20,7 @@ import SectionHeading from './SectionHeading'
  */
 const ENDPOINT = (import.meta.env.VITE_CONTACT_URL as string | undefined)?.trim() || '/api/contact'
 // Server yiqilsa yoki hali deploy qilinmagan bo'lsa (Spark rejimi) — xabar yo'qolmasin.
-const TELEGRAM_URL = 'https://t.me/Abdulloh_77700'
+const TELEGRAM_URL = 'https://t.me/abdulmajid_sharipov'
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
@@ -330,7 +330,7 @@ export default function Contact() {
                     <p role="alert" className="text-sm text-red-400">
                       {t.contact.errorGeneric} {t.contact.errorFallback}{' '}
                       <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="underline">
-                        @Abdulloh_77700
+                        @abdulmajid_sharipov
                       </a>
                     </p>
                   )}
