@@ -91,13 +91,13 @@ agents, checking and testing what they produce.
 <div class="row"><b>Savdo CRM, warehouse, sales and cash system</b><span>in progress</span></div>
 <div class="stack">React 19, TypeScript, Vite, Redux Toolkit (RTK Query), Tailwind CSS, shadcn/ui, NestJS, Prisma 7, PostgreSQL</div>
 <ul>
-  <li><b>Problem:</b> the same store runs on an offline 1C setup that the owner does not understand, and
+  <li><b>Problem:</b> the same store runs on an offline 1C setup that the owner is not comfortable using on a computer, and
       sales agents in the regions write orders in notebooks.</li>
   <li><b>Solution:</b> one online system for purchases, sales, payments and debts, and cash shifts;
       wholesale and retail, UZS and USD. 8 roles with permissions, money stored as integers, an audit
       log of every change, UI in Uzbek, Russian and English.</li>
   <li>Most of the code is written by AI agents (Claude Code); I set the architecture and check every pull
-      request: 31 merged, CI runs typecheck, lint, build and 340+ tests. Not deployed yet.</li>
+      request: 31 merged, CI runs typecheck, lint, build and 340+ tests. Not deployed yet: it runs locally, I test it on a phone over Tailscale and fix the bugs found.</li>
 </ul>
 
 <div class="row"><b>Suhbat, messenger for web, desktop and Android</b><span>beta, web version live</span></div>
